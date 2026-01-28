@@ -27,6 +27,7 @@ Navrhnout a vytvořit Full-stack webovou aplikaci pro tvorbu, správu a absolvov
     - Pravda/Nepravda
     - Párování (matching)
     - Uspořádání (ordering)
+    - Flashcard
 - **Multimediální obsah:**
     - Přidávání obrázků k otázkám
 - **Správa otázek:**
