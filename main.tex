@@ -9,37 +9,205 @@
 \autor{Jakub Papánek}
 \vedouci{RNDr. Marek Vajgl, Ph.D.}
 \rok{2025}
-\fakulta{Přírodovědecká Fakulta}{Faculty Name}
-\katedra{Katedra Informatiky}{Department Name}
+\fakulta{Přírodovědecká Fakulta}{Faculty of Science}
+\katedra{Katedra Informatiky}{Department of Computer Science}
 \nazev{Tvorba aplikace pro pokročilé testování}{Thesis Title}
-\typprace{Bakalářská Práce}{Thesis type}
+\typprace{Bakalářská Práce}{Bachelor Thesis}
 
 \pohlavi M
-\prohlaseni{V Ostravě dne 16.,12.,2025}
+\prohlaseni{V Ostravě dne 16. 12. 2025}
 
-\podekovani{\selectlanguage{czech}Autor děkuje ...}
+\podekovani{...}
 
-\abstrakt{Abstrakt v~prvním jazyce}{Abstract in the second language}
-\klicovaslova{Klíčová, slova}{Key, words}
-\resume{Resumé v~prvním jazyce}{Summary in the second language}
+\abstrakt{
+Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s důrazem na moderní uživatelské rozhraní a specifické analytické funkce pro sebetestování.
+}{
+The goal of this thesis is to design and implement a full-stack web application for test management, inspired by the Moodle system, but with an emphasis on a modern user interface and specific analytical functions for self-testing.
+}
+
+\klicovaslova{testování, webová aplikace, React, Spring Boot, vzdělávání}{testing, web application, React, Spring Boot, education}
+\resume{Resumé v češtině...}{Summary in English...}
 
 \begin{document}
 
-\tableofcontents % Zde se vygeneruje obsah
+\tableofcontents 
 
+% -----------------------------------------------------------------
+% 1. SHRNUTÍ POŽADAVKŮ
+% -----------------------------------------------------------------
 \section{Shrnutí požadavků na vytvářenou aplikaci}
-Text k sekci Shrnutí požadavků na vytvářenou aplikaci.
 
+Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s~důrazem na moderní uživatelské rozhraní a~specifické analytické funkce. Aplikace bude postavena na technologiích React (Frontend), Spring Boot (Backend) a~MySQL (Databáze).
+
+Specifikem a~hlavním přínosem této práce je zaměření na \textbf{sebetestování a~proces učení}. Aplikace je navržena tak, aby umožnila studentům snadno vytvářet testy z~vlastního učiva a~následně je opakovaně absolvovat. Tím dochází k~upevňování znalostí formou \textbf{aktivního vybavování} (\textit{active recall}). Systém poskytne uživateli detailní statistiky a~grafy, díky kterým získá okamžitý přehled o~svém pokroku a~oblastech, které vyžadují další studium. Tento přístup k~samostudiu není v~běžně dostupných aplikacích dostatečně implementován.
+
+Níže jsou definovány klíčové funkční požadavky, které představují cíle této práce.
+
+\subsection{Definice cílů a funkčních požadavků}
+
+Realizace práce je rozdělena do pěti hlavních cílů (C1--C5), z~nichž každý obsahuje konkrétní funkční požadavky (F), které musí výsledné řešení splňovat.
+
+\begin{itemize}
+    \item \textbf{Cíl 1 (C1): Správa uživatelů a autentizace}
+    \begin{itemize}
+        \item[F1.1] Registrace nového uživatele pomocí e-mailu a hesla.
+        \item[F1.2] Přihlášení a odhlášení registrovaného uživatele.
+        \item[F1.3] Zabezpečení přístupu k~privátním datům pomocí tokenové autentizace (JWT).
+    \end{itemize}
+
+    \item \textbf{Cíl 2 (C2): Modul pro tvorbu testů}
+    \begin{itemize}
+        \item[F2.1] Vytvoření testu se základními informacemi (název, popis, kategorie/štítky).
+        \item[F2.2] Konfigurace volitelného časového limitu a~bodovací škály (body, procenta).
+        \item[F2.3] Podpora sedmi typů otázek: výběr jedné odpovědi (\textit{single choice}), výběr více odpovědí (\textit{multiple choice}), textová odpověď, pravda/nepravda, přiřazování (\textit{matching}), řazení (\textit{ordering}) a~kartičky (\textit{flashcard}).
+        \item[F2.4] Možnost vkládání obrázků k~jednotlivým otázkám.
+        \item[F2.5] Přeuspořádání otázek metodou drag \& drop a~duplikace existujících otázek.
+        \item[F2.6] Banka otázek umožňující opakované použití otázek napříč testy.
+        \item[F2.8] Správa uživatelských kategorií (vytváření, editace, mazání) s~podporou multi-kategorizace (vztah M:N -- jeden test může patřit do více kategorií).
+    \end{itemize}
+
+    \item \textbf{Cíl 3 (C3): Modul pro absolvování testů}
+    \begin{itemize}
+        \item[F3.1] Vizuální ukazatel pokroku (\textit{progress bar}) během průchodu testem.
+        \item[F3.2] Možnost uložení rozpracovaného testu a~návratu k~němu později.
+        \item[F3.3] Odpočítávací časovač s~upozorněním a~automatickým odesláním po vypršení limitu.
+        \item[F3.4] Volná navigace mezi otázkami (skok vpřed i~vzad).
+        \item[F3.5] Okamžité vyhodnocení výsledků po odeslání testu.
+        \item[F3.6] Volitelné zobrazení správných odpovědí po dokončení.
+    \end{itemize}
+
+    \item \textbf{Cíl 4 (C4): Analytika a statistiky pro seberozvoj}
+    \begin{itemize}
+        \item[F4.1] Přehledná historie všech pokusů uživatele.
+        \item[F4.2] Grafické zobrazení pokroku v~čase (\textit{learning curve}).
+        \item[F4.3] Výpočet průměrného skóre a~času stráveného testem.
+        \item[F4.4] Identifikace a~analýza nejčastěji chybně zodpovězených otázek pro cílené opakování.
+        \item[F4.5] Souhrnné statistiky na úrovni jednotlivých testů i~kategorií.
+        \item[F4.6] Přehled výsledků účastníků testu a~jejich výsledků pro autora testu.
+    \end{itemize}
+
+    \item \textbf{Cíl 5 (C5): Sdílení a dostupnost}
+    \begin{itemize}
+        \item[F5.1] Generování unikátních veřejných odkazů pro sdílení testů.
+        \item[F5.2] Podpora anonymního režimu -- absolvování testu bez nutnosti registrace (s~omezenými funkcemi, bez historie, s~volitelným zadáním přezdívky).
+        \item[F5.3] Žebříček nejlepších výsledků (\textit{leaderboard}).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Kritéria hodnocení a metrika úspěšnosti}
+
+Každý z~výše uvedených cílů (C1--C5) bude hodnocen samostatně na škále A--F podle klasifikace ECTS. Výsledná známka implementační části práce bude stanovena na základě aritmetického průměru dílčích hodnocení.
+
+\subsubsection{Hodnotící škála}
+
+Pro hodnocení splnění jednotlivých cílů je stanovena následující klasifikace:
+
+\begin{description}
+    \item[A -- Výborně:] Cíl je splněn v~plném rozsahu dle specifikace. Všechny funkční požadavky jsou implementovány, funkcionalita je bezchybná, uživatelské rozhraní je intuitivní a~responzivní. Kód je čistý a~ošetřuje okrajové případy.
+    \item[B -- Velmi dobře:] Cíl je splněn, aplikace obsahuje požadovanou funkcionalitu, ale vyskytují se drobné nedostatky v~UX (např. méně přehledné chybové hlášky) nebo minoritní chyby, které nebrání v~hlavním použití.
+    \item[C -- Dobře:] Cíl je z~větší části splněn. Hlavní scénáře fungují, ale některé pokročilejší funkční požadavky nejsou implementovány nebo fungují pouze omezeně (např. drag \& drop funguje jen částečně).
+    \item[D -- Uspokojivě:] Cíl je rozpracovaný. Základní funkcionalita je přítomna, ale řešení vykazuje nestabilitu nebo chybí podstatné funkční požadavky.
+    \item[E -- Dostatečně:] Funkcionalita je přítomna pouze v~minimálním základu (např. test lze vytvořit, ale nelze editovat), uživatelské rozhraní vykazuje zásadní nedostatky.
+    \item[F -- Nedostatečně:] Cíl není realizován nebo aplikace v~daném modulu nefunguje vůbec.
+\end{description}
+
+\subsubsection{Stanovení výsledné známky}
+
+Výsledná úspěšnost implementační části práce bude vypočítána jako \textbf{aritmetický průměr} bodových hodnot za cíle C1 až C5, kde jednotlivá písmena jsou převedena na body (A\,=\,1, B\,=\,2, C\,=\,3, D\,=\,4, E\,=\,5, F\,=\,6).
+
+$$ V = \frac{\sum_{i=1}^{5} b(C_i)}{5} $$
+
+\noindent kde $b(C_i)$ je bodová hodnota hodnocení cíle $C_i$ a~$V$ je výsledný průměr.
+
+
+% -----------------------------------------------------------------
+% 2. ANALÝZA SOUČASNÝCH ŘEŠENÍ
+% -----------------------------------------------------------------
 \section{Analýza současných řešení}
-Text k sekci Analýza současných řešení.
 
+Pro kontext vlastního vývoje byla provedena rešerše existujících nástrojů pro správu testů a~kvízů. Cílem analýzy bylo identifikovat jejich silné stránky a~nedostatky ve vztahu k~funkčním požadavkům definovaným v~předchozí kapitole, a~tím zdůvodnit potřebu vývoje vlastního řešení.
+
+Analyzovaná řešení byla vybrána tak, aby pokrývala spektrum od komplexních systémů pro řízení výuky (LMS) přes jednoduché formulářové nástroje až po specializované platformy pro tvorbu kvízů.
+
+\subsection{Moodle}
+Moodle je nejrozšířenější open-source Learning Management System (LMS), který sloužil jako hlavní inspirace pro tuto práci.
+\begin{itemize}
+    \item \textbf{Výhody:} Extrémně robustní systém s~podporou desítek typů otázek, detailní logování aktivit, rozsáhlé možnosti konfigurace a~vysoká úroveň zabezpečení. Obsahuje banku otázek a~pokročilé bodovací schéma.
+    \item \textbf{Nevýhody:} Zastaralé a~složité uživatelské rozhraní, náročná konfigurace i~pro jednoduché testy. Primárně určen pro formální vzdělávací prostředí (učitel $\rightarrow$ student), nikoli pro individuální sebetestování. Sdílení mimo systém je obtížné.
+\end{itemize}
+
+\subsection{Google Forms}
+Jednoduchý a~zdarma dostupný nástroj od společnosti Google pro sběr dat a~tvorbu základních kvízů.
+\begin{itemize}
+    \item \textbf{Výhody:} Okamžitě dostupný, intuitivní rozhraní, jednoduché sdílení pomocí odkazu, podpora anonymních odpovědí.
+    \item \textbf{Nevýhody:} Velmi omezené možnosti bodování (nelze penalizovat za špatné odpovědi), absence pokročilých typů otázek (přiřazování, řazení, flashcard), chybí banka otázek, časovač, ukládání rozpracovaných testů a~jakékoliv statistiky pokroku v~čase.
+\end{itemize}
+
+\subsection{Quizizz}
+Online platforma zaměřená na gamifikaci vzdělávání s~interaktivními kvízy.
+\begin{itemize}
+    \item \textbf{Výhody:} Moderní a~atraktivní uživatelské rozhraní, živé kvízy v~reálném čase, okamžité vyhodnocení, vestavěný žebříček, snadné sdílení.
+    \item \textbf{Nevýhody:} Omezený počet typů otázek v~bezplatné verzi, klíčové funkce (pokročilé statistiky, export dat) jsou za paywallem. Zaměřen spíše na soutěžení ve skupině než na individuální sebetestování a~sledování dlouhodobého pokroku.
+\end{itemize}
+
+\subsection{Quizlet}
+Populární platforma zaměřená primárně na učení pomocí kartiček (\textit{flashcards}) a~opakování.
+\begin{itemize}
+    \item \textbf{Výhody:} Silné zaměření na proces učení a~opakování (\textit{spaced repetition}), rozsáhlá komunita se sdílenými studijními sety, jednoduché rozhraní.
+    \item \textbf{Nevýhody:} Velmi omezená tvorba strukturovaných testů -- nepodporuje většinu pokročilých typů otázek (přiřazování v~testovém formátu, řazení), chybí časovač, bodování a~detailní analytika výsledků. Mnoho funkcí je dostupných pouze v~placené verzi (Quizlet Plus).
+\end{itemize}
+
+\subsection{ProProfs Quiz Maker}
+Komerční online platforma specializovaná na tvorbu kvízů a~testů pro vzdělávání i~firemní účely.
+\begin{itemize}
+    \item \textbf{Výhody:} Široká škála typů otázek, podpora obrázků a~multimédií, banka otázek, certifikáty po dokončení, detailní reporty.
+    \item \textbf{Nevýhody:} Plnohodnotné funkce jsou dostupné pouze v~placených plánech, uživatelské rozhraní je méně moderní. Primárně orientován na hodnocení ostatních (zaměstnanců, studentů), nikoli na sebetestování.
+\end{itemize}
+
+\subsection{Srovnávací hodnocení řešení}
+
+Pro objektivní porovnání analyzovaných řešení byla stanovena hodnotící škála 0--3 bodů, kde:
+
+\begin{description}
+    \item[3] -- plná podpora požadavku,
+    \item[2] -- částečná podpora (funkcionalita existuje, ale s~omezeními),
+    \item[1] -- minimální nebo základní podpora,
+    \item[0] -- požadavek není podporován.
+\end{description}
+
+\noindent Každé řešení bylo ohodnoceno ve vztahu k~pěti definovaným cílům (C1--C5) a~doplňkovému kritériu zaměření na sebetestování. Výsledky jsou shrnuty v~tabulce~\ref{tab:srovnani}.
+
+\begin{table}[h]
+\centering
+\caption{Srovnávací hodnocení analyzovaných řešení}
+\label{tab:srovnani}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Kritérium} & \textbf{Moodle} & \textbf{G. Forms} & \textbf{Quizizz} & \textbf{Quizlet} & \textbf{ProProfs} \\
+\hline
+C1: Autentizace        & 3 & 2 & 3 & 2 & 3 \\
+C2: Tvorba testů       & 3 & 1 & 2 & 1 & 3 \\
+C3: Absolvování testů  & 3 & 1 & 2 & 1 & 2 \\
+C4: Statistiky         & 2 & 1 & 2 & 1 & 2 \\
+C5: Sdílení            & 1 & 3 & 3 & 3 & 2 \\
+Sebetestování          & 1 & 0 & 1 & 2 & 1 \\
+\hline
+\textbf{Celkem (max. 18)} & \textbf{13} & \textbf{8} & \textbf{13} & \textbf{10} & \textbf{13} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Závěr analýzy}
+
+Z~provedeného srovnání vyplývá, že žádné z~analyzovaných řešení plně nepokrývá všechny definované cíle současně. Moodle dosahuje vysokého hodnocení v~oblasti tvorby a~absolvování testů, ale jeho složitost a~zastaralé uživatelské rozhraní ho činí nevhodným pro rychlé individuální sebetestování. Google Forms je snadno přístupný, ale postrádá pokročilé testovací a~analytické funkce. Quizizz a~ProProfs nabízejí kompromis, avšak klíčové funkce jsou často za paywallem a~zaměření na sebetestování je okrajové. Quizlet je nejblíže konceptu sebetestování, ale chybí mu formální testovací funkce.
+
+Na trhu tak existuje mezera mezi jednoduchými formulářovými nástroji (Google Forms) a~komplexními systémy pro řízení výuky (Moodle). Cílem této práce je vytvořit řešení, které kombinuje pokročilé testovací funkce s~moderním uživatelským rozhraním a~explicitním zaměřením na sebetestování a~sledování individuálního pokroku -- oblast, kterou žádné z~analyzovaných řešení dostatečně nepokrývá.
+
+% -----------------------------------------------------------------
+% 3. METODIKA
+% -----------------------------------------------------------------
 \section{Metodika tvorby vývoje IS}
-Text k sekci Metodika tvorby vývoje IS.
 
-\section{Vlastní tvorba vytvářeného řešení}
-Text k sekci Vlastní tvorba vytvářeného řešení.
-
-\section{Představení vytvořeného řešení, závěr}
-Text k sekci Představení vytvořeného řešení, závěr.
+Pro správu verzí bude využit systém Git (GitHub). Jako architektonický vzor bude použita REST API architektura oddělující frontendovou prezentační vrstvu od backendové logiky a datové vrstvy.
 
 \end{document}
