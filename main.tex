@@ -158,4 +158,143 @@ QST je open-source platforma pro tvorbu testů a~hodnocení, která zahrnuje i~p
     \item \textbf{Nevýhody:} Zastaralé uživatelské rozhraní, není realizován jako SPA (Single Page Application). Vyžaduje instalaci a~konfiguraci na vlastním serveru -- není dostupný jako nasazená webová aplikace. Orientován na institucionální použití, nikoli na individuální sebetestování. I~přes rozsáhlou funkcionalitu je UX výrazně pozadu za moderními standardy.
 \end{itemize}
 
+% -----------------------------------------------------------------
+% 3. TECHNOLOGIE PRO VÝVOJ WEBOVÝCH APLIKACÍ
+% -----------------------------------------------------------------
+\section{Technologie pro vývoj webových aplikací}
+
+Pro vývoj této aplikace byl zvolen moderní stack, který je vhodný pro rozsah této práce. Tento stack zajišťuje potřebnou flexibilitu UI a taky možnost efektivně zpracovat a ukládat data.
+
+\subsection{Frontend}
+Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, dynamické změny pořadí otázek pomocí \uv{Drag \& Drop} nebo okamžitou vizuální odezvu po odevzdání odpovědí. React představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní a svižně jej překreslovat. Zásadním benefitem je navíc obrovský ekosystém komunitních balíčků (packages), ze kterého může projekt těžit. To se hodí především pro implementaci rozmanitých UI komponent a pokročilých nástrojů pro vykreslování grafů (například koláčových grafů úspěšnosti nebo křivek chybovosti a stráveného času), které jsou nezbytné pro přehledné zobrazení statistik.
+
+\subsection{Backend}
+Pro backendovou vrstvu je vynikající volbou framework Spring Boot, jenž poskytuje robustní základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to zejména díky modulu Spring AI, který umožňuje přímou a velmi efektivní integraci s velkými jazykovými modely (LLM). Toto spojení s LLM hraje v aplikaci klíčovou roli.
+
+\subsection{Databáze}
+Zvolit pro tento systém relační databázi je velmi vhodné, protože doménový model obsahuje data s jasně definovanou strukturou a množstvím pevných vazeb. Relační přístup přirozeně a bezpečně mapuje složité vztahy, jakým je například vazba M:N mezi kvízy a kategoriemi, a zároveň dokáže spravovat rozsáhlou hierarchii různých konfigurací pro sedm odlišných typů testovacích otázek. Relační schéma navíc garantuje konzistenci dat při ukládání detailních historií uživatelských pokusů, což je naprosto nezbytné pro schopnost systému spolehlivě dotazovat, filtrovat a agregovat data pro výpočet pokročilých uživatelských statistik.
+
+% -----------------------------------------------------------------
+% 4. NÁVRH WEBOVÉ APLIKACE REVIZER
+% -----------------------------------------------------------------
+\section{Návrh webové aplikace Revizer}
+
+Tato aplikace je webový systém určený pro správu a procvičování testů, který je primárně zaměřený na self-testing a aktivní vybavování znalostí. Uživatelé si v ní mohou z vlastních studijních materiálů vytvářet personalizované kvízy obsahující různé typy otázek, a to včetně volných textových odpovědí, které dokáže automaticky vyhodnocovat integrovaná umělá inteligence. Vytvořené kvízy mohou uživatelé opakovaně spouštět a svůj postup učení následně analyzovat pomocí detailních statistik, grafů úspěšnosti a možnost revize u jednotlivých pokusů, kde mohou vidět, kde udělali chybu.
+
+\subsection{Architektura systému}
+Celá fullstack aplikace je postavena na React, Spring Boot a MySQL. Aplikace je navržená na principech tradiční vrstvené architektury (tzv. n-layer), která logicky a přehledně odděluje jednotlivé komponenty systému do specifických vrstev, jako jsou Frontend + REST kontrolery, vrstva business logiky (service) a datové entity. Tato volba je mimořádně praktická, protože projekt je vyvíjen pouze jedním člověkem. Vrstvená architektura je díky své přímočarosti a povědomosti velmi jednoduchá na pochopení i implementaci. Vzhledem k tomu, že se u této aplikace neočekává dlouhodobé či časté nasazování do produkčního prostředí a zároveň se nepočítá s nasazením pro masivní počet uživatelů, nejsou běžné nedostatky vrstvené architektury problémem. Typické nevýhody, jako je například obtížnější horizontální škálovatelnost nebo potenciální výkonnostní úzká hrdla při obrovské zátěži, se v tomto konkrétním kontextu a rozsahu vůbec neprojeví.
+
+\begin{itemize}
+    \item \textbf{Prezentační vrstva (Frontend + API Endpointy)} -- skládá se z klientského frontendu a API endpointů na backendu. Uživatelské rozhraní frontendu je tvořeno React komponentami a je zcela responzivní. Komunikace s backendem probíhá přes REST API endpointy, u kterých je vyžadována platná autentizace pomocí JWT tokenu (s výjimkou několika málo veřejných cest pro registraci a přihlášení).
+    \item \textbf{Aplikační vrstva (většina backend aplikační logiky)} -- tvoří funkční jádro celého systému a je v ní soustředěna většina hlavní aplikační logiky. Tato vrstva zpracovává požadavky přicházející z prezentační vrstvy, aplikuje pravidla doménového modelu a řídí klíčové procesy, jako je správa uživatelských účtů, vytváření kvízů, organizace kategorií nebo zpracování odevzdaných pokusů.
+    \item \textbf{Servisní vrstva} -- funguje jako úzce specializovaná pomocná vrstva, kterou aplikační vrstva využívá k delegování složitějších operací. Obsahuje nezbytné pomocné servisy a komponenty určené pro specifické úkoly. Patří sem především služba pro vyhodnocení kvízu, která kontroluje správnost jednotlivých odpovědí a přiděluje body, a také dedikovaná služba pro dotazování jazykového modelu (LLM), jež se stará o automatické posuzování volných textových odpovědí.
+    \item \textbf{Databázová vrstva (konektor, ORM, Databáze)} -- zajišťuje spolehlivé a trvalé uložení všech dat do relační databáze MySQL. Datová integrace s backendem je řešena za využití frameworku Hibernate, který slouží jako nástroj pro objektově-relační mapování (ORM), a technologie Spring Data JPA, jež výrazně usnadňuje manipulaci s databázovými entitami. Pro samotné spojení aplikace s databází slouží pod kapotou tradiční JDBC konektor.
+\end{itemize}
+
+\subsection{Návrh Databáze}
+Správa databázového schématu je v aplikaci zajištěna pomocí nástroje Flyway, který řídí a verzuje databázové migrace. Pro vizuální inspekci dat v databázi byla použita rozšíření Database Client a Database Client JDBC pro editor VS Code. Tyto nástroje poskytují přehledné grafické rozhraní s možností procházení, filtrování a editace záznamů přímo v databázi, díky čemuž není nutné dotazovat se databáze zdlouhavě ručně pomocí SQL příkazů.
+
+\textbf{Popis entit a vztahů v datovém modelu}
+
+Datový model je navržen tak, aby dokázal flexibilně pojmout rozmanité typy testových otázek a detailně uchovávat průběh i výsledky učení. Skládá se z následujících klíčových entit a jejich vztahů:
+
+\begin{itemize}
+    \item \textbf{Uživatel a autentizace:}
+    \begin{itemize}
+        \item \textbf{user:} Základní entita reprezentující registrovaného uživatele. Má vztah 1:N ke svým vytvořeným kvízům (\texttt{quiz}), vlastněným kategoriím (\texttt{category}), podstoupeným pokusům o kvíz (\texttt{quiz\_attempt}) a vydaným autentizačním tokenům (\texttt{token}).
+        \item \textbf{token:} Pomocná entita sloužící ke správě a invalidaci vydaných JWT tokenů (vztah N:1 k uživateli).
+    \end{itemize}
+    \item \textbf{Organizace studijních materiálů:}
+    \begin{itemize}
+        \item \textbf{category:} Kategorie slouží k organizaci kvízů a patří vždy konkrétnímu uživateli (vztah N:1 k \texttt{user}).
+        \item \textbf{quiz:} Hlavní entita aplikace obsahující sadu otázek. Každý kvíz má jednoho autora (N:1 k \texttt{user}). Mezi kvízy a kategoriemi existuje vztah \textbf{M:N}, který je realizován prostřednictvím spojovací vazební tabulky \textbf{quiz\_category}. Dále má kvíz vztah 1:N k vlastním otázkám (\texttt{question}) a všem provedeným pokusům (\texttt{quiz\_attempt}).
+    \end{itemize}
+    \item \textbf{Otázky a jejich specifické konfigurace:}
+    \begin{itemize}
+        \item \textbf{question:} Představuje jednu otázku v rámci kvízu (N:1 k \texttt{quiz}). Vzhledem k tomu, že systém podporuje 7 různých typů otázek, využívá tato entita enum \texttt{QuestionType} (např. SINGLE\_CHOICE, TEXT\_INPUT) a váže se na další specializované tabulky podle konkrétního typu.
+        \item \textit{Specializované konfigurační tabulky:}
+        \begin{itemize}
+            \item \textbf{question\_choice\_option:} Obsahuje možnosti odpovědí pro výběrové otázky a pravda/nepravda (vztah N:1 k \texttt{question}).
+            \item \textbf{question\_match\_pair:} Definuje správné dvojice pro přiřazovací otázky (vztah N:1 k \texttt{question}).
+            \item \textbf{question\_order\_item:} Definuje položky pro řazení a jejich správnou pozici (vztah N:1 k \texttt{question}).
+            \item \textbf{question\_text\_config:} Uchovává konfiguraci pro textové otázky (zda je hodnocení manuální či automatické a vzorovou správnou odpověď). Jelikož je konfigurace pro otázku jen jedna, je zde vztah \textbf{1:1} k \texttt{question}.
+            \item \textbf{question\_flashcard:} Konfigurace zadní strany učící kartičky (vztah 1:1 k \texttt{question}).
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Uživatelské pokusy a odevzdané odpovědi:}
+    \begin{itemize}
+        \item \textbf{quiz\_attempt:} Reprezentuje jeden konkrétní průchod (pokus) uživatele kvízem. Zaznamenává si celkové dosažené skóre, čas strávený nad kvízem a datum odeslání. Má vztah N:1 ke kvízu (\texttt{quiz}) a N:1 k uživateli (\texttt{user}). Entita má také vztah 1:N na všechny odevzdané odpovědi (\texttt{attempt\_answer}).
+        \item \textbf{attempt\_answer:} Abstraktní entita, která uchovává odpověď uživatele na jednu specifickou otázku v rámci pokusu. Má vztah N:1 na konkrétní pokus (\texttt{quiz\_attempt}) a N:1 na otázku (\texttt{question}). Aby bylo možné efektivně ukládat velmi odlišné formáty odpovědí (text, výběr ID, přiřazené dvojice), \textbf{využívá databáze strategii dědičnosti SINGLE\_TABLE}. Všechny odpovědi se ukládají do jediné společné tabulky s diskriminačním sloupcem \texttt{answer\_type}. Podle typu se odpovědi dělí na:
+        \begin{itemize}
+            \item \textbf{IdBasedAttemptAnswer:} Pro odpovědi založené na výběru z možností ukládá ID vybraných položek do samostatné generované kolekční tabulky.
+            \item \textbf{MatchBasedAttemptAnswer:} Ukládá propojené páry pro přiřazovací otázky do vlastní pomocné tabulky.
+            \item \textbf{TextBasedAttemptAnswer:} Ukládá napsaný volný text uživatele a příznak toho, zda si uživatel sám při manuální revizi ohodnotil odpověď jako správnou přímo do hlavních sloupců tabulky.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Autentizace a bezpečnost}
+Autentizace a bezpečnost v této aplikaci stojí na moderních standardech.
+
+\begin{itemize}
+    \item \textbf{Autentizace} -- Hlavním mechanismem pro ověřování uživatelů je bezstavová (stateless) autentizace pomocí JWT (JSON Web Tokens). Ve zkratce fungují JWT tokeny tak, že po úspěšném přihlášení vygeneruje server kryptograficky podepsaný textový řetězec (token) nesoucí informace o identitě uživatele. Tento token si frontend uloží a následně jej automaticky přikládá do hlavičky \texttt{Authorization: Bearer $<$token$>$} u každého HTTP požadavku odesílaného na server. Backendový filtr (\texttt{JwtAuthenticationFilter}) pak token u každého requestu zkontroluje a ověří jeho platnost, což znamená, že si server nemusí pamatovat probíhající relace ve své paměti.
+    \item \textbf{Hashování hesel} -- Hesla uživatelů se neukládají v čistém textu, ale jsou bezpečně zahashována pomocí spolehlivého algoritmu BCrypt. Veškerá komunikace je navíc chráněna šifrováním přes HTTPS.
+    \item \textbf{Refresh token a jeho rotace} -- Pro zajištění dlouhodobého, ale bezpečného přihlášení aplikace provádí rotaci tokenů. Architektura k tomu využívá kromě běžného přístupového (access) tokenu také takzvaný refresh token, který je uložený v databázi pro případnou invalidaci a posílá se přes zabezpečené cookies. Pokud hlavnímu přístupovému tokenu vyprší platnost a backend odpoví chybou 401, frontendový interceptor tuto situaci zachytí a automaticky na pozadí zavolá obnovovací endpoint \texttt{/auth/refresh}, čímž získá token nový a umožní plynulé pokračování v práci.
+    \item \textbf{Frontend ochrana cest (routes)} -- Na úrovni frontendu jsou jednotlivé cesty pečlivě zabezpečené prostřednictvím knihovny React Router. Uživatel musí být prokazatelně přihlášený (mít platný JWT token), aby mu aplikace dovolila přístup k hlavním funkcím a datům. K ochraně tras slouží speciální guard komponenta \texttt{ProtectedRoute.tsx}. Pokud se nepřihlášený uživatel pokusí otevřít chráněnou stránku, tato komponenta zamezí vykreslení obsahu a uživatele okamžitě přesměruje na stránku \texttt{/login}. Validaci tokenu při samotném spuštění aplikace a instalaci interceptorů pro HTTP požadavky pak řídí globální obalovací komponenta \texttt{AuthHandler.tsx}.
+\end{itemize}
+
+\subsection{Funkční moduly}
+
+\subsubsection{Kvízy}
+\textbf{Kvízy} představují hlavní stavební kámen aplikace, která je primárně určena pro self-testing a aktivní vybavování znalostí. Při vytváření nového kvízu má uživatel možnost vyplnit řadu detailů: \textbf{název, volitelný popis, ikonu (např. ve formě emoji)} pro lepší vizuální identifikaci a \textbf{časový limit}. Kvíz je následně zařazen do \textbf{kategorií}, přičemž si uživatel může vybrat z již existujících, nebo rovnou vytvořit kategorii novou přímo během sestavování kvízu. Do testu lze nakombinovat \textbf{všechny dostupné typy otázek}: výběr jedné možnosti (single choice), výběr z více možností (multiple choice), textovou odpověď (text input), pravda/nepravda (true/false), přiřazování dvojic (matching), seřazování položek (ordering) a sebehodnotící kartičky (flashcards). Jakmile je kvíz vytvořen, může jej uživatel \textbf{spouštět neustále dokola}, aby si procvičil látku, přičemž \textbf{výsledky každého pokusu vidí okamžitě po jeho odevzdání}.
+
+\subsubsection{Kategorie}
+\textbf{Kategorie} slouží k systematické organizaci a třídění vytvořených kvízů (například podle předmětů nebo semestrů). Mezi kategoriemi a kvízy existuje \textbf{vztah M:N}, což v praxi znamená, že jeden kvíz může patřit do vícero kategorií a jedna kategorie může přirozeně obsahovat mnoho různých kvízů. Stejně jako u kvízu, i při vytváření kategorie si uživatel může nastavit její parametry, kterými jsou \textbf{název, podrobnější popis a specifická barva}. Kromě pouhého třídění má kategorie ještě jeden zásadní účel – systém umožňuje, aby si uživatel zobrazil \textbf{souhrnné statistiky a také historii jednotlivých pokusů v rámci celé dané kategorie}, nikoliv pouze u izolovaných kvízů.
+
+\subsubsection{Revize kvízů}
+\textbf{Revize kvízu} nabízí uživateli možnost kdykoliv se zpětně podívat na detailní revizi \textbf{jakéhokoliv svého dřívějšího pokusu u jakéhokoliv kvízu}. V tomto přehledu na prvním místě vidí základní informace o daném pokusu: \textbf{celkové skóre v bodech, procentuální úspěšnost, strávený čas a přesné datum a čas}, kdy kvíz podstoupil. Součástí revize je také detailní rozbor testu, kde uživatel vidí \textbf{všechny otázky}. U každé z nich si může prohlédnout \textbf{její obsah, všechny odevzdané i očekávané správné odpovědi a konkrétní počet bodů}, které za danou otázku obdržel.
+
+\subsubsection{Statistiky a analýza}
+\textbf{Statistiky a analýza} tvoří pokročilou část systému, která data vizualizuje prostřednictvím grafů, a to jak \textbf{v rámci jednotlivých kvízů, tak agregovaně v rámci celých kategorií}. K dispozici je \textbf{graf vývoje procentuální úspěšnosti} napříč pokusy a \textbf{graf stráveného času}. Pro podrobnější diagnostiku se využívají grafy na úrovni jednotlivých otázek: průměrná procentuální úspěšnost (či chybovost) u jednotlivých otázek je vizualizována jako \textbf{sloupcový graf}, zatímco pro zobrazení času stráveného na jednotlivých otázkách se využívá \textbf{box plot graf}. Hned po dokončení a odevzdání kvízu se navíc uživateli na výsledkové obrazovce zobrazí pro rychlou orientaci \textbf{koláčový graf (pie chart) celkové procentuální úspěšnosti}.
+
+\subsection{Použité technologie}
+Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je striktně rozdělen na klientskou a serverovou část. Frontend je postaven jako Single Page Application pomocí knihovny React a jazyka TypeScript, přičemž rychlé sestavení zajišťuje nástroj Vite. Backend využívá jazyk Java a robustní framework Spring Boot, data jsou pak ukládána do relační databáze MySQL. Zásadním inovativním prvkem je integrace lokálního jazykového modelu pomocí nástroje Ollama, který se stará o vyhodnocování volných textových odpovědí. Pro lepší přehlednost jsou klíčové technologie rozděleny do logických celků v následující tabulce.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Logický celek} & \textbf{Použité technologie a knihovny} \\ \hline
+\textbf{Jazyky a hlavní frameworky} & TypeScript, React, Java, Spring Boot \\ \hline
+\textbf{Build nástroje a kontejnerizace} & Vite, Maven, Docker, Docker Compose \\ \hline
+\textbf{Autentizace a bezpečnost} & Spring Security, JWT \\ \hline
+\textbf{Databáze a ORM} & MySQL, Spring Data JPA, Hibernate \\ \hline
+\textbf{Umělá inteligence} & Spring AI, Ollama, llama3.1 \\ \hline
+\textbf{Uživatelské rozhraní a styly} & Tailwind CSS, shadcn/ui, Radix UI \\ \hline
+\textbf{Správa stavu, routing a HTTP} & Redux Toolkit, React Redux, React Router DOM, Axios \\ \hline
+\textbf{Grafy a pokročilé interakce} & ECharts, Recharts, dnd-kit \\ \hline
+\end{tabular}
+\caption{Přehled použitých technologií}
+\end{table}
+
+\subsection{Prezentace aplikace}
+
+\subsubsection{Domovská stránka}
+Hlavní dashboard, dostupná na hlavní trase (\texttt{/}), jejichž cílem je \textbf{poskytnout uživateli rychlý přehled a motivovat ho k pravidelnému studiu}. Skládá se ze tří hlavních částí. První částí jsou \textbf{souhrnné statistické karet}, které ukazují celkový strávený čas nad kvízy, počet odeslaných testů a průměrné procentuální skóre uživatele za posledních 7 dní. Dále obsahuje přehled \textbf{s až čtyřma kvízy, které uživatel naposledy projel}, což usnadňuje rychlé pokračování v nedávném učivu. Posledním prvkem je \textbf{teplotní mapa aktivity (calendar heatmap)}, která pomocí mřížky zobrazuje dny v aktuálním měsíci a při najetí myší ukazuje přesný počet odeslaných pokusů v daný den.
+
+\subsubsection{Historie všech pokusů}
+Tato obrazovka na trase \texttt{/history} slouží uživatelům k tomu, aby se mohli \textbf{zpětně vracet ke svým historickým výsledkům napříč všemi vytvořenými kvízy}. Systém zde vykresluje stránkovaný seznam všech odevzdaných pokusů od nejnovějších po nejstarší. \textbf{U každého pokusu se zobrazuje název příslušného kvízu, přesné datum a čas odeslání a celkové procentuální skóre}. Kliknutím na záznam se uživatel dostane do detailní revize daného pokusu, a navíc je zde praktické \textbf{vedlejší tlačítko, které uživatele okamžitě přesměruje přímo na detailní stránku samotného kvízu}.
+
+\subsubsection{Přehled všech kvízů, knihovna}
+Sekce s URL trasou \texttt{/library} funguje jako osobní repozitář. Nachází se zde pohled ve kterém je obsažen \textbf{kompletní seznam všech kvízů}, které si daný uživatel doposud vytvořil. Uživatel odtud může ke svým materiálům jednoduše přistupovat a opakovaně testy spouštět.
+
+\subsubsection{Detaily a statistika kvízu}
+Detailní stránka konkrétního kvízu (\texttt{/quiz/:id}) poskytuje hloubkový pohled na jeden vybraný studijní materiál. V základu zobrazuje detaily kvízu, jako jsou jeho název, popis, přiřazená ikona, celkový počet otázek, případný časový limit, \textbf{možný dosažitelný počet bodů (total points) a datum, kdy byl kvíz vytvořen}. Dále poskytuje rychlý přehled o uživatelově aktivitě tím, že rovnou v základu ukazuje \textbf{celkový počet provedených pokusů, dosažené procentuální skóre u posledního pokusu (last attempt) a celkové průměrné procentuální skóre (average)}. Podstatnou částí této stránky je však seznam uživatelových předchozích pokusů v tomto konkrétním kvízu a především pokročilá analytika. Uživatel si zde může prohlédnout vývoj svého skóre a stráveného času prostřednictvím \textbf{sloupcových grafů, kde osa X představuje jednotlivé pokusy a osa Y zobrazuje procentuální výsledek neboli skóre, respektive u druhého sloupcového grafu strávený čas na daných pokusech}. Dále jsou zde k dispozici detailní grafy zaměřené na jednotlivé otázky: \textbf{sloupcový graf zobrazující průměrnou chybovost v procentech (na ose Y) napříč jednotlivými otázkami (na ose X)} a \textbf{box plot graf pro analýzu času stráveného (na ose Y) na každé konkrétní otázce (na ose X)}.
+
+\subsubsection{Detaily a statistika kategorie}
+Stránka na trase \texttt{/category/:id} slouží ke zkoumání širších studijních celků. Na této obrazovce uživatel vidí základní informace o kategorii (název, popis a zvolenou barvu) a také výpis všech kvízů, které do ní spadají, \textbf{včetně informace o celkovém počtu kvízů, co daná kategorie obsahuje}. Podobně jako u samostatného kvízu, i detail kategorie shromažďuje a zobrazuje souhrnné statistiky a historii pokusů, avšak tentokrát agregovaně pro celou danou kategorii. Uživatel zde tak v základních informacích rovnou vidí \textbf{celkový počet provedených pokusů, dosažené procentuální skóre u posledního pokusu (last attempt) a průměrné procentuální skóre (average) – vše agregovaně pro celou kategorii}. Co se týče samotných grafů, \textbf{kategorie má k dispozici pouze agregované grafy času a procentuálního skóre: jedná se o sloupcový graf procentuálních výsledků (osa Y) na počet pokusů (osa X) a sloupcový graf stráveného času na pokusech (osa Y) na počet pokusů (osa X)}. To je užitečné pro zhodnocení celkových znalostí uživatele například v rámci celého jednoho předmětu.
+
+\subsubsection{Autentizační obrazovky}
+Přístup do aplikace je chráněn bezstavovou autentizací, pro kterou slouží jednoduché, ale klíčové přihlašovací obrazovky. Na trase \textbf{/login se nachází přihlašovací formulář}, pomocí kterého se existující uživatel přihlásí pomocí emailu a hesla a získá přístupový token. Stránka \textbf{/register naopak slouží jako registrační formulář} pro vytvoření zcela nového uživatelského účtu v systému, kde uživatel vyplní username, email a heslo, které musí potvrdit.
+
 \end{document}
