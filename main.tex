@@ -2,6 +2,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[IL2]{fontenc}
+\usepackage{graphicx}
 
 \jazyky{czech}{english}
 \hlavnijazyk{czech}
@@ -125,48 +126,118 @@ $$ V = \frac{\sum_{i=1}^{5} b(C_i)}{5} $$
 % -----------------------------------------------------------------
 \section{Analýza současných řešení}
 
-Pro kontext vlastního vývoje byla provedena rešerše existujících nástrojů pro správu testů a~kvízů. Cílem analýzy bylo identifikovat jejich silné stránky a~nedostatky ve vztahu k~funkčním požadavkům definovaným v~předchozí kapitole, a~tím zdůvodnit potřebu vývoje vlastního řešení.
+Pro kontext vlastního vývoje byla provedena rešerše existujících nástrojů pro správu testů a~kvízů. Cílem analýzy bylo identifikovat jejich silné stránky a~nedostatky ve vztahu k~funkčním požadavkům definovaným v~předchozí kapitole (F1.1--F5.3), a~tím zdůvodnit potřebu vývoje vlastního řešení.
 
-Analyzovaná řešení byla vybrána tak, aby pokrývala spektrum od komplexních systémů pro řízení výuky (LMS) přes jednoduché formulářové nástroje až po specializované platformy pro tvorbu kvízů.
+Analyzovaná řešení byla vybrána tak, aby pokrývala celé spektrum dostupných přístupů: od komplexních systémů pro řízení výuky (LMS), přes jednoduché formulářové nástroje, gamifikované platformy až po open-source aplikace a~specializované komerční řešení. Celkem bylo analyzováno osm platforem.
 
+% ---- 2.1 Moodle ----
 \subsection{Moodle}
-Moodle je nejrozšířenější open-source Learning Management System (LMS), který sloužil jako hlavní inspirace pro tuto práci.
+Moodle je nejrozšířenější open-source Learning Management System (LMS), který sloužil jako hlavní inspirace pro tuto práci. Jedná se o~modulární systém určený primárně pro formální vzdělávací prostředí, kde učitel vytváří a~spravuje testy pro studenty.
+
 \begin{itemize}
-    \item \textbf{Výhody:} Extrémně robustní systém s~podporou desítek typů otázek, detailní logování aktivit, rozsáhlé možnosti konfigurace a~vysoká úroveň zabezpečení. Obsahuje banku otázek a~pokročilé bodovací schéma.
-    \item \textbf{Nevýhody:} Zastaralé a~složité uživatelské rozhraní, náročná konfigurace i~pro jednoduché testy. Primárně určen pro formální vzdělávací prostředí (učitel $\rightarrow$ student), nikoli pro individuální sebetestování. Sdílení mimo systém je obtížné.
+    \item \textbf{Typy otázek a~multimédia:} Podpora desítek typů otázek včetně výběru jedné/více odpovědí, pravda/nepravda, přiřazování, řazení, doplňování, esejí a~dalších. Otázky mohou obsahovat obrázky, audio i~video. Podporuje individuální bodování každé otázky.
+    \item \textbf{Správa otázek:} Plnohodnotná banka otázek s~kategorizací, náhodným výběrem a~importem/exportem ve formátech Moodle XML, GIFT a~QTI. Otázky lze přeuspořádávat a~duplikovat.
+    \item \textbf{Průchod testem:} Konfigurovatelný časovač, navigace mezi otázkami, možnost označení otázky pro pozdější kontrolu. Podporuje uložení rozpracovaného pokusu. Po odevzdání je k~dispozici okamžité vyhodnocení s~volitelným zobrazením správných odpovědí.
+    \item \textbf{Analytika:} Detailní logování aktivit a~statistiky na úrovni otázek (index obtížnosti, diskriminační index). Výsledky jsou viditelné pro učitele; student vidí své vlastní pokusy, ale bez grafického zobrazení pokroku v~čase.
+    \item \textbf{Sdílení:} Testy jsou dostupné pouze registrovaným uživatelům v~rámci kurzu. Sdílení mimo systém formou veřejného odkazu není nativně podporováno. Anonymní přístup není možný.
+    \item \textbf{Nevýhody:} Zastaralé a~složité uživatelské rozhraní, náročná konfigurace i~pro jednoduché testy. Primárně určen pro institucionální prostředí (učitel $\rightarrow$ student), nikoli pro individuální sebetestování. Vyžaduje instalaci a~správu serveru.
 \end{itemize}
 
+% ---- 2.2 Google Forms ----
 \subsection{Google Forms}
-Jednoduchý a~zdarma dostupný nástroj od společnosti Google pro sběr dat a~tvorbu základních kvízů.
+Jednoduchý a~zdarma dostupný nástroj od společnosti Google pro sběr dat a~tvorbu základních kvízů. Režim \uv{Kvíz} umožňuje automatické hodnocení uzavřených otázek.
+
 \begin{itemize}
-    \item \textbf{Výhody:} Okamžitě dostupný, intuitivní rozhraní, jednoduché sdílení pomocí odkazu, podpora anonymních odpovědí.
-    \item \textbf{Nevýhody:} Velmi omezené možnosti bodování (nelze penalizovat za špatné odpovědi), absence pokročilých typů otázek (přiřazování, řazení, flashcard), chybí banka otázek, časovač, ukládání rozpracovaných testů a~jakékoliv statistiky pokroku v~čase.
+    \item \textbf{Typy otázek a~multimédia:} Podporuje krátkou textovou odpověď, výběr jedné odpovědi, zaškrtávací pole (více odpovědí), rozbalovací nabídku a~mřížku. K~otázkám lze přidávat obrázky a~videa. Nepodporuje přiřazování, řazení ani flashcard otázky.
+    \item \textbf{Správa otázek:} Otázky lze přeuspořádávat metodou drag \& drop. Neexistuje banka otázek ani možnost duplikace do jiného formuláře. Import z~externích formátů není podporován.
+    \item \textbf{Průchod testem:} Neobsahuje časovač. Nelze uložit rozpracované odpovědi -- po odeslání jsou výsledky finální. Navigace je pouze lineární (vpřed). Po odeslání zobrazí souhrnné výsledky.
+    \item \textbf{Analytika:} Po odeslání zobrazí souhrnné grafy: distribuce skóre, průměr, medián a~nejčastěji chybně zodpovězené otázky. Chybí uživatelské profily a~historie pokusů v~čase -- každé odeslání je izolovaná událost.
+    \item \textbf{Sdílení:} Formulář lze sdílet pomocí odkazu. Pokud je vypnuta volba \uv{Sbírat e-mailové adresy}, může odpovědět kdokoli bez přihlášení -- odpovědi jsou anonymní.
+    \item \textbf{Nevýhody:} Velmi omezené možnosti bodování, absence pokročilých typů otázek, žádná podpora pro sledování pokroku, žádný časovač ani uložení rozpracovaného testu. Není navržen jako vzdělávací platforma.
 \end{itemize}
 
+% ---- 2.3 Kahoot! ----
+\subsection{Kahoot!}
+Kahoot! je gamifikovaná kvízová platforma založená na živých hrách v~reálném čase. Učitel prezentuje otázky a~účastníci odpovídají synchronně na svých zařízeních.
+
+\begin{itemize}
+    \item \textbf{Typy otázek a~multimédia:} V~bezplatné verzi podporuje výběr jedné odpovědi (2--6 možností) a~pravda/nepravda. Typ \uv{Type Answer} (krátká textová odpověď) je dostupný pouze v~placených plánech. K~otázkám i~odpovědím lze přidat obrázky a~videa. Přiřazování a~řazení nejsou v~bezplatné verzi dostupné.
+    \item \textbf{Správa otázek:} Základní editor bez drag \& drop řazení v~bezplatné verzi (funkce \uv{Puzzle} řazení je placená). Banka otázek je dostupná pouze v~placených plánech. Duplikace kvízů je možná.
+    \item \textbf{Průchod testem:} Každá otázka má vlastní odpočítávací časovač. Po každé otázce se zobrazí průběžné pořadí (žebříček). Nelze přeskakovat mezi otázkami ani ukládat rozpracovaný stav -- kvíz probíhá živě a~synchronně.
+    \item \textbf{Analytika:} Základní souhrnné statistiky po skončení hry: průměr třídy, úspěšnost jednotlivých otázek, živý žebříček během hry. Chybí sledování pokroku uživatele v~čase.
+    \item \textbf{Sdílení:} Hráči se připojují pomocí herního PINu, přihlášení není vyžadováno -- stačí zadat přezdívku. Hra je ze své podstaty anonymní.
+    \item \textbf{Nevýhody:} Primárně zaměřen na skupinové soutěžení v~reálném čase, nikoli na individuální sebetestování. Omezené typy otázek v~bezplatné verzi. Nelze uložit průchod a~vrátit se k~němu.
+\end{itemize}
+
+% ---- 2.4 Socrative ----
+\subsection{Socrative}
+Socrative je nástroj pro tvorbu kvízů řízenou učitelem (\textit{teacher-paced}). Bezplatná verze umožňuje kvízy pro maximálně 50 studentů.
+
+\begin{itemize}
+    \item \textbf{Typy otázek a~multimédia:} Podporuje tři typy otázek: výběr jedné/více odpovědí, pravda/nepravda a~krátkou textovou odpověď. K~otázkám lze přidat obrázky. Pokročilé typy (přiřazování, řazení, flashcard) nejsou podporovány.
+    \item \textbf{Správa otázek:} Otázky lze přeuspořádávat pomocí šipek a~duplikovat. Import je možný přes sdílecí kód. Neexistuje banka otázek.
+    \item \textbf{Průchod testem:} Kvíz je řízen učitelem -- studenti odpovídají synchronně. V~bezplatné verzi chybí časovač. Nelze uložit rozpracovaný stav (relace jsou živé). Automatické vyhodnocení uzavřených otázek.
+    \item \textbf{Analytika:} Detailní živé reporty a~exporty. Konfigurovatelné tabulky výsledků a~individuální reporty studentů. Chybí však sledování dlouhodobého pokroku.
+    \item \textbf{Sdílení:} Studenti se připojují pomocí kódu místnosti bez nutnosti registrace. V~bezplatné verzi jsou odpovědi plně anonymní. Chybí možnost sdílení pomocí veřejného odkazu.
+    \item \textbf{Nevýhody:} Omezený počet typů otázek, závislost na učiteli pro spuštění kvízu, limit 50 studentů v~bezplatné verzi. Není vhodný pro samostatné sebetestování.
+\end{itemize}
+
+% ---- 2.5 Quizizz ----
 \subsection{Quizizz}
-Online platforma zaměřená na gamifikaci vzdělávání s~interaktivními kvízy.
+Quizizz (nyní pod značkou Wayground) je moderní online platforma pro tvorbu kvízů s~podporou jak živého, tak asynchronního režimu (\textit{homework mode}).
+
 \begin{itemize}
-    \item \textbf{Výhody:} Moderní a~atraktivní uživatelské rozhraní, živé kvízy v~reálném čase, okamžité vyhodnocení, vestavěný žebříček, snadné sdílení.
-    \item \textbf{Nevýhody:} Omezený počet typů otázek v~bezplatné verzi, klíčové funkce (pokročilé statistiky, export dat) jsou za paywallem. Zaměřen spíše na soutěžení ve skupině než na individuální sebetestování a~sledování dlouhodobého pokroku.
+    \item \textbf{Typy otázek a~multimédia:} Nejširší paleta typů otázek ze všech analyzovaných platforem: výběr jedné odpovědi, výběr více odpovědí, pravda/nepravda, doplňování, otevřené odpovědi (dlouhý text), drag \& drop kategorizace, řazení, přiřazování, hotspot (kliknutí na oblast obrázku) a~audio odpovědi. K~otázkám lze přidávat obrázky a~audio.
+    \item \textbf{Správa otázek:} Editor s~drag \& drop řazením. Rozsáhlá komunitní knihovna otázek umožňující jejich opětovné použití. Nemá formální banku otázek, ale otázky lze sdílet a~znovu použít přes knihovnu.
+    \item \textbf{Průchod testem:} Podporuje živý režim (\textit{self-paced}) i~přiřazení jako domácí úkol. Volitelný časovač na jednotlivé otázky, navigovatelné rozhraní, okamžité automatické vyhodnocení.
+    \item \textbf{Analytika:} Robustní reporty zahrnující úspěšnost jednotlivých otázek, skóre studentů, analytiku otázek, žebříčky a~sledování pokroku. K~dispozici je i~AI analýza výsledků. Pokročilé funkce jsou však dostupné pouze v~placených plánech.
+    \item \textbf{Sdílení:} Kvízy lze sdílet pomocí odkazu nebo kódu. Účastníci se mohou připojit bez registrace (anonymní režim při použití kódu).
+    \item \textbf{Nevýhody:} Klíčové funkce (pokročilé statistiky, export dat, některé typy otázek) jsou za paywallem. Primárně zaměřen na skupinové soutěžení, nikoli na individuální sebetestování a~sledování dlouhodobého osobního pokroku.
 \end{itemize}
 
-\subsection{Quizlet}
-Populární platforma zaměřená primárně na učení pomocí kartiček (\textit{flashcards}) a~opakování.
-\begin{itemize}
-    \item \textbf{Výhody:} Silné zaměření na proces učení a~opakování (\textit{spaced repetition}), rozsáhlá komunita se sdílenými studijními sety, jednoduché rozhraní.
-    \item \textbf{Nevýhody:} Velmi omezená tvorba strukturovaných testů -- nepodporuje většinu pokročilých typů otázek (přiřazování v~testovém formátu, řazení), chybí časovač, bodování a~detailní analytika výsledků. Mnoho funkcí je dostupných pouze v~placené verzi (Quizlet Plus).
-\end{itemize}
-
+% ---- 2.6 ProProfs Quiz Maker ----
 \subsection{ProProfs Quiz Maker}
-Komerční online platforma specializovaná na tvorbu kvízů a~testů pro vzdělávání i~firemní účely.
+ProProfs Quiz Maker je komerční online platforma specializovaná na tvorbu kvízů a~testů pro vzdělávání i~firemní účely. Bezplatná verze umožňuje tvorbu kvízů s~maximálně 8~otázkami.
+
 \begin{itemize}
-    \item \textbf{Výhody:} Široká škála typů otázek, podpora obrázků a~multimédií, banka otázek, certifikáty po dokončení, detailní reporty.
-    \item \textbf{Nevýhody:} Plnohodnotné funkce jsou dostupné pouze v~placených plánech, uživatelské rozhraní je méně moderní. Primárně orientován na hodnocení ostatních (zaměstnanců, studentů), nikoli na sebetestování.
+    \item \textbf{Typy otázek a~multimédia:} Podporuje více než 20 typů otázek: výběr jedné/více odpovědí, pravda/nepravda, doplňování, přiřazování, řazení (rank), hotspot, esej, audio/video odpověď, nahrání dokumentu a~další. K~otázkám i~odpovědím lze přidávat obrázky, audio a~video.
+    \item \textbf{Správa otázek:} Drag \& drop řazení, duplikace otázek, rozsáhlá šablonová knihovna. Přizpůsobitelné motivy a~branding. Formální banka otázek není explicitně zmíněna, ale knihovna šablon plní obdobnou funkci.
+    \item \textbf{Průchod testem:} Konfigurovatelný časovač na celý test i~jednotlivé otázky. Možnost vynutit režim zkoušky (jedna otázka najednou). Automatické vyhodnocení uzavřených otázek. Anti-cheating opatření.
+    \item \textbf{Analytika:} Pokročilá analytika: okamžité bodování, detailní reporty o~obtížnosti otázek, chování účastníků, kompetencích. Možnost generování certifikátů a~exportu dat.
+    \item \textbf{Sdílení:} Sdílení pomocí odkazu, vložení na web (embed), e-mailem nebo přes classroom. Podporuje zabezpečené kvízy (heslo, omezení domény). Lze povolit anonymní pokusy nebo sledovat uživatele přes e-mail.
+    \item \textbf{Nevýhody:} Plnohodnotné funkce jsou dostupné pouze v~placených plánech (bezplatná verze je silně omezená na 8~otázek). Uživatelské rozhraní je méně moderní. Primárně orientován na hodnocení ostatních (zaměstnanců, studentů), nikoli na sebetestování.
 \end{itemize}
 
+% ---- 2.7 ClassQuiz ----
+\subsection{ClassQuiz}
+ClassQuiz je open-source alternativa ke Kahoot!, určená pro živé kvízy ve třídě. Aplikaci je možné provozovat na vlastním serveru (\textit{self-hosted}).
+
+\begin{itemize}
+    \item \textbf{Typy otázek a~multimédia:} Podporuje primárně otázky s~výběrem odpovědi (kvíz/anketa). K~otázkám lze přidat obrázky. Nepodporuje pokročilé typy: textovou odpověď, přiřazování, řazení ani flashcard.
+    \item \textbf{Správa otázek:} Základní editor pro tvorbu otázek. Uživatelé mohou procházet a~importovat kvízy vytvořené ostatními. Chybí banka otázek, míchání otázek i~pokročilá správa.
+    \item \textbf{Průchod testem:} Výhradně živý herní režim -- hostitel prezentuje otázky a~účastníci odpovídají v~reálném čase. Po zodpovězení se zobrazí okamžitá zpětná vazba. Na konci hry se zobrazí žebříček vítězů. Nelze uložit rozpracovaný stav.
+    \item \textbf{Analytika:} Minimální -- zobrazí se pouze konečné skóre a~pořadí. Žádné sledování uživatelů, historie pokusů ani analytika otázek.
+    \item \textbf{Sdílení:} Hostitel poskytne odkaz nebo PIN, hráči zadají přezdívku (bez registrace). Hra je plně anonymní. Počet hráčů není omezen (testováno na stovkách).
+    \item \textbf{Nevýhody:} Velmi omezené typy otázek, žádná analytika, výhradně synchronní herní režim. Není vhodný pro strukturované testování ani sebetestování. Vyžaduje vlastní hosting.
+\end{itemize}
+
+% ---- 2.8 QST ----
+\subsection{QST (Quiz/Survey/Test)}
+QST je open-source platforma pro tvorbu testů a~hodnocení, která zahrnuje i~plnohodnotný klasifikační systém (\textit{gradebook}). Je dostupná pro Windows, Linux i~macOS, ale vyžaduje lokální instalaci a~konfiguraci.
+
+\begin{itemize}
+    \item \textbf{Typy otázek a~multimédia:} Podpora širokého spektra typů otázek včetně výběru jedné/více odpovědí, doplňování, přiřazování, esejí a~dalších. Podporuje multimediální obsah. Unikátní funkce \uv{Memory} -- zobrazení studijního materiálu a~následné kladení otázek.
+    \item \textbf{Správa otázek:} Import a~export v~mnoha formátech: Moodle XML, QTI, PDF a~dalších. Tato schopnost importu z~Moodlu je mezi analyzovanými řešeními unikátní (sdílena pouze s~navrhovanou aplikací).
+    \item \textbf{Průchod testem:} Časovač, navigace mezi otázkami, automatické hodnocení s~okamžitým zobrazením výsledků.
+    \item \textbf{Analytika:} Detailní analytika na úrovni otázek (které otázky byly nejčastěji chybně zodpovězeny a~kým). Plnohodnotný klasifikační systém (\textit{gradebook}) s~historií výsledků.
+    \item \textbf{Sdílení:} Systém je určen pro nasazení v~rámci školy nebo organizace. Sdílení přes veřejný odkaz není nativně podporováno.
+    \item \textbf{Nevýhody:} Zastaralé uživatelské rozhraní, není realizován jako SPA (Single Page Application). Vyžaduje instalaci a~konfiguraci na vlastním serveru -- není dostupný jako nasazená webová aplikace. Orientován na institucionální použití, nikoli na individuální sebetestování. I~přes rozsáhlou funkcionalitu je UX výrazně pozadu za moderními standardy.
+\end{itemize}
+
+% ---- 2.9 Srovnávací tabulka ----
 \subsection{Srovnávací hodnocení řešení}
 
-Pro objektivní porovnání analyzovaných řešení byla stanovena hodnotící škála 0--3 bodů, kde:
+Pro objektivní porovnání analyzovaných řešení vůči definovaným cílům (C1--C5) a~doplňkovému kritériu zaměření na sebetestování byla stanovena hodnotící škála 0--3 bodů:
 
 \begin{description}
     \item[3] -- plná podpora požadavku,
@@ -175,33 +246,59 @@ Pro objektivní porovnání analyzovaných řešení byla stanovena hodnotící 
     \item[0] -- požadavek není podporován.
 \end{description}
 
-\noindent Každé řešení bylo ohodnoceno ve vztahu k~pěti definovaným cílům (C1--C5) a~doplňkovému kritériu zaměření na sebetestování. Výsledky jsou shrnuty v~tabulce~\ref{tab:srovnani}.
+\noindent Výsledky hodnocení jsou shrnuty v~tabulce~\ref{tab:srovnani}.
 
 \begin{table}[h]
 \centering
+\small
 \caption{Srovnávací hodnocení analyzovaných řešení}
 \label{tab:srovnani}
-\begin{tabular}{|l|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
-\textbf{Kritérium} & \textbf{Moodle} & \textbf{G. Forms} & \textbf{Quizizz} & \textbf{Quizlet} & \textbf{ProProfs} \\
+\textbf{Kritérium} & \rotatebox{70}{\textbf{Moodle}} & \rotatebox{70}{\textbf{G.\,Forms}} & \rotatebox{70}{\textbf{Kahoot!}} & \rotatebox{70}{\textbf{Socrative}} & \rotatebox{70}{\textbf{Quizizz}} & \rotatebox{70}{\textbf{ProProfs}} & \rotatebox{70}{\textbf{ClassQuiz}} & \rotatebox{70}{\textbf{QST}} \\
 \hline
-C1: Autentizace        & 3 & 2 & 3 & 2 & 3 \\
-C2: Tvorba testů       & 3 & 1 & 2 & 1 & 3 \\
-C3: Absolvování testů  & 3 & 1 & 2 & 1 & 2 \\
-C4: Statistiky         & 2 & 1 & 2 & 1 & 2 \\
-C5: Sdílení            & 1 & 3 & 3 & 3 & 2 \\
-Sebetestování          & 1 & 0 & 1 & 2 & 1 \\
+C1: Autentizace          & 3 & 2 & 1 & 1 & 2 & 3 & 0 & 3 \\
+C2: Tvorba testů         & 3 & 1 & 1 & 1 & 3 & 3 & 1 & 3 \\
+C3: Absolvování testů    & 3 & 1 & 2 & 1 & 2 & 2 & 1 & 2 \\
+C4: Statistiky           & 2 & 1 & 1 & 2 & 2 & 3 & 0 & 3 \\
+C5: Sdílení              & 1 & 3 & 3 & 2 & 3 & 2 & 3 & 1 \\
+Sebetestování            & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 1 \\
 \hline
-\textbf{Celkem (max. 18)} & \textbf{13} & \textbf{8} & \textbf{13} & \textbf{10} & \textbf{13} \\
+\textbf{Celkem (max.\,18)} & \textbf{13} & \textbf{8} & \textbf{8} & \textbf{7} & \textbf{13} & \textbf{14} & \textbf{5} & \textbf{13} \\
 \hline
 \end{tabular}
 \end{table}
 
+\noindent Jednotlivá hodnocení v~tabulce~\ref{tab:srovnani} vycházejí z~následujících úvah:
+
+\begin{itemize}
+    \item \textbf{C1 -- Autentizace:} Moodle, ProProfs a~QST disponují plnohodnotným systémem uživatelských účtů (3). Google Forms a~Quizizz vyžadují účet pouze pro autora, nikoli pro účastníka (2). Kahoot! a~Socrative nevyžadují žádnou registraci, ale uživatelské profily chybí (1). ClassQuiz nemá žádný systém účtů (0).
+
+    \item \textbf{C2 -- Tvorba testů:} Moodle, Quizizz, ProProfs a~QST nabízejí širokou škálu typů otázek, banku otázek nebo knihovnu, drag \& drop správu a~multimediální obsah (3). Google Forms, Kahoot!, Socrative a~ClassQuiz podporují pouze základní typy bez banky otázek (1).
+
+    \item \textbf{C3 -- Absolvování testů:} Moodle jako jediný splňuje všechny požadavky (časovač, uložení rozpracovaného testu, navigace, okamžité vyhodnocení) (3). Kahoot!, Quizizz a~ProProfs nabízejí časovač a~vyhodnocení, ale chybí jim uložení rozpracovaného stavu a/nebo volná navigace (2). Google Forms, Socrative a~ClassQuiz mají pouze minimální funkce průchodu (1). QST podporuje časovač a~vyhodnocení, ale uložení rozpracovaného testu je omezené (2).
+
+    \item \textbf{C4 -- Statistiky:} ProProfs a~QST nabízejí detailní reporty na úrovni otázek i~uživatelů s~historií (3). Moodle, Socrative a~Quizizz mají souhrnné statistiky, ale chybí grafický pokrok v~čase (2). Google Forms a~Kahoot! nabízejí pouze základní souhrny (1). ClassQuiz zobrazuje jen konečné pořadí (0).
+
+    \item \textbf{C5 -- Sdílení:} Google Forms, Kahoot!, Quizizz a~ClassQuiz umožňují snadné sdílení pomocí odkazu/PINu s~anonymním přístupem (3). ProProfs a~Socrative podporují sdílení, ale s~omezeními (2). Moodle a~QST jsou omezeny na registrované uživatele v~rámci systému (1).
+
+    \item \textbf{Sebetestování:} Žádná z~analyzovaných platforem není primárně navržena pro individuální sebetestování se sledováním pokroku. Quizizz, ProProfs a~QST umožňují opakované pokusy, ale chybí jim explicitní zaměření na \textit{active recall} a~personalizovaný dashboard pokroku (1). Ostatní platformy sebetestování prakticky nepodporují (0).
+\end{itemize}
+
+% ---- 2.10 Závěr analýzy ----
 \subsection{Závěr analýzy}
 
-Z~provedeného srovnání vyplývá, že žádné z~analyzovaných řešení plně nepokrývá všechny definované cíle současně. Moodle dosahuje vysokého hodnocení v~oblasti tvorby a~absolvování testů, ale jeho složitost a~zastaralé uživatelské rozhraní ho činí nevhodným pro rychlé individuální sebetestování. Google Forms je snadno přístupný, ale postrádá pokročilé testovací a~analytické funkce. Quizizz a~ProProfs nabízejí kompromis, avšak klíčové funkce jsou často za paywallem a~zaměření na sebetestování je okrajové. Quizlet je nejblíže konceptu sebetestování, ale chybí mu formální testovací funkce.
+Z~provedeného srovnání osmi existujících řešení vyplývá, že žádné z~nich plně nepokrývá všechny definované cíle (C1--C5) současně a~zároveň se zaměřuje na individuální sebetestování.
 
-Na trhu tak existuje mezera mezi jednoduchými formulářovými nástroji (Google Forms) a~komplexními systémy pro řízení výuky (Moodle). Cílem této práce je vytvořit řešení, které kombinuje pokročilé testovací funkce s~moderním uživatelským rozhraním a~explicitním zaměřením na sebetestování a~sledování individuálního pokroku -- oblast, kterou žádné z~analyzovaných řešení dostatečně nepokrývá.
+\textbf{Komplexní systémy} (Moodle, QST) dosahují vysokého hodnocení v~oblasti tvorby testů, typů otázek a~analytiky, ale jejich zastaralé uživatelské rozhraní, nutnost instalace a~orientace na institucionální prostředí je činí nevhodnými pro rychlé individuální sebetestování. QST je funkčně nejbližší navrhovanému řešení (včetně importu z~Moodlu), ale jeho nemodernizované UI a~absence nasazení jako SPA webové aplikace představují zásadní omezení.
+
+\textbf{Formulářové nástroje} (Google Forms) jsou snadno přístupné a~zdarma, ale postrádají pokročilé typy otázek, časovač, uložení rozpracovaného testu i~jakékoliv sledování pokroku -- jsou navrženy pro jednorázový sběr dat, nikoli pro vzdělávání.
+
+\textbf{Gamifikované platformy} (Kahoot!, ClassQuiz, Socrative) jsou zaměřeny na skupinové soutěžení v~reálném čase. Nabízejí atraktivní UX, ale jsou nevhodné pro individuální studium -- chybí jim uložení stavu, analytika pokroku a~pokročilé typy otázek.
+
+\textbf{Komerční platformy} (Quizizz, ProProfs) nabízejí nejširší paletu funkcí, avšak klíčové funkce (pokročilé stat\-is\-ti\-ky, rozšířené typy otázek, export) jsou dostupné pouze v~placených plánech. Jejich zaměření na hodnocení ostatních (učitel $\rightarrow$ student, firma $\rightarrow$ uchazeč) se liší od cílového použití navrhované aplikace.
+
+Na trhu tak existuje \textbf{mezera} mezi jednoduchými formulářovými nástroji a~komplexními systémy pro řízení výuky. Cílem této práce je vytvořit řešení, které kombinuje pokročilé testovací funkce (srovnatelné s~Moodlem) s~moderním uživatelským rozhraním (SPA v~Reactu), snadným sdílením (srovnatelným s~Google Forms) a~explicitním zaměřením na sebetestování a~sledování individuálního pokroku -- oblast, kterou žádné z~analyzovaných řešení dostatečně nepokrývá.
 
 % -----------------------------------------------------------------
 % 3. METODIKA
