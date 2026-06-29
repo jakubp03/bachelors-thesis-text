@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[IL2]{fontenc}
 \usepackage{graphicx}
+\usepackage{tabularx} % pro lepší zalamování v tabulkách
 
 \jazyky{czech}{english}
 \hlavnijazyk{czech}
@@ -18,7 +19,6 @@
 \usepackage{todonotes}
 \newcommand{\mv}[1]{\todo[inline,color=red!50]{MV: #1}}
 \newcommand{\jp}[1]{\todo[inline,color=blue!25]{PK: #1}}
-
 
 \pohlavi M
 \prohlaseni{V Ostravě dne 16. 12. 2025}
@@ -46,259 +46,282 @@ The goal of this thesis is to design and implement a full-stack web application 
 Základní kapitoly:
 
 \begin{itemize}
-
     \item Úvod -- představení toho, co se bude v práci řešit. Je to info pro čtenáře, kterým ho chcete nalákat na to, co bude číst. Takže rychlé představení současného stavu a naznačeného způsobu řešení
-
     \item Cíle práce -- představení cílů práce (čeho se má dosáhnout) a základního způsobu, který použijete k dosažení cílů práce
-
     \item Analýza současného stavu -- představení jednak metodiky, pomocí které budete hledat aktuální řešení (tj. jak jsme se bavili: jaké jsou kritéria, jakým způsobem se budou hodnotit), druhak představení současně dostupných nástrojů pro dané řešení (stručné předsdtavení + odkaz na nástroj, ohdonocení kritérií podle metodiky) + na závěr shrnutí, zda lze nějaký existující nástroj použít a není třeba tvořit nic nového, nebo zda se tedy bude dělat vlastní řešení
-
     \item Metodika řešení práce - představení postupů, přístupů a nástrojů, které použijete při řešení práce; jakým způsobem se bude postupovat při sběru požadavků, jak se budou proritizovat, že/zda bude vize, risk-list, git, jak testování atp.
-
     \item Odteď dále kapitoly ohledně vlastního řešení práce. Je mi jedno, jak to rozčleníte -- nejdřív architektura a pak po kapitolách BE/FE/DB, nebo po funkcionalitách, ale nějak smysluplně to pojmout
-
     \item Představení vytvořeného řešení -- rychlé představení vytvořeného řešení a toho, jakt o vypadá. je to o to "prodat co vzniklo", ne o tvorbě uživatelské příručky
-
     \item Shrnutí -- zde sepíšete, zda/jak se podařilo splnit cíle práce, co se povedlo co se nepovedlo + případně co by šlo dělat do budoucna
-
     \item Závěr -- zde napište, co vlastně vzniklo a jak to dopadlo.
-
-    V průběhu textu nezapomeňte přidávat reference (pořád si je průběžně ukldádejte, ať je pak nemusíte hledat).
-
-    Připravte si na tohle všechno vlastní kapitoly, případný existující text do toho přesuňte a dejte echo, že je hotovo a můžu kontrolovat, díky.
-    
 \end{itemize}
 
-% -----------------------------------------------------------------
-% 1. SHRNUTÍ POŽADAVKŮ
-% -----------------------------------------------------------------
-\section{Shrnutí požadavků na vytvářenou aplikaci}
+V průběhu textu nezapomeňte přidávat reference (pořád si je průběžně ukldádejte, ať je pak nemusíte hledat).
 
-Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s~důrazem na moderní uživatelské rozhraní a~specifické analytické funkce. Aplikace bude postavena na technologiích React (Frontend), Spring Boot (Backend) a~MySQL (Databáze).
+Připravte si na tohle všechno vlastní kapitoly, případný existující text do toho přesuňte a dejte echo, že je hotovo a můžu kontrolovat, díky.
 
-Specifikem a~hlavním přínosem této práce je zaměření na \textbf{sebetestování a~proces učení}. Aplikace je navržena tak, aby umožnila studentům snadno vytvářet testy z~vlastního učiva a~následně je opakovaně absolvovat. Tím dochází k~upevňování znalostí formou \textbf{aktivního vybavování} (\textit{active recall}). Systém poskytne uživateli detailní statistiky a~grafy, díky kterým získá okamžitý přehled o~svém pokroku a~oblastech, které vyžadují další studium. Tento přístup k~samostudiu není v~běžně dostupných aplikacích dostatečně implementován.
+\section{úvod}
 
-Níže jsou definovány klíčové funkční požadavky, které představují cíle této práce.
+\subsection{Současný stav problematiky}
+
+\subsection{řešení problému}
 
 
-% -----------------------------------------------------------------
-% 2. ANALÝZA SOUČASNÝCH ŘEŠENÍ
-% -----------------------------------------------------------------
-\section{Analýza současných řešení}
+\section{cíle práce}
 
-Pro kontext vlastního vývoje byla provedena rešerše existujících nástrojů pro správu testů a~kvízů. Cílem analýzy bylo identifikovat jejich silné stránky a~nedostatky ve vztahu k~funkčním požadavkům definovaným v~předchozí kapitole (F1.1--F5.3), a~tím zdůvodnit potřebu vývoje vlastního řešení.
+\subsection{cíle práce}
 
-Analyzovaná řešení byla vybrána tak, aby pokrývala celé spektrum dostupných přístupů: od komplexních systémů pro řízení výuky (LMS), přes jednoduché formulářové nástroje, gamifikované platformy až po open-source aplikace a~specializované komerční řešení. Celkem bylo analyzováno osm platforem.
+\subsection{způsob dosažení cíle}
+\jp{způsob ? programování ? nevím co zde patří}
 
-% ---- 2.1 Moodle ----
-\subsection{Moodle}
-Moodle je nejrozšířenější open-source Learning Management System (LMS), který sloužil jako hlavní inspirace pro tuto práci. Jedná se o~modulární systém určený primárně pro formální vzdělávací prostředí, kde učitel vytváří a~spravuje testy pro studenty.
 
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podpora desítek typů otázek včetně výběru jedné/více odpovědí, pravda/nepravda, přiřazování, řazení, doplňování, esejí a~dalších. Otázky mohou obsahovat obrázky, audio i~video. Podporuje individuální bodování každé otázky.
-    \item \textbf{Správa otázek:} Plnohodnotná banka otázek s~kategorizací, náhodným výběrem a~importem/exportem ve formátech Moodle XML, GIFT a~QTI. Otázky lze přeuspořádávat a~duplikovat.
-    \item \textbf{Průchod testem:} Konfigurovatelný časovač, navigace mezi otázkami, možnost označení otázky pro pozdější kontrolu. Podporuje uložení rozpracovaného pokusu. Po odevzdání je k~dispozici okamžité vyhodnocení s~volitelným zobrazením správných odpovědí.
-    \item \textbf{Analytika:} Detailní logování aktivit a~statistiky na úrovni otázek (index obtížnosti, diskriminační index). Výsledky jsou viditelné pro učitele; student vidí své vlastní pokusy, ale bez grafického zobrazení pokroku v~čase.
-    \item \textbf{Sdílení:} Testy jsou dostupné pouze registrovaným uživatelům v~rámci kurzu. Sdílení mimo systém formou veřejného odkazu není nativně podporováno. Anonymní přístup není možný.
-    \item \textbf{Nevýhody:} Zastaralé a~složité uživatelské rozhraní, náročná konfigurace i~pro jednoduché testy. Primárně určen pro institucionální prostředí (učitel $\rightarrow$ student), nikoli pro individuální sebetestování. Vyžaduje instalaci a~správu serveru.
-\end{itemize}
+\section{analýza součaného stavu}
+\jp{ještě se bude upravovat}
 
-% ---- 2.2 Google Forms ----
-\subsection{Google Forms}
-Jednoduchý a~zdarma dostupný nástroj od společnosti Google pro sběr dat a~tvorbu základních kvízů. Režim \uv{Kvíz} umožňuje automatické hodnocení uzavřených otázek.
+\subsection{metodika analýzy existujících řešení}
 
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podporuje krátkou textovou odpověď, výběr jedné odpovědi, zaškrtávací pole (více odpovědí), rozbalovací nabídku a~mřížku. K~otázkám lze přidávat obrázky a~videa. Nepodporuje přiřazování, řazení ani flashcard otázky.
-    \item \textbf{Správa otázek:} Otázky lze přeuspořádávat metodou drag \& drop. Neexistuje banka otázek ani možnost duplikace do jiného formuláře. Import z~externích formátů není podporován.
-    \item \textbf{Průchod testem:} Neobsahuje časovač. Nelze uložit rozpracované odpovědi -- po odeslání jsou výsledky finální. Navigace je pouze lineární (vpřed). Po odeslání zobrazí souhrnné výsledky.
-    \item \textbf{Analytika:} Po odeslání zobrazí souhrnné grafy: distribuce skóre, průměr, medián a~nejčastěji chybně zodpovězené otázky. Chybí uživatelské profily a~historie pokusů v~čase -- každé odeslání je izolovaná událost.
-    \item \textbf{Sdílení:} Formulář lze sdílet pomocí odkazu. Pokud je vypnuta volba \uv{Sbírat e-mailové adresy}, může odpovědět kdokoli bez přihlášení -- odpovědi jsou anonymní.
-    \item \textbf{Nevýhody:} Velmi omezené možnosti bodování, absence pokročilých typů otázek, žádná podpora pro sledování pokroku, žádný časovač ani uložení rozpracovaného testu. Není navržen jako vzdělávací platforma.
-\end{itemize}
-
-% ---- 2.3 Kahoot! ----
-\subsection{Kahoot!}
-Kahoot! je gamifikovaná kvízová platforma založená na živých hrách v~reálném čase. Učitel prezentuje otázky a~účastníci odpovídají synchronně na svých zařízeních.
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} V~bezplatné verzi podporuje výběr jedné odpovědi (2--6 možností) a~pravda/nepravda. Typ \uv{Type Answer} (krátká textová odpověď) je dostupný pouze v~placených plánech. K~otázkám i~odpovědím lze přidat obrázky a~videa. Přiřazování a~řazení nejsou v~bezplatné verzi dostupné.
-    \item \textbf{Správa otázek:} Základní editor bez drag \& drop řazení v~bezplatné verzi (funkce \uv{Puzzle} řazení je placená). Banka otázek je dostupná pouze v~placených plánech. Duplikace kvízů je možná.
-    \item \textbf{Průchod testem:} Každá otázka má vlastní odpočítávací časovač. Po každé otázce se zobrazí průběžné pořadí (žebříček). Nelze přeskakovat mezi otázkami ani ukládat rozpracovaný stav -- kvíz probíhá živě a~synchronně.
-    \item \textbf{Analytika:} Základní souhrnné statistiky po skončení hry: průměr třídy, úspěšnost jednotlivých otázek, živý žebříček během hry. Chybí sledování pokroku uživatele v~čase.
-    \item \textbf{Sdílení:} Hráči se připojují pomocí herního PINu, přihlášení není vyžadováno -- stačí zadat přezdívku. Hra je ze své podstaty anonymní.
-    \item \textbf{Nevýhody:} Primárně zaměřen na skupinové soutěžení v~reálném čase, nikoli na individuální sebetestování. Omezené typy otázek v~bezplatné verzi. Nelze uložit průchod a~vrátit se k~němu.
-\end{itemize}
-
-% ---- 2.4 Socrative ----
-\subsection{Socrative}
-Socrative je nástroj pro tvorbu kvízů řízenou učitelem (\textit{teacher-paced}). Bezplatná verze umožňuje kvízy pro maximálně 50 studentů.
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podporuje tři typy otázek: výběr jedné/více odpovědí, pravda/nepravda a~krátkou textovou odpověď. K~otázkám lze přidat obrázky. Pokročilé typy (přiřazování, řazení, flashcard) nejsou podporovány.
-    \item \textbf{Správa otázek:} Otázky lze přeuspořádávat pomocí šipek a~duplikovat. Import je možný přes sdílecí kód. Neexistuje banka otázek.
-    \item \textbf{Průchod testem:} Kvíz je řízen učitelem -- studenti odpovídají synchronně. V~bezplatné verzi chybí časovač. Nelze uložit rozpracovaný stav (relace jsou živé). Automatické vyhodnocení uzavřených otázek.
-    \item \textbf{Analytika:} Detailní živé reporty a~exporty. Konfigurovatelné tabulky výsledků a~individuální reporty studentů. Chybí však sledování dlouhodobého pokroku.
-    \item \textbf{Sdílení:} Studenti se připojují pomocí kódu místnosti bez nutnosti registrace. V~bezplatné verzi jsou odpovědi plně anonymní. Chybí možnost sdílení pomocí veřejného odkazu.
-    \item \textbf{Nevýhody:} Omezený počet typů otázek, závislost na učiteli pro spuštění kvízu, limit 50 studentů v~bezplatné verzi. Není vhodný pro samostatné sebetestování.
-\end{itemize}
-
-% ---- 2.5 Quizizz ----
-\subsection{Quizizz}
-Quizizz (nyní pod značkou Wayground) je moderní online platforma pro tvorbu kvízů s~podporou jak živého, tak asynchronního režimu (\textit{homework mode}).
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Nejširší paleta typů otázek ze všech analyzovaných platforem: výběr jedné odpovědi, výběr více odpovědí, pravda/nepravda, doplňování, otevřené odpovědi (dlouhý text), drag \& drop kategorizace, řazení, přiřazování, hotspot (kliknutí na oblast obrázku) a~audio odpovědi. K~otázkám lze přidávat obrázky a~audio.
-    \item \textbf{Správa otázek:} Editor s~drag \& drop řazením. Rozsáhlá komunitní knihovna otázek umožňující jejich opětovné použití. Nemá formální banku otázek, ale otázky lze sdílet a~znovu použít přes knihovnu.
-    \item \textbf{Průchod testem:} Podporuje živý režim (\textit{self-paced}) i~přiřazení jako domácí úkol. Volitelný časovač na jednotlivé otázky, navigovatelné rozhraní, okamžité automatické vyhodnocení.
-    \item \textbf{Analytika:} Robustní reporty zahrnující úspěšnost jednotlivých otázek, skóre studentů, analytiku otázek, žebříčky a~sledování pokroku. K~dispozici je i~AI analýza výsledků. Pokročilé funkce jsou však dostupné pouze v~placených plánech.
-    \item \textbf{Sdílení:} Kvízy lze sdílet pomocí odkazu nebo kódu. Účastníci se mohou připojit bez registrace (anonymní režim při použití kódu).
-    \item \textbf{Nevýhody:} Klíčové funkce (pokročilé statistiky, export dat, některé typy otázek) jsou za paywallem. Primárně zaměřen na skupinové soutěžení, nikoli na individuální sebetestování a~sledování dlouhodobého osobního pokroku.
-\end{itemize}
-
-% ---- 2.6 ProProfs Quiz Maker ----
-\subsection{ProProfs Quiz Maker}
-ProProfs Quiz Maker je komerční online platforma specializovaná na tvorbu kvízů a~testů pro vzdělávání i~firemní účely. Bezplatná verze umožňuje tvorbu kvízů s~maximálně 8~otázkami.
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podporuje více než 20 typů otázek: výběr jedné/více odpovědí, pravda/nepravda, doplňování, přiřazování, řazení (rank), hotspot, esej, audio/video odpověď, nahrání dokumentu a~další. K~otázkám i~odpovědím lze přidávat obrázky, audio a~video.
-    \item \textbf{Správa otázek:} Drag \& drop řazení, duplikace otázek, rozsáhlá šablonová knihovna. Přizpůsobitelné motivy a~branding. Formální banka otázek není explicitně zmíněna, ale knihovna šablon plní obdobnou funkci.
-    \item \textbf{Průchod testem:} Konfigurovatelný časovač na celý test i~jednotlivé otázky. Možnost vynutit režim zkoušky (jedna otázka najednou). Automatické vyhodnocení uzavřených otázek. Anti-cheating opatření.
-    \item \textbf{Analytika:} Pokročilá analytika: okamžité bodování, detailní reporty o~obtížnosti otázek, chování účastníků, kompetencích. Možnost generování certifikátů a~exportu dat.
-    \item \textbf{Sdílení:} Sdílení pomocí odkazu, vložení na web (embed), e-mailem nebo přes classroom. Podporuje zabezpečené kvízy (heslo, omezení domény). Lze povolit anonymní pokusy nebo sledovat uživatele přes e-mail.
-    \item \textbf{Nevýhody:} Plnohodnotné funkce jsou dostupné pouze v~placených plánech (bezplatná verze je silně omezená na 8~otázek). Uživatelské rozhraní je méně moderní. Primárně orientován na hodnocení ostatních (zaměstnanců, studentů), nikoli na sebetestování.
-\end{itemize}
-
-% ---- 2.7 ClassQuiz ----
-\subsection{ClassQuiz}
-ClassQuiz je open-source alternativa ke Kahoot!, určená pro živé kvízy ve třídě. Aplikaci je možné provozovat na vlastním serveru (\textit{self-hosted}).
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podporuje primárně otázky s~výběrem odpovědi (kvíz/anketa). K~otázkám lze přidat obrázky. Nepodporuje pokročilé typy: textovou odpověď, přiřazování, řazení ani flashcard.
-    \item \textbf{Správa otázek:} Základní editor pro tvorbu otázek. Uživatelé mohou procházet a~importovat kvízy vytvořené ostatními. Chybí banka otázek, míchání otázek i~pokročilá správa.
-    \item \textbf{Průchod testem:} Výhradně živý herní režim -- hostitel prezentuje otázky a~účastníci odpovídají v~reálném čase. Po zodpovězení se zobrazí okamžitá zpětná vazba. Na konci hry se zobrazí žebříček vítězů. Nelze uložit rozpracovaný stav.
-    \item \textbf{Analytika:} Minimální -- zobrazí se pouze konečné skóre a~pořadí. Žádné sledování uživatelů, historie pokusů ani analytika otázek.
-    \item \textbf{Sdílení:} Hostitel poskytne odkaz nebo PIN, hráči zadají přezdívku (bez registrace). Hra je plně anonymní. Počet hráčů není omezen (testováno na stovkách).
-    \item \textbf{Nevýhody:} Velmi omezené typy otázek, žádná analytika, výhradně synchronní herní režim. Není vhodný pro strukturované testování ani sebetestování. Vyžaduje vlastní hosting.
-\end{itemize}
-
-% ---- 2.8 QST ----
-\subsection{QST (Quiz/Survey/Test)}
-QST je open-source platforma pro tvorbu testů a~hodnocení, která zahrnuje i~plnohodnotný klasifikační systém (\textit{gradebook}). Je dostupná pro Windows, Linux i~macOS, ale vyžaduje lokální instalaci a~konfiguraci.
-
-\begin{itemize}
-    \item \textbf{Typy otázek a~multimédia:} Podpora širokého spektra typů otázek včetně výběru jedné/více odpovědí, doplňování, přiřazování, esejí a~dalších. Podporuje multimediální obsah. Unikátní funkce \uv{Memory} -- zobrazení studijního materiálu a~následné kladení otázek.
-    \item \textbf{Správa otázek:} Import a~export v~mnoha formátech: Moodle XML, QTI, PDF a~dalších. Tato schopnost importu z~Moodlu je mezi analyzovanými řešeními unikátní (sdílena pouze s~navrhovanou aplikací).
-    \item \textbf{Průchod testem:} Časovač, navigace mezi otázkami, automatické hodnocení s~okamžitým zobrazením výsledků.
-    \item \textbf{Analytika:} Detailní analytika na úrovni otázek (které otázky byly nejčastěji chybně zodpovězeny a~kým). Plnohodnotný klasifikační systém (\textit{gradebook}) s~historií výsledků.
-    \item \textbf{Sdílení:} Systém je určen pro nasazení v~rámci školy nebo organizace. Sdílení přes veřejný odkaz není nativně podporováno.
-    \item \textbf{Nevýhody:} Zastaralé uživatelské rozhraní, není realizován jako SPA (Single Page Application). Vyžaduje instalaci a~konfiguraci na vlastním serveru -- není dostupný jako nasazená webová aplikace. Orientován na institucionální použití, nikoli na individuální sebetestování. I~přes rozsáhlou funkcionalitu je UX výrazně pozadu za moderními standardy.
-\end{itemize}
-
-% -----------------------------------------------------------------
-% 3. TECHNOLOGIE PRO VÝVOJ WEBOVÝCH APLIKACÍ
-% -----------------------------------------------------------------
-\section{Technologie pro vývoj webových aplikací}
-
-Pro vývoj této aplikace byl zvolen moderní stack, který je vhodný pro rozsah této práce. Tento stack zajišťuje potřebnou flexibilitu UI a taky možnost efektivně zpracovat a ukládat data.
-
-\subsection{Frontend}
-Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, dynamické změny pořadí otázek pomocí \uv{Drag \& Drop} nebo okamžitou vizuální odezvu po odevzdání odpovědí. React představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní a svižně jej překreslovat. Zásadním benefitem je navíc obrovský ekosystém komunitních balíčků (packages), ze kterého může projekt těžit. To se hodí především pro implementaci rozmanitých UI komponent a pokročilých nástrojů pro vykreslování grafů (například koláčových grafů úspěšnosti nebo křivek chybovosti a stráveného času), které jsou nezbytné pro přehledné zobrazení statistik.
-
-\subsection{Backend}
-Pro backendovou vrstvu je vynikající volbou framework Spring Boot, jenž poskytuje robustní základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to zejména díky modulu Spring AI, který umožňuje přímou a velmi efektivní integraci s velkými jazykovými modely (LLM). Toto spojení s LLM hraje v aplikaci klíčovou roli.
-
-\subsection{Databáze}
-Zvolit pro tento systém relační databázi je velmi vhodné, protože doménový model obsahuje data s jasně definovanou strukturou a množstvím pevných vazeb. Relační přístup přirozeně a bezpečně mapuje složité vztahy, jakým je například vazba M:N mezi kvízy a kategoriemi, a zároveň dokáže spravovat rozsáhlou hierarchii různých konfigurací pro sedm odlišných typů testovacích otázek. Relační schéma navíc garantuje konzistenci dat při ukládání detailních historií uživatelských pokusů, což je naprosto nezbytné pro schopnost systému spolehlivě dotazovat, filtrovat a agregovat data pro výpočet pokročilých uživatelských statistik.
-
-% -----------------------------------------------------------------
-% 4. NÁVRH WEBOVÉ APLIKACE REVIZER
-% -----------------------------------------------------------------
-\section{Návrh webové aplikace Revizer}
-
-Tato aplikace je webový systém určený pro správu a procvičování testů, který je primárně zaměřený na self-testing a aktivní vybavování znalostí. Uživatelé si v ní mohou z vlastních studijních materiálů vytvářet personalizované kvízy obsahující různé typy otázek, a to včetně volných textových odpovědí, které dokáže automaticky vyhodnocovat integrovaná umělá inteligence. Vytvořené kvízy mohou uživatelé opakovaně spouštět a svůj postup učení následně analyzovat pomocí detailních statistik, grafů úspěšnosti a možnost revize u jednotlivých pokusů, kde mohou vidět, kde udělali chybu.
-
-\subsection{Architektura systému}
-Celá fullstack aplikace je postavena na React, Spring Boot a MySQL. Aplikace je navržená na principech tradiční vrstvené architektury (tzv. n-layer), která logicky a přehledně odděluje jednotlivé komponenty systému do specifických vrstev, jako jsou Frontend + REST kontrolery, vrstva business logiky (service) a datové entity. Tato volba je mimořádně praktická, protože projekt je vyvíjen pouze jedním člověkem. Vrstvená architektura je díky své přímočarosti a povědomosti velmi jednoduchá na pochopení i implementaci. Vzhledem k tomu, že se u této aplikace neočekává dlouhodobé či časté nasazování do produkčního prostředí a zároveň se nepočítá s nasazením pro masivní počet uživatelů, nejsou běžné nedostatky vrstvené architektury problémem. Typické nevýhody, jako je například obtížnější horizontální škálovatelnost nebo potenciální výkonnostní úzká hrdla při obrovské zátěži, se v tomto konkrétním kontextu a rozsahu vůbec neprojeví.
-
-\begin{itemize}
-    \item \textbf{Prezentační vrstva (Frontend + API Endpointy)} -- skládá se z klientského frontendu a API endpointů na backendu. Uživatelské rozhraní frontendu je tvořeno React komponentami a je zcela responzivní. Komunikace s backendem probíhá přes REST API endpointy, u kterých je vyžadována platná autentizace pomocí JWT tokenu (s výjimkou několika málo veřejných cest pro registraci a přihlášení).
-    \item \textbf{Aplikační vrstva (většina backend aplikační logiky)} -- tvoří funkční jádro celého systému a je v ní soustředěna většina hlavní aplikační logiky. Tato vrstva zpracovává požadavky přicházející z prezentační vrstvy, aplikuje pravidla doménového modelu a řídí klíčové procesy, jako je správa uživatelských účtů, vytváření kvízů, organizace kategorií nebo zpracování odevzdaných pokusů.
-    \item \textbf{Servisní vrstva} -- funguje jako úzce specializovaná pomocná vrstva, kterou aplikační vrstva využívá k delegování složitějších operací. Obsahuje nezbytné pomocné servisy a komponenty určené pro specifické úkoly. Patří sem především služba pro vyhodnocení kvízu, která kontroluje správnost jednotlivých odpovědí a přiděluje body, a také dedikovaná služba pro dotazování jazykového modelu (LLM), jež se stará o automatické posuzování volných textových odpovědí.
-    \item \textbf{Databázová vrstva (konektor, ORM, Databáze)} -- zajišťuje spolehlivé a trvalé uložení všech dat do relační databáze MySQL. Datová integrace s backendem je řešena za využití frameworku Hibernate, který slouží jako nástroj pro objektově-relační mapování (ORM), a technologie Spring Data JPA, jež výrazně usnadňuje manipulaci s databázovými entitami. Pro samotné spojení aplikace s databází slouží pod kapotou tradiční JDBC konektor.
-\end{itemize}
-
-\subsection{Návrh Databáze}
-Správa databázového schématu je v aplikaci zajištěna pomocí nástroje Flyway, který řídí a verzuje databázové migrace. Pro vizuální inspekci dat v databázi byla použita rozšíření Database Client a Database Client JDBC pro editor VS Code. Tyto nástroje poskytují přehledné grafické rozhraní s možností procházení, filtrování a editace záznamů přímo v databázi, díky čemuž není nutné dotazovat se databáze zdlouhavě ručně pomocí SQL příkazů.
-
-\textbf{Popis entit a vztahů v datovém modelu}
-
-Datový model je navržen tak, aby dokázal flexibilně pojmout rozmanité typy testových otázek a detailně uchovávat průběh i výsledky učení. Skládá se z následujících klíčových entit a jejich vztahů:
-
-\begin{itemize}
-    \item \textbf{Uživatel a autentizace:}
-    \begin{itemize}
-        \item \textbf{user:} Základní entita reprezentující registrovaného uživatele. Má vztah 1:N ke svým vytvořeným kvízům (\texttt{quiz}), vlastněným kategoriím (\texttt{category}), podstoupeným pokusům o kvíz (\texttt{quiz\_attempt}) a vydaným autentizačním tokenům (\texttt{token}).
-        \item \textbf{token:} Pomocná entita sloužící ke správě a invalidaci vydaných JWT tokenů (vztah N:1 k uživateli).
-    \end{itemize}
-    \item \textbf{Organizace studijních materiálů:}
-    \begin{itemize}
-        \item \textbf{category:} Kategorie slouží k organizaci kvízů a patří vždy konkrétnímu uživateli (vztah N:1 k \texttt{user}).
-        \item \textbf{quiz:} Hlavní entita aplikace obsahující sadu otázek. Každý kvíz má jednoho autora (N:1 k \texttt{user}). Mezi kvízy a kategoriemi existuje vztah \textbf{M:N}, který je realizován prostřednictvím spojovací vazební tabulky \textbf{quiz\_category}. Dále má kvíz vztah 1:N k vlastním otázkám (\texttt{question}) a všem provedeným pokusům (\texttt{quiz\_attempt}).
-    \end{itemize}
-    \item \textbf{Otázky a jejich specifické konfigurace:}
-    \begin{itemize}
-        \item \textbf{question:} Představuje jednu otázku v rámci kvízu (N:1 k \texttt{quiz}). Vzhledem k tomu, že systém podporuje 7 různých typů otázek, využívá tato entita enum \texttt{QuestionType} (např. SINGLE\_CHOICE, TEXT\_INPUT) a váže se na další specializované tabulky podle konkrétního typu.
-        \item \textit{Specializované konfigurační tabulky:}
-        \begin{itemize}
-            \item \textbf{question\_choice\_option:} Obsahuje možnosti odpovědí pro výběrové otázky a pravda/nepravda (vztah N:1 k \texttt{question}).
-            \item \textbf{question\_match\_pair:} Definuje správné dvojice pro přiřazovací otázky (vztah N:1 k \texttt{question}).
-            \item \textbf{question\_order\_item:} Definuje položky pro řazení a jejich správnou pozici (vztah N:1 k \texttt{question}).
-            \item \textbf{question\_text\_config:} Uchovává konfiguraci pro textové otázky (zda je hodnocení manuální či automatické a vzorovou správnou odpověď). Jelikož je konfigurace pro otázku jen jedna, je zde vztah \textbf{1:1} k \texttt{question}.
-            \item \textbf{question\_flashcard:} Konfigurace zadní strany učící kartičky (vztah 1:1 k \texttt{question}).
-        \end{itemize}
-    \end{itemize}
-    \item \textbf{Uživatelské pokusy a odevzdané odpovědi:}
-    \begin{itemize}
-        \item \textbf{quiz\_attempt:} Reprezentuje jeden konkrétní průchod (pokus) uživatele kvízem. Zaznamenává si celkové dosažené skóre, čas strávený nad kvízem a datum odeslání. Má vztah N:1 ke kvízu (\texttt{quiz}) a N:1 k uživateli (\texttt{user}). Entita má také vztah 1:N na všechny odevzdané odpovědi (\texttt{attempt\_answer}).
-        \item \textbf{attempt\_answer:} Abstraktní entita, která uchovává odpověď uživatele na jednu specifickou otázku v rámci pokusu. Má vztah N:1 na konkrétní pokus (\texttt{quiz\_attempt}) a N:1 na otázku (\texttt{question}). Aby bylo možné efektivně ukládat velmi odlišné formáty odpovědí (text, výběr ID, přiřazené dvojice), \textbf{využívá databáze strategii dědičnosti SINGLE\_TABLE}. Všechny odpovědi se ukládají do jediné společné tabulky s diskriminačním sloupcem \texttt{answer\_type}. Podle typu se odpovědi dělí na:
-        \begin{itemize}
-            \item \textbf{IdBasedAttemptAnswer:} Pro odpovědi založené na výběru z možností ukládá ID vybraných položek do samostatné generované kolekční tabulky.
-            \item \textbf{MatchBasedAttemptAnswer:} Ukládá propojené páry pro přiřazovací otázky do vlastní pomocné tabulky.
-            \item \textbf{TextBasedAttemptAnswer:} Ukládá napsaný volný text uživatele a příznak toho, zda si uživatel sám při manuální revizi ohodnotil odpověď jako správnou přímo do hlavních sloupců tabulky.
-        \end{itemize}
-    \end{itemize}
-\end{itemize}
-
-\subsection{Autentizace a bezpečnost}
-Autentizace a bezpečnost v této aplikaci stojí na moderních standardech.
-
-\begin{itemize}
-    \item \textbf{Autentizace} -- Hlavním mechanismem pro ověřování uživatelů je bezstavová (stateless) autentizace pomocí JWT (JSON Web Tokens). Ve zkratce fungují JWT tokeny tak, že po úspěšném přihlášení vygeneruje server kryptograficky podepsaný textový řetězec (token) nesoucí informace o identitě uživatele. Tento token si frontend uloží a následně jej automaticky přikládá do hlavičky \texttt{Authorization: Bearer $<$token$>$} u každého HTTP požadavku odesílaného na server. Backendový filtr (\texttt{JwtAuthenticationFilter}) pak token u každého requestu zkontroluje a ověří jeho platnost, což znamená, že si server nemusí pamatovat probíhající relace ve své paměti.
-    \item \textbf{Hashování hesel} -- Hesla uživatelů se neukládají v čistém textu, ale jsou bezpečně zahashována pomocí spolehlivého algoritmu BCrypt. Veškerá komunikace je navíc chráněna šifrováním přes HTTPS.
-    \item \textbf{Refresh token a jeho rotace} -- Pro zajištění dlouhodobého, ale bezpečného přihlášení aplikace provádí rotaci tokenů. Architektura k tomu využívá kromě běžného přístupového (access) tokenu také takzvaný refresh token, který je uložený v databázi pro případnou invalidaci a posílá se přes zabezpečené cookies. Pokud hlavnímu přístupovému tokenu vyprší platnost a backend odpoví chybou 401, frontendový interceptor tuto situaci zachytí a automaticky na pozadí zavolá obnovovací endpoint \texttt{/auth/refresh}, čímž získá token nový a umožní plynulé pokračování v práci.
-    \item \textbf{Frontend ochrana cest (routes)} -- Na úrovni frontendu jsou jednotlivé cesty pečlivě zabezpečené prostřednictvím knihovny React Router. Uživatel musí být prokazatelně přihlášený (mít platný JWT token), aby mu aplikace dovolila přístup k hlavním funkcím a datům. K ochraně tras slouží speciální guard komponenta \texttt{ProtectedRoute.tsx}. Pokud se nepřihlášený uživatel pokusí otevřít chráněnou stránku, tato komponenta zamezí vykreslení obsahu a uživatele okamžitě přesměruje na stránku \texttt{/login}. Validaci tokenu při samotném spuštění aplikace a instalaci interceptorů pro HTTP požadavky pak řídí globální obalovací komponenta \texttt{AuthHandler.tsx}.
-\end{itemize}
-
-\subsection{Funkční moduly}
-
-\subsubsection{Kvízy}
-\textbf{Kvízy} představují hlavní stavební kámen aplikace, která je primárně určena pro self-testing a aktivní vybavování znalostí. Při vytváření nového kvízu má uživatel možnost vyplnit řadu detailů: \textbf{název, volitelný popis, ikonu (např. ve formě emoji)} pro lepší vizuální identifikaci a \textbf{časový limit}. Kvíz je následně zařazen do \textbf{kategorií}, přičemž si uživatel může vybrat z již existujících, nebo rovnou vytvořit kategorii novou přímo během sestavování kvízu. Do testu lze nakombinovat \textbf{všechny dostupné typy otázek}: výběr jedné možnosti (single choice), výběr z více možností (multiple choice), textovou odpověď (text input), pravda/nepravda (true/false), přiřazování dvojic (matching), seřazování položek (ordering) a sebehodnotící kartičky (flashcards). Jakmile je kvíz vytvořen, může jej uživatel \textbf{spouštět neustále dokola}, aby si procvičil látku, přičemž \textbf{výsledky každého pokusu vidí okamžitě po jeho odevzdání}.
-
-\subsubsection{Kategorie}
-\textbf{Kategorie} slouží k systematické organizaci a třídění vytvořených kvízů (například podle předmětů nebo semestrů). Mezi kategoriemi a kvízy existuje \textbf{vztah M:N}, což v praxi znamená, že jeden kvíz může patřit do vícero kategorií a jedna kategorie může přirozeně obsahovat mnoho různých kvízů. Stejně jako u kvízu, i při vytváření kategorie si uživatel může nastavit její parametry, kterými jsou \textbf{název, podrobnější popis a specifická barva}. Kromě pouhého třídění má kategorie ještě jeden zásadní účel – systém umožňuje, aby si uživatel zobrazil \textbf{souhrnné statistiky a také historii jednotlivých pokusů v rámci celé dané kategorie}, nikoliv pouze u izolovaných kvízů.
-
-\subsubsection{Revize kvízů}
-\textbf{Revize kvízu} nabízí uživateli možnost kdykoliv se zpětně podívat na detailní revizi \textbf{jakéhokoliv svého dřívějšího pokusu u jakéhokoliv kvízu}. V tomto přehledu na prvním místě vidí základní informace o daném pokusu: \textbf{celkové skóre v bodech, procentuální úspěšnost, strávený čas a přesné datum a čas}, kdy kvíz podstoupil. Součástí revize je také detailní rozbor testu, kde uživatel vidí \textbf{všechny otázky}. U každé z nich si může prohlédnout \textbf{její obsah, všechny odevzdané i očekávané správné odpovědi a konkrétní počet bodů}, které za danou otázku obdržel.
-
-\subsubsection{Statistiky a analýza}
-\textbf{Statistiky a analýza} tvoří pokročilou část systému, která data vizualizuje prostřednictvím grafů, a to jak \textbf{v rámci jednotlivých kvízů, tak agregovaně v rámci celých kategorií}. K dispozici je \textbf{graf vývoje procentuální úspěšnosti} napříč pokusy a \textbf{graf stráveného času}. Pro podrobnější diagnostiku se využívají grafy na úrovni jednotlivých otázek: průměrná procentuální úspěšnost (či chybovost) u jednotlivých otázek je vizualizována jako \textbf{sloupcový graf}, zatímco pro zobrazení času stráveného na jednotlivých otázkách se využívá \textbf{box plot graf}. Hned po dokončení a odevzdání kvízu se navíc uživateli na výsledkové obrazovce zobrazí pro rychlou orientaci \textbf{koláčový graf (pie chart) celkové procentuální úspěšnosti}.
-
-\subsection{Použité technologie}
-Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je striktně rozdělen na klientskou a serverovou část. Frontend je postaven jako Single Page Application pomocí knihovny React a jazyka TypeScript, přičemž rychlé sestavení zajišťuje nástroj Vite. Backend využívá jazyk Java a robustní framework Spring Boot, data jsou pak ukládána do relační databáze MySQL. Zásadním inovativním prvkem je integrace lokálního jazykového modelu pomocí nástroje Ollama, který se stará o vyhodnocování volných textových odpovědí. Pro lepší přehlednost jsou klíčové technologie rozděleny do logických celků v následující tabulce.
+\subsubsection{základní funkcionality}
 
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|}
+\hline
+\textbf{základní funkcionality} & \textbf{váha} \\ \hline
+dostupnost & 9 \\ \hline
+vytváření testů & 5 \\ \hline
+otázky & 5 \\ \hline
+absolvování testů & 8 \\ \hline
+analytika a statistiky & 7 \\ \hline
+UX/UI & 3 \\ \hline
+\end{tabular}
+\end{table}
+
+\subsubsection{hodnocení}
+
+\begin{itemize}
+    \item jednotlivé základní funkcionality jsou hodnoceny A-E + váha
+    \item hodnocení se potom budou pomocí vzorce agregovat do finalního hodnocení
+    \item každá základní funkcionalita bude mít několik definovaných konkrétních kritériích, každé kritérium má určitý počet bodů který může dosáhnout podle toho jestli je splněno nebo ne
+    \item body se sečtou a podle toho se udělí známka celé základní funkcionality
+    \begin{itemize}
+        \item 0-1 bod $\Rightarrow$ E
+        \item 2 body $\Rightarrow$ D
+        \item 3 body $\Rightarrow$ C
+        \item 4 body $\Rightarrow$ B
+        \item 5 bodů $\Rightarrow$ A
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Dostupnost (Accessibility \& Hosting)}
+
+Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{Známka} \\ \hline
+Veřejně dostupná SaaS. Uživatel si založí účet (zdarma nebo s jasným ceníkem) a může okamžitě využívat všechny klíčové funkce bez nutnosti cokoliv instalovat nebo hostovat. & A (5 bodů) \\ \hline
+Veřejně dostupná SaaS, ale s výraznými paywally (např. zamknuté základní typy otázek za prémiové předplatné) nebo s velkým omezením počtu testů ve free verzi. & B (4 body) \\ \hline
+Self-hosted open-source (např. Moodle). Je zcela zdarma a otevřený, ale vyžaduje, aby si uživatel sám zařídil server, databázi a provedl instalaci (velká technická bariéra). & C (3 body) \\ \hline
+Vyžaduje příslušnost k organizaci (škole), ale po získání přístupu umožňuje studentovi plně samostatnou práci a tvorbu vlastních materiálů. & D (2 body) \\ \hline
+Uzavřený B2B/Enterprise systém. Nelze se do něj registrovat jako jednotlivec a bez učitele/školy je naprosto nedostupný a nepoužitelný. & E (1 bod) \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item zde hodnocení funguje trochu jinak protože každé kritéria mají jinou relevanci a také vždy platí jen jedno z nich (platforma nemůže být zároveň self-hosted a SaaS)
+\end{itemize}
+
+\subsubsection{Vytváření testů a organizace}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
+má/nemá časový limit & 1 bod \\ \hline
+má/nemá kategorie & 1 bod \\ \hline
+umožnuje vytvořit testy s jakým koliv typem otázky * & 1 bod \\ \hline
+UX: celková flow, jak dobře se to používá ** & 2 body \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item * - to znamená že když platforma podporuje například otázky s jednou odpovědí, otázky s více odpověďmi a flashcards tak umožňuje uživatelovi vytvořit test se všemi typy otázek a ne například jen s flashcards.
+    \item ** - zde chceme hodnotit hodnotit UX konkrétně protože tato část aplikace může výrazně trpět na špatný UX
+    \item ** - UX má 2 body protože je to víc abstraktní kritérium proto je vyjádření na stupnici s rozpětím víc efektivní
+    \item vynecháváme základní kritéra jako title, description… atd. protože to jsou základní funkce u kterých se očekává že jsou pokryté na každé platformě proto je nemá smysl zakomponovat do hodnocení
+\end{itemize}
+
+\subsubsection{Typologie a obsah otázek}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
+má/nemá otázku typu jedna možnost & 0,5 bodu \\ \hline
+má/nemá otázku typu více možností & 0,5 bodů \\ \hline
+má/nemá otázku typu textová odpověď & 0,5 bodů \\ \hline
+má/nemá otázku typu pravda/nepravda & 0,5 bodů \\ \hline
+má/nemá otázku typu dvojice & 0,5 bodů \\ \hline
+má/nemá otázku typu Seřazení & 0,5 bodů \\ \hline
+má/nemá otázku typu Flashcard * & 1 bod \\ \hline
+podporuje přidání obrázků k otázkám & 1 bod \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item pro platformu je klíčové aby podporovala co nejvíc typů otázek aby se odlišila od ostatních platforem proto chceme hodnotit všechny
+    \item * - Flashcard má větší váhu protože to nepodporují všechny platformy
+\end{itemize}
+
+\subsubsection{Absolvování testů}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
+UX: možnost zobrazení výsledků hned po dokončení testu & 1 bod \\ \hline
+UX: možnost opětovného spuštění testu hned po dokončení & 1 bod \\ \hline
+UX: test se dá jednoduše spustit pro sebe bez toho aby se musel spustit přes nasdílený odkaz v druhém okně * & 0 nebo 2 body \\ \hline
+umožňuje volnou navigaci mezi otázkami & 1 bod \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item * - hodnocení nemůže dosáhnout 1 bodu, buď 0 bodů nebo 2, hodnocení nelze vyjádřit na stupnici
+    \item zde chceme hodnotit UX konkrétně protože to jsou důležité kritéria které chceme pokrýt
+\end{itemize}
+
+\subsubsection{Analytika a statistiky}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
+má/nemá historii pokusů & 1 bod \\ \hline
+má/nemá jakékoliv statistické vyjádření úspěšnosti testu * & 0 nebo 2 body \\ \hline
+má/nemá dlouhodobé vedení statistik ** & 1 bod \\ \hline
+instantní zpětná vazba ukonceni testu (revize, vyjádření úspěšnosti) & 1 bod \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item * - hodnocení nemůže dosáhnout 1 bodu, buď 0 bodů nebo 2, hodnocení nelze vyjádřit na stupnici
+    \item ** - není to tak že jsou statistiky dostupné jen po dokončení jednoho testu ale jsou dlouhodobě vedené skrze všechny pokusy
+\end{itemize}
+
+\subsubsection{UX/UI}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.7\textwidth}|l|}
+\hline
+\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
+celkové UI & 2,5 bodů \\ \hline
+celkové UX & 2,5 bodů \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+    \item tyto kritéria mají hodnocení až 2,5 bodů protože jsou víc abstraktní proto je vyjádření na stupnici s rozpětím víc efektivní
+\end{itemize}
+
+\subsubsection{agregace finálního hodnocení}
+
+\begin{enumerate}
+    \item hodnocení základních funkcionalit platformy (A-E) se převede na body A=5, B=4, C=3, D=2, E=1 $\Rightarrow$ \textit{Hi}
+    \item Každé základní funkcionalitě přiřadíme váhu \textit{Wi} (viz. tabulka nahoře)
+    \item Finální známka pro danou platformu se vypočítá pomocí tohoto vzorce:\\
+    $S = (w_1 \cdot H_1 + w_2 \cdot H_2 + \dots + w_n \cdot H_n) / (w_1 + w_2 + \dots + w_n)$
+\end{enumerate}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{obrazek.png}
+    \caption{Agregace finálního hodnocení}
+\end{figure}
+\jp{obrázek dostane bílé pozadí}
+
+\subsection{představení a analýza existujících řešení}
+
+\subsection{shrnutí analýzy existujících řešení}
+
+
+\section{metodika řešení práce}
+\subsection{nástroje}
+\jp{u každého nástroje bude jen v pár větách popsané co dělají a jak jsou užitečné}
+\subsubsection{vscode}
+
+\subsubsection{vscode rozšíření: \textbf{Database Client}}
+\jp{toto mi příjde relevantní protože jsem to používal jako GUI pro zobrazení obsahu databáze}
+\subsubsection{git}
+
+\subsubsection{jira}
+
+\subsubsection{exceli draw}
+
+\subsubsection{draw.io}
+
+\subsubsection{overleaf}
+
+\subsubsection{notion (?)}
+\jp{k shromažďování informací a k dokumentaci, měl bych to tam dát?}
+\subsection{postup vývoje}
+\jp{napíšu o tom že to byl scrum s 1 týdenními sprinty}
+\subsection{sběr požadavků}
+\jp{co se myslí "jakým způsobem se bude postupovat při sběru požadavků" ? a "jak se budou proritizovat" ?}
+
+Požadavky budou sbírány tak aby aplikace primárně podporovala základní funkcionality k tomu aby mohly být implementovány hlavní funkcionality které jsou cílem této práce.
+\jp{potom se tam ještě dopíše že bude vize a risk-list}
+
+\section{řešení práce}
+
+Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je striktně rozdělen na klientskou a serverovou část.
+
+\subsection{frontend}
+
+Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, Drag \& Drop. React představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech javascript frameworků/knihoven nejrozsáhlejší.
+
+\subsection{backend}
+
+Pro backend je vynikající volbou framework Spring Boot, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM). 
+
+\subsection{Architektura systému}
+
+Celá fullstack aplikace je postavena React, Springboot a MySQL. Aplikace je navržená na principech vrstvené architektury (tzv. n-layer), která odděluje jednotlivé části systému do specifických vrstev, jako jsou Frontend + REST kontrolery, vrstva business logiky (service) a datové entity. Tato volba je praktická, protože projekt je vyvíjen jedním člověkem. Vrstvená architektura je díky své a povědomosti velmi jednoduchá na pochopení i implementaci. Vzhledem k tomu, že se u této aplikace neočekává dlouhodobé či časté nasazování do produkčního prostředí a zároveň se nepočítá s nasazením pro masivní počet uživatelů, nejsou nedostatky vrstvené architektury problémem. Typické nevýhody, jako je například obtížnější horizontální škálovatelnost nebo potenciální výkonnostní úzká hrdla při obrovské zátěži, se v tomto konkrétním rozsahu vůbec neprojeví.
+
+\begin{itemize}
+    \item \textbf{Prezentační vrstva (Frontend + API Endpointy)}
+    \begin{itemize}
+        \item Skládá se z klientského frontendu a API endpointů na backendu. Uživatelské rozhraní frontendu je tvořeno react komponentami. Uživatelské rozhraní je zcela responzivní. Komunikace s backendem probíhá přes REST API endpointy, u kterých je vyžadována platná autentizace pomocí JWT tokenu (s výjimkou několika málo veřejných cest pro registraci a přihlášení).
+    \end{itemize}
+    
+    \item \textbf{Aplikační vrstva (větčina backend aplikační logiky)}
+    \begin{itemize}
+        \item Tvoří funkční jádro celého systému a je v ní soustředěna většina hlavní aplikační logiky. Tato vrstva zpracovává požadavky přicházející z prezentační vrstvy, je doménově dělena a řídí klíčové procesy, jako je správa uživatelských účtů, vytváření kvízů, organizace kategorií nebo zpracování odevzdaných pokusů.
+    \end{itemize}
+    
+    \item \textbf{Servisní vrstva}
+    \begin{itemize}
+        \item Funguje jako specializovaná pomocná vrstva, kterou aplikační vrstva využívá k delegování složitějších operací. Obsahuje nezbytné pomocné servisy a komponenty určené pro specifické úkoly. Patří sem služba pro vyhodnocení kvízu a také dedikovaná služba pro dotazování jazykového modelu (LLM), jež se stará o automatické posuzování volných textových odpovědí.
+    \end{itemize}
+    
+    \item \textbf{Databázová vrstva (konektor, ORM, Databáze)}
+    \begin{itemize}
+        \item zajišťuje uložení všech dat do relační databáze MySQL. Datová integrace s backendem je řešena za využití frameworku Hibernate, který slouží jako nástroj pro objektově-relační mapování (ORM), a technologie Spring Data JPA, jež usnadňuje manipulaci s databázovými entitami. Pro samotné spojení aplikace s databází slouží JDBC konektor.
+    \end{itemize}
+\end{itemize}
+
+\subsection{přehled použitých technologií}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{0.35\textwidth}|p{0.6\textwidth}|}
 \hline
 \textbf{Logický celek} & \textbf{Použité technologie a knihovny} \\ \hline
 \textbf{Jazyky a hlavní frameworky} & TypeScript, React, Java, Spring Boot \\ \hline
@@ -310,27 +333,13 @@ Vývoj celé aplikace byl realizován s využitím pestré palety moderních sof
 \textbf{Správa stavu, routing a HTTP} & Redux Toolkit, React Redux, React Router DOM, Axios \\ \hline
 \textbf{Grafy a pokročilé interakce} & ECharts, Recharts, dnd-kit \\ \hline
 \end{tabular}
-\caption{Přehled použitých technologií}
 \end{table}
 
-\subsection{Prezentace aplikace}
 
-\subsubsection{Domovská stránka}
-Hlavní dashboard, dostupná na hlavní trase (\texttt{/}), jejichž cílem je \textbf{poskytnout uživateli rychlý přehled a motivovat ho k pravidelnému studiu}. Skládá se ze tří hlavních částí. První částí jsou \textbf{souhrnné statistické karet}, které ukazují celkový strávený čas nad kvízy, počet odeslaných testů a průměrné procentuální skóre uživatele za posledních 7 dní. Dále obsahuje přehled \textbf{s až čtyřma kvízy, které uživatel naposledy projel}, což usnadňuje rychlé pokračování v nedávném učivu. Posledním prvkem je \textbf{teplotní mapa aktivity (calendar heatmap)}, která pomocí mřížky zobrazuje dny v aktuálním měsíci a při najetí myší ukazuje přesný počet odeslaných pokusů v daný den.
+\section{Představení řešení}
 
-\subsubsection{Historie všech pokusů}
-Tato obrazovka na trase \texttt{/history} slouží uživatelům k tomu, aby se mohli \textbf{zpětně vracet ke svým historickým výsledkům napříč všemi vytvořenými kvízy}. Systém zde vykresluje stránkovaný seznam všech odevzdaných pokusů od nejnovějších po nejstarší. \textbf{U každého pokusu se zobrazuje název příslušného kvízu, přesné datum a čas odeslání a celkové procentuální skóre}. Kliknutím na záznam se uživatel dostane do detailní revize daného pokusu, a navíc je zde praktické \textbf{vedlejší tlačítko, které uživatele okamžitě přesměruje přímo na detailní stránku samotného kvízu}.
+\section{shrnutí}
 
-\subsubsection{Přehled všech kvízů, knihovna}
-Sekce s URL trasou \texttt{/library} funguje jako osobní repozitář. Nachází se zde pohled ve kterém je obsažen \textbf{kompletní seznam všech kvízů}, které si daný uživatel doposud vytvořil. Uživatel odtud může ke svým materiálům jednoduše přistupovat a opakovaně testy spouštět.
-
-\subsubsection{Detaily a statistika kvízu}
-Detailní stránka konkrétního kvízu (\texttt{/quiz/:id}) poskytuje hloubkový pohled na jeden vybraný studijní materiál. V základu zobrazuje detaily kvízu, jako jsou jeho název, popis, přiřazená ikona, celkový počet otázek, případný časový limit, \textbf{možný dosažitelný počet bodů (total points) a datum, kdy byl kvíz vytvořen}. Dále poskytuje rychlý přehled o uživatelově aktivitě tím, že rovnou v základu ukazuje \textbf{celkový počet provedených pokusů, dosažené procentuální skóre u posledního pokusu (last attempt) a celkové průměrné procentuální skóre (average)}. Podstatnou částí této stránky je však seznam uživatelových předchozích pokusů v tomto konkrétním kvízu a především pokročilá analytika. Uživatel si zde může prohlédnout vývoj svého skóre a stráveného času prostřednictvím \textbf{sloupcových grafů, kde osa X představuje jednotlivé pokusy a osa Y zobrazuje procentuální výsledek neboli skóre, respektive u druhého sloupcového grafu strávený čas na daných pokusech}. Dále jsou zde k dispozici detailní grafy zaměřené na jednotlivé otázky: \textbf{sloupcový graf zobrazující průměrnou chybovost v procentech (na ose Y) napříč jednotlivými otázkami (na ose X)} a \textbf{box plot graf pro analýzu času stráveného (na ose Y) na každé konkrétní otázce (na ose X)}.
-
-\subsubsection{Detaily a statistika kategorie}
-Stránka na trase \texttt{/category/:id} slouží ke zkoumání širších studijních celků. Na této obrazovce uživatel vidí základní informace o kategorii (název, popis a zvolenou barvu) a také výpis všech kvízů, které do ní spadají, \textbf{včetně informace o celkovém počtu kvízů, co daná kategorie obsahuje}. Podobně jako u samostatného kvízu, i detail kategorie shromažďuje a zobrazuje souhrnné statistiky a historii pokusů, avšak tentokrát agregovaně pro celou danou kategorii. Uživatel zde tak v základních informacích rovnou vidí \textbf{celkový počet provedených pokusů, dosažené procentuální skóre u posledního pokusu (last attempt) a průměrné procentuální skóre (average) – vše agregovaně pro celou kategorii}. Co se týče samotných grafů, \textbf{kategorie má k dispozici pouze agregované grafy času a procentuálního skóre: jedná se o sloupcový graf procentuálních výsledků (osa Y) na počet pokusů (osa X) a sloupcový graf stráveného času na pokusech (osa Y) na počet pokusů (osa X)}. To je užitečné pro zhodnocení celkových znalostí uživatele například v rámci celého jednoho předmětu.
-
-\subsubsection{Autentizační obrazovky}
-Přístup do aplikace je chráněn bezstavovou autentizací, pro kterou slouží jednoduché, ale klíčové přihlašovací obrazovky. Na trase \textbf{/login se nachází přihlašovací formulář}, pomocí kterého se existující uživatel přihlásí pomocí emailu a hesla a získá přístupový token. Stránka \textbf{/register naopak slouží jako registrační formulář} pro vytvoření zcela nového uživatelského účtu v systému, kde uživatel vyplní username, email a heslo, které musí potvrdit.
+\section{závěr}
 
 \end{document}
