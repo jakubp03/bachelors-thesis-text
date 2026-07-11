@@ -3,7 +3,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[IL2]{fontenc}
 \usepackage{graphicx}
-\usepackage{tabularx} % pro lepší zalamování v tabulkách
+\usepackage{tabularx}
+\usepackage{amsmath}  
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 \jazyky{czech}{english}
 \hlavnijazyk{czech}
@@ -16,6 +20,7 @@
 \nazev{Tvorba aplikace pro pokročilé testování}{Thesis Title}
 \typprace{Bakalářská Práce}{Bachelor Thesis}
 
+\usepackage{float}
 \usepackage{todonotes}
 \newcommand{\mv}[1]{\todo[inline,color=red!50]{MV: #1}}
 \newcommand{\jp}[1]{\todo[inline,color=blue!25]{PK: #1}}
@@ -37,6 +42,7 @@ The goal of this thesis is to design and implement a full-stack web application 
 \begin{document}
 
 \tableofcontents 
+\newpage
 
 \section{Osnova práce}
 
@@ -60,33 +66,57 @@ V průběhu textu nezapomeňte přidávat reference (pořád si je průběžně 
 
 Připravte si na tohle všechno vlastní kapitoly, případný existující text do toho přesuňte a dejte echo, že je hotovo a můžu kontrolovat, díky.
 
-\section{úvod}
+\section{Úvod}
 
 \subsection{Současný stav problematiky}
 
-\subsection{řešení problému}
+Vyplňování jednoho a toho samého kvízu může být efektivní způsob jak se naučit nějakou látku. Například cvičný test na moodle s podobnými otázkami jaké budou na nadcházejícím testu je skvělý způsob kterým se studenti mohou připravit na test. 
 
+Co tak kdyby si student mohl vytvořit ze svých materiálů cvičné testy které může opakovaně projíždět k procvičení látky ? Bohužel moodle toto studentům nedovoluje, jenom admini a učitelé mají oprávnění vytvářet moodle testy. Tím že je Moodle open-source platforma tak student teoreticky může rozjet vlastní instanci Moodle ale to je velice obtížné.
 
-\section{cíle práce}
+Aplikace která by byla zaměřená na vytváření cvičných testů by byla velice přínosná. Takové aplikace existují ale jejich implementace se liší, některé jsou určeny pro učitele k testování studentů díky čemuž je používání těchto aplikací k sebevzdělávání obtížné a i když tu jsou aplikace které jsou zaměřené na studenty a sebevzdělávání tak jsou primárně zaměřeny na kartičky (flashcards) kde umožňují uživatelovi vytvořit jen balíčky kartiček a potom se mu snaží ulehčit práci tím že testy vytvoří automaticky za pomocí algoritmů a AI. Bohužel žádná z nich nedovoluje uživatelovi vytvořit přímo to co potřebuje na míru.
 
-\subsection{cíle práce}
+\subsection{Řešení problému}
 
-\subsection{způsob dosažení cíle}
-\jp{způsob ? programování ? nevím co zde patří}
+Řešení ? Navrhnout a implementovat aplikaci která by uživateli umožňovala vytvořit vlastní testy s širokou škálou typů otázek a možností organizace. Hlavní myšlenkou je udělat nástroj pro studenty který není nijak omezující, který umožňuje studentovi vytvořit přesně to co potřebuje. Když už máme nástroj který pomáhá studentovi se naučit látku tím že projíždí cvičné testy furt dokola tak by bylo dobré nějakým způsobem interpretovat jeho výkon tak aby si dokázal udělat obrázek o svojí znalosti látky, proto aplikace bude vykreslovat analytické grafy které vizualizují studentův výkon.
 
+\section{Cíle práce}
 
-\section{analýza součaného stavu}
-\jp{ještě se bude upravovat}
+\subsection{Cíle práce}
 
-\subsection{metodika analýzy existujících řešení}
+Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s důrazem na moderní uživatelské rozhraní a specifické analytické funkce. Specifikem a hlavním přínosem této práce je zaměření na sebetestování a proces učení. Cílem je navrhnout aplikaci tak, aby umožnila studentům snadno vytvářet testy z vlastního učiva a následně je opakovaně absolvovat. Systém poskytne uživateli detailní statistiky a grafy, díky kterým získá okamžitý přehled o svém pokroku a oblastech, které vyžadují další studium.
 
-\subsubsection{základní funkcionality}
+\subsection{Způsob dosažení cíle}
 
-\begin{table}[h]
+Tyto cíle budou dosaženy vývojem aplikace agilním způsobem pomocí moderních nástrojů a současných technik vývoje softwaru. Git bude použit pro efektivní vývoj a verzování a Jira pro správu sprintů a úloh.
+
+\section{Analýza současného stavu}
+
+\subsection{Metodika analýzy existujících řešení}
+
+\subsubsection{Hodnocení}
+
+\begin{itemize}
+    \item jednotlivé základní funkcionality jsou hodnoceny A-E + váha
+    \item hodnocení se potom budou pomocí vzorce agregovat do finalního hodnocení
+    \item každá základní funkcionalita bude mít několik definovaných konkrétních kritériích, každé kritérium má určitý počet bodů který může dosáhnout podle toho jestli je splněno nebo ne, pakliže je splněno dostane specifikovaný pevný počet bodů a pakliže ne tak žádné body nejsou přičteny. Některé kritéria jsou na stupnici s rozsahem (hodnoty na stupnici lze měnit pouze v krocích po 0,5)
+    \item body se sečtou a podle toho se udělí známka celé základní funkcionality (u necelých číslech je zaokrouhlení dolů)
+    \begin{itemize}
+        \item 0--1 bod $\Rightarrow$ E
+        \item 2 body $\Rightarrow$ D
+        \item 3 body $\Rightarrow$ C
+        \item 4 body $\Rightarrow$ B
+        \item 5 bodů $\Rightarrow$ A
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Základní funkcionality}
+
+\begin{table}[H]
 \centering
 \begin{tabular}{|l|l|}
 \hline
-\textbf{základní funkcionality} & \textbf{váha} \\ \hline
+\textbf{Základní funkcionality} & \textbf{Váha} \\ \hline
 dostupnost & 9 \\ \hline
 vytváření testů & 5 \\ \hline
 otázky & 5 \\ \hline
@@ -96,27 +126,11 @@ UX/UI & 3 \\ \hline
 \end{tabular}
 \end{table}
 
-\subsubsection{hodnocení}
-
-\begin{itemize}
-    \item jednotlivé základní funkcionality jsou hodnoceny A-E + váha
-    \item hodnocení se potom budou pomocí vzorce agregovat do finalního hodnocení
-    \item každá základní funkcionalita bude mít několik definovaných konkrétních kritériích, každé kritérium má určitý počet bodů který může dosáhnout podle toho jestli je splněno nebo ne
-    \item body se sečtou a podle toho se udělí známka celé základní funkcionality
-    \begin{itemize}
-        \item 0-1 bod $\Rightarrow$ E
-        \item 2 body $\Rightarrow$ D
-        \item 3 body $\Rightarrow$ C
-        \item 4 body $\Rightarrow$ B
-        \item 5 bodů $\Rightarrow$ A
-    \end{itemize}
-\end{itemize}
-
 \subsubsection{Dostupnost (Accessibility \& Hosting)}
 
 Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
@@ -135,15 +149,15 @@ Uzavřený B2B/Enterprise systém. Nelze se do něj registrovat jako jednotlivec
 
 \subsubsection{Vytváření testů a organizace}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
-\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
-má/nemá časový limit & 1 bod \\ \hline
-má/nemá kategorie & 1 bod \\ \hline
-umožnuje vytvořit testy s jakým koliv typem otázky * & 1 bod \\ \hline
-UX: celková flow, jak dobře se to používá ** & 2 body \\ \hline
+\textbf{Kritéria} & \textbf{Hodnocení v bodech} \\ \hline
+má/nemá časový limit & 0 nebo 1 bod \\ \hline
+má/nemá kategorie & 0 nebo 1 bod \\ \hline
+umožnuje vytvořit testy s jakým koliv typem otázky * & 0 nebo 1 bod \\ \hline
+UX: celková flow, jak dobře se to používá ** & 0 až 2 body \\ \hline
 \end{tabular}
 \end{table}
 
@@ -156,74 +170,77 @@ UX: celková flow, jak dobře se to používá ** & 2 body \\ \hline
 
 \subsubsection{Typologie a obsah otázek}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
-\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
-má/nemá otázku typu jedna možnost & 0,5 bodu \\ \hline
-má/nemá otázku typu více možností & 0,5 bodů \\ \hline
-má/nemá otázku typu textová odpověď & 0,5 bodů \\ \hline
-má/nemá otázku typu pravda/nepravda & 0,5 bodů \\ \hline
-má/nemá otázku typu dvojice & 0,5 bodů \\ \hline
-má/nemá otázku typu Seřazení & 0,5 bodů \\ \hline
-má/nemá otázku typu Flashcard * & 1 bod \\ \hline
-podporuje přidání obrázků k otázkám & 1 bod \\ \hline
+\textbf{Kritéria} & \textbf{Hodnocení v bodech} \\ \hline
+má/nemá otázku typu jedna možnost & 0 nebo 0,5 bodu \\ \hline
+má/nemá otázku typu více možností & 0 nebo 0,5 bodů \\ \hline
+má/nemá otázku typu textová odpověď & 0 nebo 0,5 bodů \\ \hline
+má/nemá otázku typu pravda/nepravda & 0 nebo 0,5 bodů \\ \hline
+má/nemá otázku typu dvojice & 0 nebo 0,5 bodů \\ \hline
+má/nemá otázku typu Seřazení & 0 nebo 0,5 bodů \\ \hline
+má/nemá otázku typu Flashcard * & 0 nebo 1 bod \\ \hline
+podporuje přidání obrázků k otázkám & 0 nebo 1 bod \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{itemize}
     \item pro platformu je klíčové aby podporovala co nejvíc typů otázek aby se odlišila od ostatních platforem proto chceme hodnotit všechny
-    \item * - Flashcard má větší váhu protože to nepodporují všechny platformy
+    \item * - Flashcard má víc bodů protože je důležitější
 \end{itemize}
 
 \subsubsection{Absolvování testů}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
-\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
-UX: možnost zobrazení výsledků hned po dokončení testu & 1 bod \\ \hline
-UX: možnost opětovného spuštění testu hned po dokončení & 1 bod \\ \hline
-UX: test se dá jednoduše spustit pro sebe bez toho aby se musel spustit přes nasdílený odkaz v druhém okně * & 0 nebo 2 body \\ \hline
-umožňuje volnou navigaci mezi otázkami & 1 bod \\ \hline
+\textbf{Kritéria} & \textbf{Hodnocení v bodech} \\ \hline
+UX: zobrazení výsledků hned po dokončení testu & 0 nebo 1 bod \\ \hline
+UX: možnost opětovného spuštění testu hned po dokončení * & 0 nebo 1 bod \\ \hline
+UX: test se dá jednoduše spustit pro sebe bez toho aby se musel spustit přes nasdílený odkaz v druhém okně ** & 0 nebo 2 body \\ \hline
+umožňuje volnou navigaci mezi otázkami & 0 nebo 1 bod \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{itemize}
-    \item * - hodnocení nemůže dosáhnout 1 bodu, buď 0 bodů nebo 2, hodnocení nelze vyjádřit na stupnici
+    \item * - např.: ve formě tlačítka které spustí test znovu které se zobrazí hned po dokončení testu
+    \item ** - toto kritérium má větší bodové ohodnocení protože je mnohem důležitější než ostatní
     \item zde chceme hodnotit UX konkrétně protože to jsou důležité kritéria které chceme pokrýt
 \end{itemize}
 
 \subsubsection{Analytika a statistiky}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
-\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
-má/nemá historii pokusů & 1 bod \\ \hline
-má/nemá jakékoliv statistické vyjádření úspěšnosti testu * & 0 nebo 2 body \\ \hline
-má/nemá dlouhodobé vedení statistik ** & 1 bod \\ \hline
-instantní zpětná vazba ukonceni testu (revize, vyjádření úspěšnosti) & 1 bod \\ \hline
+\textbf{Kritéria} & \textbf{Hodnocení v bodech} \\ \hline
+má/nemá jakékoliv statistické vyjádření úspěšnosti testu * & 0 nebo 1 bod \\ \hline
+má/nemá dlouhodobé vedení statistik ** & 0 nebo 2 body \\ \hline
+má/nemá historii pokusů & 0 nebo 1 bod \\ \hline
+u předešlých pokusů je možnost revize *** & 0 nebo 1 bod \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{itemize}
-    \item * - hodnocení nemůže dosáhnout 1 bodu, buď 0 bodů nebo 2, hodnocení nelze vyjádřit na stupnici
-    \item ** - není to tak že jsou statistiky dostupné jen po dokončení jednoho testu ale jsou dlouhodobě vedené skrze všechny pokusy
+    \item * - např.: jaké koliv statsitické vyjádření výsledku vůči předchozím pokusům, zobrazení procentuální úspěšnosti s koláčovým grafem
+    \item ** - zde je víc bodů protože tato funkcionalita je důležitější než ostatní
+    \item ** - hodnocení není uděleno jen když jsou statistiky dostupné jen po dokončení jednoho testu ale jen když jsou dlouhodobě vedené skrze všechny pokusy
+    \item *** - tím se myslí všechny uživatelovi předešlé pokusy ne jenom poslední pokus
 \end{itemize}
 
 \subsubsection{UX/UI}
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.7\textwidth}|l|}
 \hline
-\textbf{Kritéria} & \textbf{hodnocení v bodech} \\ \hline
-celkové UI & 2,5 bodů \\ \hline
-celkové UX & 2,5 bodů \\ \hline
+\textbf{Kritéria} & \textbf{Hodnocení v bodech} \\ \hline
+celkové UI & 0 až 2,5 bodů \\ \hline
+celkové UX & 0 až 2,5 bodů \\ \hline
 \end{tabular}
 \end{table}
 
@@ -231,63 +248,192 @@ celkové UX & 2,5 bodů \\ \hline
     \item tyto kritéria mají hodnocení až 2,5 bodů protože jsou víc abstraktní proto je vyjádření na stupnici s rozpětím víc efektivní
 \end{itemize}
 
-\subsubsection{agregace finálního hodnocení}
+\subsubsection{Agregace finálního hodnocení}
 
 \begin{enumerate}
     \item hodnocení základních funkcionalit platformy (A-E) se převede na body A=5, B=4, C=3, D=2, E=1 $\Rightarrow$ \textit{Hi}
     \item Každé základní funkcionalitě přiřadíme váhu \textit{Wi} (viz. tabulka nahoře)
-    \item Finální známka pro danou platformu se vypočítá pomocí tohoto vzorce:\\
-    $S = (w_1 \cdot H_1 + w_2 \cdot H_2 + \dots + w_n \cdot H_n) / (w_1 + w_2 + \dots + w_n)$
+    \item Finální známka pro danou platformu se vypočítá pomocí tohoto vzorce:
+    % $$S = \frac{w_1 \cdot H_1 + w_2 \cdot H_2 + \dots + w_n \cdot H_n}{w_1 + w_2 + \dots + w_n}$$
 \end{enumerate}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{obrazek.png}
-    \caption{Agregace finálního hodnocení}
+    \includegraphics[width=0.8\textwidth]{vzorec.png}
+    \caption{Vzorec pro výpočet finálního hodnocení}
 \end{figure}
-\jp{obrázek dostane bílé pozadí}
 
-\subsection{představení a analýza existujících řešení}
+\subsection{Představení a analýza existujících řešení}
 
-\subsection{shrnutí analýzy existujících řešení}
+\subsubsection{Tabulka hodnocení existujících řešení}
 
+\begin{table}[H]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline
+\textbf{Platforma} & \textbf{Dostupnost} & \textbf{Vytváření} & \textbf{Typologie} & \textbf{Absolvování} & \textbf{Analytika} & \textbf{UX/UI} & \textbf{Finální} \\
+ & \textbf{(váha: 9)} & \textbf{(váha: 5)} & \textbf{(váha: 5)} & \textbf{(váha: 8)} & \textbf{(váha: 7)} & \textbf{(váha: 3)} & \textbf{hodnocení} \\ \hline
+Moje řešení & A (5) & A (5) & A (5) & A (5) & A (5) & A (5) & 5 \\ \hline
+\textbf{Knowt} & B (4) & D (2) & B (4) & A (5) & D (2) & C (3) & \textbf{3,49} \\ \hline
+\textbf{Quizlet} & B (4) & D (2) & B (4) & A (5) & E (1) & B (4) & \textbf{3,38} \\ \hline
+\textbf{wayground} & B (4) & B (4) & D (2) & C (3) & B (4) & D (2) & \textbf{3,35} \\ \hline
+\textbf{FlexiQuiz} & B (4) & C (3) & D (2) & C (3) & D (2) & D (2) & \textbf{2,84} \\ \hline
+\textbf{ProProfs} & B (4) & D (2) & C (3) & D (2) & C (3) & D (2) & \textbf{2,81} \\ \hline
+\textbf{Microsoft Forms} & A (5) & B (4) & B (4) & E (1) & E (1) & E (1) & \textbf{2,78} \\ \hline
+\textbf{OnlineExamMaker} & B (4) & C (3) & C (3) & D (2) & D (2) & D (2) & \textbf{2,76} \\ \hline
+\textbf{Google Forms} & A (5) & D (2) & D (2) & D (2) & D (2) & D (2) & \textbf{2,73} \\ \hline
+\textbf{Moodle} & C (3) & C (3) & D (2) & C (3) & C (3) & E (1) & \textbf{2,70} \\ \hline
+\textbf{Kahoot!} & B (4) & D (2) & D (2) & D (2) & C (3) & D (2) & \textbf{2,68} \\ \hline
+\textbf{Socrative} & B (4) & C (3) & D (2) & C (3) & E (1) & D (2) & \textbf{2,65} \\ \hline
+\textbf{ClassMarker} & B (4) & C (3) & D (2) & D (2) & D (2) & D (2) & \textbf{2,62} \\ \hline
+\textbf{Anki} & A (5) & D (2) & D (2) & E (1) & D (2) & C (3) & \textbf{2,59} \\ \hline
+\textbf{QST} & C (3) & D (2) & C (3) & D (2) & C (3) & D (2) & \textbf{2,57} \\ \hline
+\textbf{ClassQuiz} & A (5) & C (3) & D (2) & E (1) & E (1) & C (3) & \textbf{2,54} \\ \hline
+\textbf{TCExam} & C (3) & C (3) & C (3) & D (2) & D (2) & D (2) & \textbf{2,51} \\ \hline
+\end{tabular}%
+}
+\end{table}
 
-\section{metodika řešení práce}
-\subsection{nástroje}
-\jp{u každého nástroje bude jen v pár větách popsané co dělají a jak jsou užitečné}
-\subsubsection{vscode}
+\subsubsection{Existující řešení}
 
-\subsubsection{vscode rozšíření: \textbf{Database Client}}
-\jp{toto mi příjde relevantní protože jsem to používal jako GUI pro zobrazení obsahu databáze}
-\subsubsection{git}
+\paragraph{Knowt}\mbox{}\\
+Knowt je moderní platforma pro studenty i učitele, která slouží jako bezplatná a funkcemi nabitá alternativa ke Quizletu. Umožňuje snadno vytvářet výukové kartičky (flashcards), poznámky a cvičné testy. Její největší výhodou je integrace umělé inteligence, která dokáže automaticky vygenerovat studijní materiály ze souborů nebo dokonce z videí na YouTube. Hlavním problémem platforem Knowt a Quizlet je to že neumožňuje uživateli vytvořit přímo to co uživatel chce. Tyto platformy umožňují uživateli vytvořit jen sady kartiček (flashcards) s tím že ostatní typy testů se podle těch kartiček vytvoří automaticky samy a uživatel nad tím nemá žádnou kontrolu. To z těchto platforem nedělá nic jiného než jen “lepší” platformu s kartičkami. Tyto automaticky vytvořené testy jsou jen doplněk. Hlavní zaměření je na kartičky. Druhý největší problém jsou paywally, i když se Knowt vydává jako bezplatná alternative Quizletu tak i navzdory tomu jsou furt některé funkce zamčeny nebo omezeny dokud uživatel nezaplatí.
 
-\subsubsection{jira}
+\paragraph{Wayground (Quizizz)}\mbox{}\\
+Wayground, mnohem známější pod svým původním a běžněji užívaným názvem Quizizz, je gamifikovaná vzdělávací platforma navržená pro maximální zapojení studentů a oživení výuky. Učitelům umožňuje vytvářet interaktivní kvízy, ankety a lekce, které mohou studenti plnit buď naživo v reálném čase formou soutěže, nebo asynchronně vlastním tempem jako domácí úkol. Wayground a podobně aji ostatní platformy jako např. OnlineExamMaker jsou zaměřené spíš na učitele a jsou uzpůsobeny k tomu aby učitel otestoval žáky. Jejich hlavní problém je potom v tom že když si student chce spustit test pro sebe tak musí test spustit a potom se do něho připojit přes druhé okno v prohlížeči. Spouštění testů taky není plynulé, většinou se uživatel musí proklikat přes několik oken s nastavením předtím než jde test spustit. Tyto platformy jednoduše nejsou uzpůsobeny k opakovanému spouštění testu několikrát za sebou.
 
-\subsubsection{exceli draw}
+\paragraph{Moodle}\mbox{}\\
+Moodle (včetně jeho nástroje Moodle Quiz) je komplexní open-source systém pro správu výuky (LMS), který si vzdělávací instituce obvykle samy hostují na vlastních serverech. Jedná se o extrémně robustní a modulární platformu budovanou pro dlouhodobé akademické vzdělávání. Systém exceluje ve správě rozsáhlých databází otázek, podpoře složitých typů úloh a poskytuje učitelům hluboké analýzy výsledků zkoušek. Je určen primárně pro formální výuku na univerzitách a středních školách, kde je kladen důraz na strukturované učení, bezpečnost a detailní dlouhodobé sledování studentů. Sebe hostování a konfigurace tohoto systému představuje velkou technickou bariéru, to platí aji pro ostatní open-source LMS. Moodle specificky trpí na zastaralé UI a UX hlavně co se týče Moodle Quiz.
 
-\subsubsection{draw.io}
+\paragraph{Anki}\mbox{}\\
+Anki je výkonná aplikace (dostupná pro desktop i mobilní zařízení) zaměřená primárně na dlouhodobé a efektivní zapamatování velkého množství informací pomocí flashcards. Její hlavní devízou je vědecky podložený algoritmus rozloženého opakování (Spaced Repetition), který uživateli ukazuje kartičky přesně ve chvíli, kdy by je pravděpodobně zapomněl. Nabízí obrovskou míru přizpůsobení, podporuje doplňky, obrázky, zvuk i matematický zápis (LaTeX). Anki je aplikace zaměřená zcela jen na kartičky. Mimo to, UI/UX je velice matoucí.
 
-\subsubsection{overleaf}
+\subsection{Shrnutí analýzy existujících řešení}
 
-\subsubsection{notion (?)}
-\jp{k shromažďování informací a k dokumentaci, měl bych to tam dát?}
-\subsection{postup vývoje}
-\jp{napíšu o tom že to byl scrum s 1 týdenními sprinty}
-\subsection{sběr požadavků}
-\jp{co se myslí "jakým způsobem se bude postupovat při sběru požadavků" ? a "jak se budou proritizovat" ?}
+Z širokého výběru platforem pro tvorbu testů je většina zaměřena na učitele k tomu aby testovali studenty nebo to jsou velké komplexní LMS které se musí složitě nainstalovat a spustit jako server s tím, že ty platformy které jsou zaměřené na studenty a na sebevzdělávání tak jsou buď zcela zaměřery jen na kartičky nebo nedávají možnost uživatelovi udělat to co chce podle sebe. Taky žádná z platforem (až na pár vyjímek jako je Anki) nemají žádnou formu statistiky které by uživatelovi ukázala jestli se zlepšuje. V poslední řadě v šechny platformy (až ty co jsou open-source) jsou nějakým způsobem omezeny v bezplatné verzi.
 
-Požadavky budou sbírány tak aby aplikace primárně podporovala základní funkcionality k tomu aby mohly být implementovány hlavní funkcionality které jsou cílem této práce.
-\jp{potom se tam ještě dopíše že bude vize a risk-list}
+\section{Metodika řešení práce}
 
-\section{řešení práce}
+\subsection{Nástroje}
+
+\subsubsection{V.S. Code}
+
+Pro psaní kodu bude využit kódový editor visual studio code který díky možnosti přidání rozšíření, které editoru přidávají mnoho funkcí navíc, dosahuje na úroveň IDE. Obsahuje mnoho funkcionalit které jsou nezbytné pro softwarový vývoj což jsou například.: integrovaný terminál, GUI pro git, kompilátor…
+
+\subsubsection{V.S. Code rozšíření: \textbf{Database Client}}
+
+Pro inspekci a správu databáze během vývoje bylo využito rozšíření Database Client. Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření Database Client JDBC kvůli tomu že aplikace používá JDBC konektor.
+
+\subsubsection{Git}
+
+Během vývoje aplikace bude pro správu verzí zdrojového kódu využit systém Git. Git je v dnešní době standardem využívaným při vývoji jakékoliv aplikace jakékoliv velikosti. Kód bude zálohován na cloudovou platformu Github.
+
+\subsubsection{Jira}
+
+Pro efektivní řízení vývoje a organizaci práce bude využit nástroj Jira. Jira bude použita pro plánování a sledování jednotlivých sprintů, správu backlogu a detailní evidenci vývojových úloh (tasků).
+
+\subsection{Postup vývoje}
+
+Vývoj bude probíhat agilním zúsobem ve formě sprintů o délce jednoho týdne. Přičemž se bude dbát na prioritizaci tásků které budou v jiře odpovídat jednotlivým git commitům díky možnosti integrace Githubu s Jirou. Během vývoje bude vytvořen risk list a vize projektu.
+
+\subsubsection{Vize}
+
+\paragraph{Současný stav problematiky}\mbox{}\\
+Současné prostředí vzdělávacích technologií znemožňuje využívat jednotný nástroj pro efektivní studium.
+
+\begin{itemize}
+    \item \textbf{Administrativní „UX bloat“ v zastaralých systémech:} Tyto platformy často trpí UX - mají nepřehlednou navigaci, vyžadují příliš mnoho kliknutí a vykazují pomalý výkon.
+    \item \textbf{Absence formální struktury ve studijních aplikacích:} Aplikace zaměřené na studenty postrádají komplexní struktury „formálního testu“ (např. ukazatele průběhu, přísné časové limity, víceformátové typy otázek).
+    \item \textbf{Nedostatečné vyhodnocování odpovědí:} Většina digitálních hodnotících nástrojů spoléhá u textových odpovědí na přesnou shodu řetězců. To vede k falešně negativním výsledkům u odpovědí, které jsou správné, ale formulované jinými slovy.
+    \item \textbf{Povrchní analytika:} Stávající nástroje obvykle studentům sdělí pouze to, co udělali špatně (základní skóre), místo aby diagnostikovaly, \textit{jak} test vypracovávali. Chybí podrobná diagnostika, jako je čas strávený nad jednotlivými otázkami nebo dlouhodobé sledování chybovosti.
+    \item \textbf{Zaměření na zkoušení:} Platformy které jsou momentálně dostupné jsou hlavně určeny pro učitele k tomu aby testovali žáky. Díky tomu je UI k tomu aji uzpůsobené proto je obtížné tyto platformy využívat jen k sebevzdělávání.
+\end{itemize}
+
+\paragraph{Jak bude problém vyřešen}\mbox{}\\
+Řešením je „full-stack“ webová aplikace (Single Page Application) zaměřená na studenta.
+
+Klíčová řešení:
+\begin{itemize}
+    \item \textbf{Moderní UX:} SPA eliminuje zpoždění při vykreslování na straně serveru a poskytne responzivní prostředí s funkcemi, jako je řazení prvků přetažením (drag-and-drop), vizuální indikátory stavu (zodpovězeno/nezodpovězeno) a persistence relace, díky které mohou studenti test přerušit a pokračovat.
+    \item \textbf{Zaměření na sebevzdělávání:} UI bude navrženo tak aby byl systém snadno použitelný pro sebevzdělávání.
+    \item \textbf{Sofistikovaná správa obsahu a testů:} Uživatelé budou mít přístup k bance otázek s kategorizačním systémem M:N, což umožní opakované použití otázek v různých testech. Podporovány budou různé formáty včetně výběru jedné/více odpovědí, přiřazování, seřazování, kartiček a zápisu LaTeX.
+    \item \textbf{Hodnocení s podporou AI:} Pro vyřešení problému se subjektivním známkováním zavede aplikace systém revize textových odpovědí. Integrovaný LLM model (přes lokální modely nebo API jako OpenAI/Google) automaticky vyhodnotí význam textových odpovědí.
+    \item \textbf{Panel hloubkové behaviorální analytiky:} Platforma bude obsahovat spojnicové grafy sledující procentuální úspěšnost a čas strávený při opakovaných pokusech, spolu se sloupcovými grafy detailně popisujícími chybovost a čas strávený u jednotlivých otázek. To studentům umožní identifikovat konkrétní mezery ve znalostech a „časové pasti“.
+\end{itemize}
+
+\paragraph{Stakeholders}\mbox{}\\
+\begin{itemize}
+    \item \textbf{Primární uživatelé (Studenti):} Používají platformu a všechny její funkce.
+    \item \textbf{Vývojáři}
+    \item \textbf{Poskytovatelé AI služeb (např. OpenAI, Google):} Externí strany poskytující infrastrukturu API, pro automatizované vyhodnocování textových odpovědí. V případě že se rozhodne že využijeme externích služeb místo lokálního modelu.
+\end{itemize}
+
+\subsubsection{Risk list}
+
+\paragraph{Použité stupnice:}\mbox{}\\
+\begin{itemize}
+    \item \textbf{Pravděpodobnost:} Nízká, Střední, Vysoká
+    \item \textbf{Závažnost/Rozsah:} Nízká, Střední, Vysoká, Kritická
+\end{itemize}
+
+\paragraph{Risk List}\mbox{}\\
+\begin{enumerate}
+    \item \textbf{Halucinace AI/LLM při automatickém hodnocení}
+    \begin{itemize}
+        \item \textbf{Popis:} Integrovaný Large Language Model (LLM) prostřednictvím lokálního modelu nebo API (OpenAI, Google….) může trpět „halucinacemi“, kdy chybně vyhodnotí textovou odpověď studenta jako nesprávnou, i když je správná, nebo naopak.
+        \item \textbf{Dopad:} Studenti mohou obdržet nepřesnou zpětnou vazbu, což narušuje proces aktivního vybavování znalostí (\textit{active recall}) a podkopává důvěru ve spolehlivost platformy.
+        \item \textbf{Pravděpodobnost:} Střední
+        \item \textbf{Závažnost/Rozsah:} Nízká
+        \item \textbf{Opatření ke zmírnění:} Je důležité implementovat možnost manuální kontroly. Také je možné implementovat tlačítko, které uživateli umožní změnit hodnocení otázky (např. pokud uživatel zjistí, že LLM chybně vyhodnotilo otázku jako špatnou, změní hodnocení ze „špatně“ na „správně“). Výběr optimalizovaného a otestovaného promptu pro hodnocení otázek by také snížilo riziko.
+    \end{itemize}
+    
+    \item \textbf{Algoritmické chyby v komplexní logice hodnocení}
+    \begin{itemize}
+        \item \textbf{Popis:} Aplikace využívá data o pokusech uživatele k tomu aby poskytla analytické data uživateli.
+        \item \textbf{Dopad:} Chyby ve výpočetním algoritmu povedou k nesprávným celkovým procentům, což následně zkreslí dlouhodobou analytiku (např. grafy skóre vs. pokusy).
+        \item \textbf{Pravděpodobnost:} Nízká
+        \item \textbf{Závažnost/Rozsah:} Vysoká
+        \item \textbf{Opatření ke zmírnění:} Centralizovat veškerou komplexní logiku hodnocení striktně do servisních vrstev backendu Spring Boot, aby byla zajištěna konzistence a bezpečnost výpočtů. Implementovat důkladné unit testování pro modul hodnocení.
+    \end{itemize}
+    
+    \item \textbf{Výkonnostní omezení databáze u hloubkové analytiky}
+    \begin{itemize}
+        \item \textbf{Popis:} Generování pokročilých dashboardů, konkrétně analýzy dlouhodobých trendů a sloupcových grafů u jednotlivých otázek, vyžaduje komplexní relační dotazy napříč více tabulkami MySQL (Pokusy, Otázky, Testy a propojovací tabulky kategorií M:N).
+        \item \textbf{Dopad:} S rostoucí uživatelskou základnou a historií pokusů mohou složité dotazy zpomalit vykreslování dashboardu, což zhorší responzivitu uživatelského prostředí (UX), která platformu odlišuje od starších systémů.
+        \item \textbf{Pravděpodobnost:} Střední
+        \item \textbf{Závažnost/Rozsah:} Střední
+        \item \textbf{Opatření ke zmírnění:} Optimalizovat relační schéma MySQL pomocí správného indexování propojovacích tabulek (např. \texttt{Category\_Test}). Využít strategie cachování na backendu ve Spring Boot pro historická data grafů, která nevyžadují přepočet v reálném čase.
+    \end{itemize}
+    
+    \item \textbf{Latence odpovědí AI při automatickém hodnocení otázek}
+    \begin{itemize}
+        \item \textbf{Popis:} Odpověď z LLM může být pomalá (zejména u lokálních modelů), což po odeslání testu povede k zobrazení načítací obrazovky a uživatel bude muset čekat na výsledky.
+        \item \textbf{Dopad:} To může vést k frustraci uživatelů, zejména pokud test obsahuje mnoho otázek s textovou odpovědí.
+        \item \textbf{Pravděpodobnost:} Střední
+        \item \textbf{Závažnost/Rozsah:} Střední
+        \item \textbf{Opatření ke zmírnění:} Použití API třetích stran pro LLM namísto lokálního modelu, případně použití výkonného lokálního modelu.
+    \end{itemize}
+    
+    \item \textbf{Zpoždění vykreslování UI u pokročilých typů obsahu}
+    \begin{itemize}
+        \item \textbf{Popis:} Řazení prvků pomocí drag and drop, společně s podporou pro LaTeX a vykreslování analytických grafů může být náročné.
+        \item \textbf{Dopad:} React DOM by se mohl stát přetíženým nebo pomalým, což by vedlo ke stejným problémům s „těžkopádnou“ navigací, které aktuálně trápí starší systémy založené na PHP.
+        \item \textbf{Pravděpodobnost:} Nízká
+        \item \textbf{Závažnost/Rozsah:} Střední
+        \item \textbf{Opatření ke zmírnění:} Použít pokročilý state management, optimalizace react kódu, využití vhodných knihoven.
+    \end{itemize}
+\end{enumerate}
+
+\section{Řešení práce}
 
 Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je striktně rozdělen na klientskou a serverovou část.
 
-\subsection{frontend}
+\subsection{Frontend}
 
 Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, Drag \& Drop. React představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech javascript frameworků/knihoven nejrozsáhlejší.
 
-\subsection{backend}
+\subsection{Backend}
 
 Pro backend je vynikající volbou framework Spring Boot, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM). 
 
@@ -317,9 +463,15 @@ Celá fullstack aplikace je postavena React, Springboot a MySQL. Aplikace je nav
     \end{itemize}
 \end{itemize}
 
-\subsection{přehled použitých technologií}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{architecture diagram.png}
+    \caption{Architektura systému}
+\end{figure}
 
-\begin{table}[h]
+\subsection{Přehled použitých technologií}
+
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{0.35\textwidth}|p{0.6\textwidth}|}
 \hline
@@ -335,11 +487,62 @@ Celá fullstack aplikace je postavena React, Springboot a MySQL. Aplikace je nav
 \end{tabular}
 \end{table}
 
-
 \section{Představení řešení}
 
-\section{shrnutí}
+Vytvořené řešení představuje moderní webovou aplikaci zaměřenou na efektivní sebevzdělávání (self-testing) a metodu aktivního vybavování znalostí. Jádrem systému je tvorba personalizovaných kvízů z vlastních studijních materiálů, které lze logicky uspořádat do strukturovaných kategorií. 
 
-\section{závěr}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{quiz creation.jpg}
+    \caption{Tvorba kvízu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{categories.jpg}
+    \caption{Správa kategorií}
+\end{figure}
+
+Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů testovacích formátů, jako jsou otázky s jedním či více výběry, přiřazování, seřazování, studijní kartičky a volné textové odpovědi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{question types.jpg}
+    \caption{Typy otázek}
+\end{figure}
+
+Zásadní inovací celého řešení je integrace umělé inteligence (lokálního jazykového modelu), která se stará o inteligentní a automatizované vyhodnocování právě těchto volných psaných odpovědí. Avšak systém nabízí možnost uživatelovi manuálně vyhodnotit tento typ otázek na konci testu.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{manual review modal.jpg}
+    \caption{Manuální vyhodnocení textových odpovědí}
+\end{figure}
+
+Veškeré studijní úsilí a opakované pokusy uživatele jsou následně vizualizovány v pokročilém analytickém panelu, kde systém pomocí podrobných grafů a statistik ukazuje vývoj procentuální úspěšnosti, strávený čas i detailní chybovost a časovou náročnost u jednotlivých otázek. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{quiz stats.jpg}
+    \caption{Analytický panel a statistiky}
+\end{figure}
+
+Systém nezobrazuje tyto statistiky u jednotlivých testů ale i v rámci celé kategorie napříč všemi testy které jsou v té kategorii.
+
+Systém dále umožnuje detailní revizi uživatelových pokusů kde uživatel vidí jak odpověděl na všechny otázky, jestli jeho odpověď je správná a také které odpovědi jsou správné a které jsou špatné. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{quiz review.jpg}
+    \caption{Revize odevzdaného kvízu}
+\end{figure}
+
+\section{Shrnutí}
+
+databaze neni normalizovana
+
+ai je hloupe
+
+\section{Závěr}
 
 \end{document}
