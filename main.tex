@@ -68,6 +68,8 @@ Připravte si na tohle všechno vlastní kapitoly, případný existující text
 
 \section{Úvod}
 
+\mv{upravte úvod. Úvodní kapitola, která popisuje, proč se práce tvoří a co je jejím cílem. Neměla by obsahovat podkapitoly. Na konci úvodu by mělo být vysvětleno, co čtenář nalezne v jednotlivých kapitolách.}
+
 \subsection{Současný stav problematiky}
 
 Vyplňování jednoho a toho samého kvízu může být efektivní způsob jak se naučit nějakou látku. Například cvičný test na moodle s podobnými otázkami jaké budou na nadcházejícím testu je skvělý způsob kterým se studenti mohou připravit na test. 
@@ -78,9 +80,13 @@ Aplikace která by byla zaměřená na vytváření cvičných testů by byla ve
 
 \subsection{Řešení problému}
 
+\mv{Začínáte řečnickou otázkou. nedávejte řečnické otázky. Navíc text obsahuje gramatické chyby ve větných čárkách. Zkontrolovat všude v textu. -- te´d se sem ještě vracím; obecně máte v textu enormní množství chyb, překlepů a nespisovných výrazů; je třeba vyřešit}
+
 Řešení ? Navrhnout a implementovat aplikaci která by uživateli umožňovala vytvořit vlastní testy s širokou škálou typů otázek a možností organizace. Hlavní myšlenkou je udělat nástroj pro studenty který není nijak omezující, který umožňuje studentovi vytvořit přesně to co potřebuje. Když už máme nástroj který pomáhá studentovi se naučit látku tím že projíždí cvičné testy furt dokola tak by bylo dobré nějakým způsobem interpretovat jeho výkon tak aby si dokázal udělat obrázek o svojí znalosti látky, proto aplikace bude vykreslovat analytické grafy které vizualizují studentův výkon.
 
 \section{Cíle práce}
+
+\mv{obecně byste neměl mít kapitolu, ve které není žádný text, ale hned další podkapiotla. Takže třeba je vhodné sem alespoň napsat, že "tato kapitola představuje cíle práce, které...." nebo něco podobného. Obecně ale cíle práce berte ze zadání práce, jen to přeformulujte. Tu sekci "dosažení cílů práce" bych zrušil (myslím tím ten nadpis), protože není důvod dávat dvě věty do vlastní podkapitoly.}
 
 \subsection{Cíle práce}
 
@@ -92,9 +98,15 @@ Tyto cíle budou dosaženy vývojem aplikace agilním způsobem pomocí moderní
 
 \section{Analýza současného stavu}
 
+\mv{opět nějak uvést kapitolu, říct, co s etu dozvíme}
+
 \subsection{Metodika analýzy existujících řešení}
 
+\mv{stejně tak tady; vysvětlit, co se tu bude představovat a proč}
+
 \subsubsection{Hodnocení}
+
+\mv{předpokládám, že text bude dopsán, aktuálně v nevyhovující formě}
 
 \begin{itemize}
     \item jednotlivé základní funkcionality jsou hodnoceny A-E + váha
@@ -146,6 +158,8 @@ Uzavřený B2B/Enterprise systém. Nelze se do něj registrovat jako jednotlivec
 \begin{itemize}
     \item zde hodnocení funguje trochu jinak protože každé kritéria mají jinou relevanci a také vždy platí jen jedno z nich (platforma nemůže být zároveň self-hosted a SaaS)
 \end{itemize}
+
+\mv{proč tady jsou písmena A...E a ne body a ve zbytku textu jsou body?}
 
 \subsubsection{Vytváření testů a organizace}
 
@@ -257,6 +271,12 @@ celkové UX & 0 až 2,5 bodů \\ \hline
     % $$S = \frac{w_1 \cdot H_1 + w_2 \cdot H_2 + \dots + w_n \cdot H_n}{w_1 + w_2 + \dots + w_n}$$
 \end{enumerate}
 
+\mv{zkontrolovat vzorec a pak smazat obrázek}
+
+$$
+S = \frac{\sum^n_{i=1}{(w_i*H_i)}}{\sum^n_{i=1}w_i}
+$$
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{vzorec.png}
@@ -297,17 +317,19 @@ Moje řešení & A (5) & A (5) & A (5) & A (5) & A (5) & A (5) & 5 \\ \hline
 
 \subsubsection{Existující řešení}
 
+\mv{tady to nezanořujte; udělejte 4.2 představení hodnotících řešení, 4.2.1 knowt, 4.2.2 quizizz... a pak 4.3 tabulka hodnocení + shrnutí}
+
 \paragraph{Knowt}\mbox{}\\
-Knowt je moderní platforma pro studenty i učitele, která slouží jako bezplatná a funkcemi nabitá alternativa ke Quizletu. Umožňuje snadno vytvářet výukové kartičky (flashcards), poznámky a cvičné testy. Její největší výhodou je integrace umělé inteligence, která dokáže automaticky vygenerovat studijní materiály ze souborů nebo dokonce z videí na YouTube. Hlavním problémem platforem Knowt a Quizlet je to že neumožňuje uživateli vytvořit přímo to co uživatel chce. Tyto platformy umožňují uživateli vytvořit jen sady kartiček (flashcards) s tím že ostatní typy testů se podle těch kartiček vytvoří automaticky samy a uživatel nad tím nemá žádnou kontrolu. To z těchto platforem nedělá nic jiného než jen “lepší” platformu s kartičkami. Tyto automaticky vytvořené testy jsou jen doplněk. Hlavní zaměření je na kartičky. Druhý největší problém jsou paywally, i když se Knowt vydává jako bezplatná alternative Quizletu tak i navzdory tomu jsou furt některé funkce zamčeny nebo omezeny dokud uživatel nezaplatí.
+Knowt \todo{link} je moderní platforma pro studenty i učitele, která slouží jako bezplatná a funkcemi nabitá alternativa ke Quizletu. Umožňuje snadno vytvářet výukové kartičky (flashcards), poznámky a cvičné testy. Její největší výhodou je integrace umělé inteligence, která dokáže automaticky vygenerovat studijní materiály ze souborů nebo dokonce z videí na YouTube. Hlavním problémem platforem Knowt a Quizlet je to že neumožňuje uživateli vytvořit přímo to co uživatel chce. Tyto platformy umožňují uživateli vytvořit jen sady kartiček (flashcards) s tím že ostatní typy testů se podle těch kartiček vytvoří automaticky samy a uživatel nad tím nemá žádnou kontrolu. To z těchto platforem nedělá nic jiného než jen “lepší” platformu s kartičkami. Tyto automaticky vytvořené testy jsou jen doplněk. Hlavní zaměření je na kartičky. Druhý největší problém jsou paywally, i když se Knowt vydává jako bezplatná alternative Quizletu tak i navzdory tomu jsou furt některé funkce zamčeny nebo omezeny dokud uživatel nezaplatí.
 
 \paragraph{Wayground (Quizizz)}\mbox{}\\
-Wayground, mnohem známější pod svým původním a běžněji užívaným názvem Quizizz, je gamifikovaná vzdělávací platforma navržená pro maximální zapojení studentů a oživení výuky. Učitelům umožňuje vytvářet interaktivní kvízy, ankety a lekce, které mohou studenti plnit buď naživo v reálném čase formou soutěže, nebo asynchronně vlastním tempem jako domácí úkol. Wayground a podobně aji ostatní platformy jako např. OnlineExamMaker jsou zaměřené spíš na učitele a jsou uzpůsobeny k tomu aby učitel otestoval žáky. Jejich hlavní problém je potom v tom že když si student chce spustit test pro sebe tak musí test spustit a potom se do něho připojit přes druhé okno v prohlížeči. Spouštění testů taky není plynulé, většinou se uživatel musí proklikat přes několik oken s nastavením předtím než jde test spustit. Tyto platformy jednoduše nejsou uzpůsobeny k opakovanému spouštění testu několikrát za sebou.
+Wayground\todo{link}, mnohem známější pod svým původním a běžněji užívaným názvem Quizizz, je gamifikovaná vzdělávací platforma navržená pro maximální zapojení studentů a oživení výuky. Učitelům umožňuje vytvářet interaktivní kvízy, ankety a lekce, které mohou studenti plnit buď naživo v reálném čase formou soutěže, nebo asynchronně vlastním tempem jako domácí úkol. Wayground a podobně aji ostatní platformy jako např. OnlineExamMaker jsou zaměřené spíš na učitele a jsou uzpůsobeny k tomu aby učitel otestoval žáky. Jejich hlavní problém je potom v tom že když si student chce spustit test pro sebe tak musí test spustit a potom se do něho připojit přes druhé okno v prohlížeči. Spouštění testů taky není plynulé, většinou se uživatel musí proklikat přes několik oken s nastavením předtím než jde test spustit. Tyto platformy jednoduše nejsou uzpůsobeny k opakovanému spouštění testu několikrát za sebou.
 
 \paragraph{Moodle}\mbox{}\\
-Moodle (včetně jeho nástroje Moodle Quiz) je komplexní open-source systém pro správu výuky (LMS), který si vzdělávací instituce obvykle samy hostují na vlastních serverech. Jedná se o extrémně robustní a modulární platformu budovanou pro dlouhodobé akademické vzdělávání. Systém exceluje ve správě rozsáhlých databází otázek, podpoře složitých typů úloh a poskytuje učitelům hluboké analýzy výsledků zkoušek. Je určen primárně pro formální výuku na univerzitách a středních školách, kde je kladen důraz na strukturované učení, bezpečnost a detailní dlouhodobé sledování studentů. Sebe hostování a konfigurace tohoto systému představuje velkou technickou bariéru, to platí aji pro ostatní open-source LMS. Moodle specificky trpí na zastaralé UI a UX hlavně co se týče Moodle Quiz.
+Moodle\todo{link} (včetně jeho nástroje Moodle Quiz) je komplexní open-source systém pro správu výuky (LMS), který si vzdělávací instituce obvykle samy hostují na vlastních serverech. Jedná se o extrémně robustní a modulární platformu budovanou pro dlouhodobé akademické vzdělávání. Systém exceluje ve správě rozsáhlých databází otázek, podpoře složitých typů úloh a poskytuje učitelům hluboké analýzy výsledků zkoušek. Je určen primárně pro formální výuku na univerzitách a středních školách, kde je kladen důraz na strukturované učení, bezpečnost a detailní dlouhodobé sledování studentů. Sebe hostování a konfigurace tohoto systému představuje velkou technickou bariéru, to platí aji pro ostatní open-source LMS. Moodle specificky trpí na zastaralé UI a UX hlavně co se týče Moodle Quiz.
 
 \paragraph{Anki}\mbox{}\\
-Anki je výkonná aplikace (dostupná pro desktop i mobilní zařízení) zaměřená primárně na dlouhodobé a efektivní zapamatování velkého množství informací pomocí flashcards. Její hlavní devízou je vědecky podložený algoritmus rozloženého opakování (Spaced Repetition), který uživateli ukazuje kartičky přesně ve chvíli, kdy by je pravděpodobně zapomněl. Nabízí obrovskou míru přizpůsobení, podporuje doplňky, obrázky, zvuk i matematický zápis (LaTeX). Anki je aplikace zaměřená zcela jen na kartičky. Mimo to, UI/UX je velice matoucí.
+Anki\todo{link} je výkonná aplikace (dostupná pro desktop i mobilní zařízení) zaměřená primárně na dlouhodobé a efektivní zapamatování velkého množství informací pomocí flashcards. Její hlavní devízou je vědecky podložený algoritmus rozloženého opakování (Spaced Repetition), který uživateli ukazuje kartičky přesně ve chvíli, kdy by je pravděpodobně zapomněl. Nabízí obrovskou míru přizpůsobení, podporuje doplňky, obrázky, zvuk i matematický zápis (LaTeX). Anki je aplikace zaměřená zcela jen na kartičky. Mimo to, UI/UX je velice matoucí.
 
 \subsection{Shrnutí analýzy existujících řešení}
 
@@ -315,29 +337,33 @@ Z širokého výběru platforem pro tvorbu testů je většina zaměřena na uč
 
 \section{Metodika řešení práce}
 
+\mv{nejdříve tu musíte zmínit ty metodické věci -- že bude agilní vývoj, že bude Jira, jak se budou sbírat požadavky, že se bude dělat risk-list a architektura, jak se bude testovat atp.; teprve pak nástroje}
+
 \subsection{Nástroje}
 
 \subsubsection{V.S. Code}
 
-Pro psaní kodu bude využit kódový editor visual studio code který díky možnosti přidání rozšíření, které editoru přidávají mnoho funkcí navíc, dosahuje na úroveň IDE. Obsahuje mnoho funkcionalit které jsou nezbytné pro softwarový vývoj což jsou například.: integrovaný terminál, GUI pro git, kompilátor…
+Pro psaní kodu bude využit kódový editor visual studio code\todo{link} který díky možnosti přidání rozšíření, které editoru přidávají mnoho funkcí navíc, dosahuje na úroveň IDE. Obsahuje mnoho funkcionalit které jsou nezbytné pro softwarový vývoj což jsou například.: integrovaný terminál, GUI pro git, kompilátor…
 
 \subsubsection{V.S. Code rozšíření: \textbf{Database Client}}
 
-Pro inspekci a správu databáze během vývoje bylo využito rozšíření Database Client. Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření Database Client JDBC kvůli tomu že aplikace používá JDBC konektor.
+Pro inspekci a správu databáze během vývoje bylo využito rozšíření Database Client\todo{link}. Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření Database Client JDBC kvůli tomu že aplikace používá JDBC konektor.
 
 \subsubsection{Git}
 
-Během vývoje aplikace bude pro správu verzí zdrojového kódu využit systém Git. Git je v dnešní době standardem využívaným při vývoji jakékoliv aplikace jakékoliv velikosti. Kód bude zálohován na cloudovou platformu Github.
+Během vývoje aplikace bude pro správu verzí zdrojového kódu využit systém Git\todo{link}. Git je v dnešní době standardem využívaným při vývoji jakékoliv aplikace jakékoliv velikosti. Kód bude zálohován na cloudovou platformu Github\todo{link}.
 
 \subsubsection{Jira}
 
-Pro efektivní řízení vývoje a organizaci práce bude využit nástroj Jira. Jira bude použita pro plánování a sledování jednotlivých sprintů, správu backlogu a detailní evidenci vývojových úloh (tasků).
+Pro efektivní řízení vývoje a organizaci práce bude využit nástroj Jira\todo{link}. Jira bude použita pro plánování a sledování jednotlivých sprintů, správu backlogu a detailní evidenci vývojových úloh (tasků).
 
 \subsection{Postup vývoje}
 
 Vývoj bude probíhat agilním zúsobem ve formě sprintů o délce jednoho týdne. Přičemž se bude dbát na prioritizaci tásků které budou v jiře odpovídat jednotlivým git commitům díky možnosti integrace Githubu s Jirou. Během vývoje bude vytvořen risk list a vize projektu.
 
 \subsubsection{Vize}
+
+\mv{dát do příloh; vizi i risk-list; a navíc je teda zmínit na začátku kapitoly 6, kde s enejdříve tedy musí ujasnit, co se bude dělat a teprve potom se může začít řešit nějaká architektura}
 
 \paragraph{Současný stav problematiky}\mbox{}\\
 Současné prostředí vzdělávacích technologií znemožňuje využívat jednotný nástroj pro efektivní studium.
@@ -429,17 +455,27 @@ Klíčová řešení:
 
 Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je striktně rozdělen na klientskou a serverovou část.
 
+\mv{nejdříve vysvětlete vrstvenou architekturu, pak zvlášť FE a BE}
+
 \subsection{Frontend}
 
-Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, Drag \& Drop. React představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech javascript frameworků/knihoven nejrozsáhlejší.
+Aplikace je navržena jako Single Page Application (SPA)\todo{link}, což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce jako odpočet časovače, plynulé přeskakování mezi otázkami, Drag \& Drop. React\todo{link} představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech javascript frameworků/knihoven nejrozsáhlejší.
+
+\mv{chybí zmínit, jaké základní technologie/kníhovny byly na FE použity a proč - klidně jen jako odrážky}
 
 \subsection{Backend}
 
 Pro backend je vynikající volbou framework Spring Boot, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM). 
 
+\mv{opět doplnit, jaké základní balíčky ze spring-boot byly využity a proč}
+
 \subsection{Architektura systému}
 
+\mv{tady v popisu matláte vrstvení na architektury s mixem FE/BE. FE v principu vrstvení může mít také několik vrstev; není to tak, že FE je jedna vrstva}
+
 Celá fullstack aplikace je postavena React, Springboot a MySQL. Aplikace je navržená na principech vrstvené architektury (tzv. n-layer), která odděluje jednotlivé části systému do specifických vrstev, jako jsou Frontend + REST kontrolery, vrstva business logiky (service) a datové entity. Tato volba je praktická, protože projekt je vyvíjen jedním člověkem. Vrstvená architektura je díky své a povědomosti velmi jednoduchá na pochopení i implementaci. Vzhledem k tomu, že se u této aplikace neočekává dlouhodobé či časté nasazování do produkčního prostředí a zároveň se nepočítá s nasazením pro masivní počet uživatelů, nejsou nedostatky vrstvené architektury problémem. Typické nevýhody, jako je například obtížnější horizontální škálovatelnost nebo potenciální výkonnostní úzká hrdla při obrovské zátěži, se v tomto konkrétním rozsahu vůbec neprojeví.
+
+\mv{nepsal bych, že se ty problémy neprojeví, protože tím naznačujete, že tu aplikaci bude používat málo lidí a tak bude jakoby nanic; napsal bych, že alternativou je např. mikroservices, ale u toho se musí řešit spousta věcí navíc a je to zbytečně složié na projekt tohoto rozsahu}
 
 \begin{itemize}
     \item \textbf{Prezentační vrstva (Frontend + API Endpointy)}
@@ -512,6 +548,8 @@ Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů testovacích f
 \end{figure}
 
 Zásadní inovací celého řešení je integrace umělé inteligence (lokálního jazykového modelu), která se stará o inteligentní a automatizované vyhodnocování právě těchto volných psaných odpovědí. Avšak systém nabízí možnost uživatelovi manuálně vyhodnotit tento typ otázek na konci testu.
+
+\mv{toto mi ve zbytku textu hrozně chybí; je málo zdůrazněno, jednak k čemu to bude přesně využito a druhak jak to bude zakomponováno do výsledného řešení; i diagram archtiektury je v tomto skoupý}
 
 \begin{figure}[H]
     \centering
