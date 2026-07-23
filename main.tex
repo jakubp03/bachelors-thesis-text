@@ -51,7 +51,8 @@ The goal of this thesis is to design and implement a full-stack web application 
 \tableofcontents 
 \newpage
 
-\section{Osnova práce}
+\section*{Osnova práce}
+\addcontentsline{toc}{section}{Osnova práce}
 
 \mv{Zdravím, do téhle sekce vám napíši, jak bych si představoval osnovu práce}
 \jp{Pomocí "\textbackslash jp\{...\}" dělejte svoje vlastní komentáře}
@@ -73,7 +74,8 @@ V průběhu textu nezapomeňte přidávat reference (pořád si je průběžně 
 
 Připravte si na tohle všechno vlastní kapitoly, případný existující text do toho přesuňte a dejte echo, že je hotovo a můžu kontrolovat, díky.
 
-\section{Úvod}
+\section*{Úvod}
+\addcontentsline{toc}{section}{Úvod}
 
 Vyplňování jednoho a téhož kvízu může být efektivním způsobem, jak se naučit probíranou látku. Například cvičný test v systému Moodle s podobnými otázkami, jaké se objeví v nadcházejícím testu, představuje skvělý způsob, jak se mohou studenti připravit.
 
@@ -83,17 +85,7 @@ Aplikace, která by byla zaměřená na vytváření cvičných testů, by byla 
 
 Řešením je navrhnout a implementovat aplikaci, která by uživateli umožňovala vytvářet vlastní kvízy s širokou škálou typů otázek a možností organizace. Hlavní myšlenkou je vytvořit nástroj pro studenty, který není nijak omezující a který umožňuje studentovi vytvořit přesně to, co potřebuje. Když už budeme mít nástroj, který pomáhá studentovi naučit se látku tím, že opakovaně prochází cvičné testy, bylo by dobré nějakým způsobem interpretovat jeho výkon tak, aby si dokázal udělat obrázek o svých znalostech. Z toho důvodu bude aplikace vykreslovat analytické grafy, které vizualizují studentův výkon. Pro ještě efektivnější studium doplní platformu integrace velkého jazykového modelu (LLM), který se bude starat o inteligentní a automatizované vyhodnocování otázek s volnou textovou odpovědí na základě jejich významu.
 
-\textbf{Kapitoly}
-
-\begin{itemize}
-    \item \textbf{Cíle práce:} Definice hlavního záměru, kterým je vývoj full-stack webové aplikace zaměřené na proces učení, a popis agilního přístupu k vývoji s využitím moderních nástrojů.
-    \item \textbf{Analýza současného stavu:} Detailní zhodnocení a srovnání existujících vzdělávacích platforem (např. Knowt, Moodle, Anki) na základě stanovené metodiky a bodových kritérií, včetně shrnutí jejich hlavních nedostatků.
-    \item \textbf{Metodika řešení práce:} Přehled zvolených nástrojů pro vývoj a správu projektu (VS Code, Git, Jira).
-    \item \textbf{Řešení práce:} Technický popis softwarové architektury rozdělené do vrstev (prezentační, aplikační, servisní a databázová) a jasný výčet použitých technologií na frontendu i backendu.
-    \item \textbf{Představení řešení:} Vizuální a funkční ukázka hotové aplikace, která zahrnuje tvorbu kvízů z vlastních materiálů, využití umělé inteligence k automatickému hodnocení volných odpovědí a pokročilé grafické statistiky pro sledování pokroku.
-    \item \textbf{Shrnutí:} Zhodnocení stavu implementace s upozorněním na nenormalizovanou databázi a nedokonalosti umělé inteligence.
-    \item \textbf{Závěr:} Závěr práce.
-\end{itemize}
+V první kapitole je definován hlavní záměr práce, kterým je vývoj full-stack webové aplikace zaměřené na proces učení, společně s popisem využitého agilního přístupu k vývoji. Druhá kapitola přináší detailní zhodnocení a srovnání existujících vzdělávacích platforem na základě stanovené metodiky a shrnuje jejich hlavní nedostatky. Následující část se věnuje metodice řešení a poskytuje přehled zvolených nástrojů pro vývoj a správu projektu. Další kapitola uvádí technický popis navržené vrstvené softwarové architektury a obsahuje výčet použitých technologií na frontendu i backendu. Pátá kapitola následně vizuálně a funkčně představuje hotovou aplikaci, demonstruje tvorbu kvízů, využití umělé inteligence k automatickému hodnocení odpovědí a analytické statistiky pro sledování pokroku. Předposlední kapitola shrnuje stav implementace a upozorňuje na limity řešení, jako je nenormalizovaná databáze či nedokonalosti umělé inteligence. Celý text je formálně zakončen závěrem práce.
 
 \mv{ty kapitoyl tu musí být jako text: "V první kapitole je přdstaveno... v druhé kapitole je ... další kapitola uvádí .. atd.}
 \mv{úvod se nečísluje; až kapitola za úvodem je 1. kapitola a má prefix "1."}
@@ -119,13 +111,13 @@ Aby bylo možné jednotlivé platformy spravedlivě a prokazatelně porovnat, je
 Postup hodnocení:
 
 \begin{itemize}
-    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 + váha.\mv{ nemá to být krát váha, ne plus?}
+    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 * váha.\mv{ nemá to být krát váha, ne plus?}
     \item Hodnocení se následně budou pomocí vzorce agregovat do finálního hodnocení.
     \item Každá základní funkcionalita bude mít několik definovaných konkrétních kritérií. Každé kritérium má určitý počet bodů, kterých může dosáhnout podle toho, zda je splněno, či nikoliv. Pokud je splněno, získá specifikovaný pevný počet bodů; pokud ne, žádné body se nepřičtou. Součet bodů všech definovaných kritérií v rámci jedné základní funkcionality nesmí být vyšší než pět. Některá kritéria jsou hodnocena na stupnici s rozsahem (hodnoty na stupnici lze měnit pouze v krocích po 0,5).
     \item Součet bodů poté vyjadřuje celkové hodnocení základní funkcionality.
 \end{itemize}
 
-\begin{table}[htbp]
+\begin{table}[H]
 \caption{Základní hodnotící funkcionality a jejich váhy}
 \label{tab:funkcionality}
 \centering
@@ -143,7 +135,7 @@ UX/UI & 3 \\ \hline
 
 \subsubsection{Dostupnost (Accessibility \& Hosting)}
 
-Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce. Zde hodnocení funguje poněkud jinak, protože jednotlivá kritéria mají odlišnou relevanci a vždy platí pouze jedno z nich (platforma nemůže být zároveň self-hosted a SaaS).
+Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce (viz Tabulka~\ref{tab:dostupnost}). Zde hodnocení funguje poněkud jinak, protože jednotlivá kritéria mají odlišnou relevanci a vždy platí pouze jedno z nich (platforma nemůže být zároveň self-hosted a SaaS).
 
 \mv{chybí odkaz na tabulku 2; obecně na všechny tabulky a obrázky (a ideálně i výpisy kódu) byste měl mít v textu odkazy}
 
@@ -166,7 +158,7 @@ Uzavřený B2B/Enterprise systém. Nelze se do něj registrovat jako jednotlivec
 
 Vynecháváme základní kritéria jako titulek, popis atd., protože se jedná o naprostý základ, u kterého se očekává, že je na každé platformě pokryt, a proto nemá smysl jej do hodnocení zakomponovávat.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \caption{Kritéria hodnocení tvorby kvízů a jejich organizace}
 \label{tab:vytvareni}
 \centering
@@ -191,7 +183,7 @@ UX: Celkový průchod (flow) a uživatelská přívětivost ** & 0 až 2 body \\
 
 Pro platformu je klíčové, aby podporovala co nejvíce typů otázek a odlišila se tak od ostatních platforem; proto chceme hodnotit všechny.
 
-\begin{table}[htbp]
+\begin{table}[H]
 \caption{Kritéria hodnocení typů a obsahu otázek}
 \label{tab:typologie}
 \centering
@@ -241,6 +233,8 @@ Umožňuje volnou navigaci mezi otázkami & 0 nebo 1 bod \\ \hline
 \end{table}
 
 \subsubsection{Analytika a statistiky}
+
+Analytický a statistický modul představuje klíčovou součást platformy, jelikož studentům umožňuje exaktně sledovat efektivitu učení metodou aktivního vybavování a identifikovat konkrétní mezery ve znalostech.
 
 \mv{chybí popis}
 
@@ -354,7 +348,7 @@ Pro úspěšnou a efektivní realizaci výsledné aplikace je nezbytné předem 
 \subsection{Postup vývoje}
 
 Požadavky na aplikaci byly shromážděny na základě předchozí analýzy existujících platforem a identifikace jejich hlavních nedostatků, jako je absence zaměření na sebevzdělávání či zastaralé uživatelské prostředí. Tyto požadavky jsou formálně strukturovány primárně do podoby agilních uživatelských příběhů (User Stories), které jsou doplněny o jasný výčet funkčních a nefunkčních specifikací.
-Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly průběžně prioritizovat\mv{nemůžete prioritizovat průběžně, protože pak zjistíte, že jste něco dpležitého z vysokou prioritou zapomněl}, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
+Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly prioritizovat\mv{nemůžete prioritizovat průběžně, protože pak zjistíte, že jste něco dpležitého z vysokou prioritou zapomněl}, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
 Na začátku se navrhne architektura aplikace a podle ní se bude následně vyvíjet. Během vývoje bude vytvořen dokument rizik (risk list) a vize projektu. Testování bude probíhat formou manuálních end-to-end testů, automatických unit a integračních testů a manuálních API testů pomocí nástroje Postman.
 
 \subsection{Nástroje}
@@ -368,8 +362,6 @@ Pro psaní kódu bude využit kódový editor \textbf{Visual Studio Code} (\url{
 \subsubsection{Rozšíření VS Code: \textbf{Database Client}}
 
 Pro inspekci a správu databáze během vývoje bylo využito rozšíření \textbf{Database Client} (\url{https://database-client.com}). Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření \textbf{Database Client JDBC} (\url{https://marketplace.visualstudio.com/items?itemName=cweijan.dbclient-jdbc}), jelikož aplikace používá JDBC konektor.
-
-\mv{nahradil jsem vám balíček url za xurl, aby zalamování url probíhalo lépe; po přečtení můžete tento komentář smazat}
 
 \subsubsection{Git}
 
@@ -426,18 +418,18 @@ Celý systém je fyzicky a logicky rozdělen do následujících vrstev (viz Obr
 
 \subsection{Frontend}
 
-Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce, jako je odpočet časovače, plynulé přeskakování mezi otázkami či operace typu Drag \& Drop. \textbf{React} (\url{https://react.dev}) představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech JavaScriptových frameworků a knihoven nejrozsáhlejší.
+Aplikace je navržena jako Single Page Application (SPA), což je pro takto vysoce interaktivní systém naprosto nezbytné. Architektura SPA zajišťuje plynulý chod bez znovunačítání celé stránky, což je kritické pro funkce, jako je odpočet časovače, plynulé přeskakování mezi otázkami či operace typu Drag \& Drop. \textbf{React} (\url{https://react.dev})\cite{react_components} představuje pro tento účel ideální volbu díky své schopnosti efektivně spravovat složitý stav klientského rozhraní. Zásadním benefitem je obrovský ekosystém komunitních balíčků (packages), který je ze všech JavaScriptových frameworků a knihoven nejrozsáhlejší.
 
 Hlavní knihovny a nástroje, které byly použity:
 
 \begin{itemize}
     \item \textbf{Vite}: Použito jako rychlý a moderní sestavovací nástroj (build tool) pro optimalizaci a běh aplikace.
-    \item \textbf{Redux Toolkit} (společně s React Redux): Zajišťuje centralizovanou správu stavu, například pro uchování dat přihlášeného uživatele nebo stavu probíhajícího kvízu.
-    \item \textbf{Axios}: Obsluhuje veškerou HTTP komunikaci s backendem, včetně odesílání autentizačních tokenů.
-    \item \textbf{React Router DOM}: Zajišťuje klientské směrování (routing) a logiku pro ochranu tras před neoprávněným přístupem.
-    \item \textbf{Tailwind CSS}, \textbf{shadcn/ui} a \textbf{Radix UI}: Kombinace nástrojů pro rychlé a responzivní stylovaní vizulních komponent\cite{react_components}.
-    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{healy2019}. \mv{nechat link na to co je graf + přidat linky/url na ty knihovny}
-    \item \textbf{dnd-kit}: Implementuje logiku pro interakce typu Drag \& Drop\cite{html_dnd}.
+    \item \textbf{Redux Toolkit} (společně s React Redux): Zajišťuje centralizovanou správu stavu, například pro uchování dat přihlášeného uživatele nebo stavu probíhajícího kvízu\cite{redux_toolkit}.
+    \item \textbf{Axios}: Obsluhuje veškerou HTTP komunikaci s backendem, včetně odesílání autentizačních tokenů\cite{axios}.
+    \item \textbf{React Router DOM}: Zajišťuje klientské směrování (routing) a logiku pro ochranu tras před neoprávněným přístupem\cite{react_router}.
+    \item \textbf{Tailwind CSS}, \textbf{shadcn/ui} a \textbf{Radix UI}: Kombinace nástrojů pro rychlé a responzivní stylovaní vizulních komponent\cite{shadcn_ui,radix_ui}.
+    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{echarts,recharts,healy2019}. \mv{nechat link na to co je graf + přidat linky/url na ty knihovny}
+    \item \textbf{dnd-kit}: Implementuje logiku pro interakce typu Drag \& Drop\cite{dnd_kit,html_dnd}.
 \end{itemize}
 
 \subsection{Backend}
@@ -639,13 +631,16 @@ Zdrojový kód je dostupný na platformě Github:
 
 \mv{nemáte anglický titulek práce}
 
-\section{Přílohy}
+\setcounter{secnumdepth}{-1}
+\section*{Přílohy}
+\addcontentsline{toc}{section}{Přílohy}
 
 \mv{přílohy označovat "Příloha A -- Vize", "Příloha B -- Risk-list" ... Nadpis "Přílohy" ani nic v přílohách už nečíslujte}
 
-\subsection{Vize}
+\clearpage
+\subsection{Příloha A -- Vize}
 
-\subsubsection{Současný stav problematiky}
+\subsubsection*{Současný stav problematiky}
 
 Současné prostředí vzdělávacích technologií znemožňuje využívat jednotný nástroj pro efektivní studium. 
 
@@ -657,7 +652,7 @@ Současné prostředí vzdělávacích technologií znemožňuje využívat jedn
     \item \textbf{Zaměření na zkoušení:} Platformy které jsou momentálně dostupné jsou hlavně určeny pro učitele k tomu aby testovali žáky. Díky tomu je UI k tomu aji uzpůsobené proto je obtížné tyto platformy využívat jen k sebevzdělávání.
 \end{itemize}
 
-\subsubsection{Jak bude problém vyřešen}
+\subsubsection*{Jak bude problém vyřešen}
 
 Řešením je „full-stack“ webová aplikace (Single Page Application) zaměřená na studenta.
 
@@ -671,7 +666,7 @@ klíčová řešení:
     \item \textbf{Panel hloubkové behaviorální analytiky:} Platforma bude obsahovat spojnicové grafy sledující procentuální úspěšnost a čas strávený při opakovaných pokusech, spolu se sloupcovými grafy detailně popisujícími chybovost a čas strávený u jednotlivých otázek. To studentům umožní identifikovat konkrétní mezery ve znalostech a „časové pasti“.
 \end{itemize}
 
-\subsubsection{Stakeholders}
+\subsubsection*{Stakeholders}
 
 \begin{itemize}
     \item \textbf{Primární uživatelé (Studenti):} Používají platformu a všechny její funkce.
@@ -679,16 +674,17 @@ klíčová řešení:
     \item \textbf{Poskytovatelé AI služeb (např. OpenAI, Google):} Externí strany poskytující infrastrukturu API, pro automatizované vyhodnocování textových odpovědí. V případě že se rozhodne že využijeme externích služeb místo lokálního modelu.
 \end{itemize}
 
-\subsection{Risk List}
+\clearpage
+\subsection{Příloha B -- Risk-list}
 
-\subsubsection{Použité stupnice:}
+\subsubsection*{Použité stupnice:}
 
 \begin{itemize}
     \item \textbf{Pravděpodobnost:} Nízká, Střední, Vysoká
     \item \textbf{Závažnost/Rozsah:} Nízká, Střední, Vysoká, Kritická
 \end{itemize}
 
-\subsubsection{1. Halucinace AI/LLM při automatickém hodnocení}
+\subsubsection*{1. Halucinace AI/LLM při automatickém hodnocení}
 
 \begin{itemize}
     \item \textbf{Popis:} Integrovaný Large Language Model (LLM) prostřednictvím lokálního modelu nebo API (OpenAI, Google….) může trpět „halucinacemi“, kdy chybně vyhodnotí textovou odpověď studenta jako nesprávnou, i když je správná, nebo naopak.
@@ -698,7 +694,7 @@ klíčová řešení:
     \item \textbf{Opatření ke zmírnění:} Je důležité implementovat možnost manuální kontroly. Také je možné implementovat tlačítko, které uživateli umožní změnit hodnocení otázky (např. pokud uživatel zjistí, že LLM chybně vyhodnotilo otázku jako špatnou, změní hodnocení ze „špatně“ na „správně“). Výběr optimalizovaného a otestovaného promptu pro hodnocení otázek by také snížilo riziko.
 \end{itemize}
 
-\subsubsection{2. Algoritmické chyby v komplexní logice hodnocení}
+\subsubsection*{2. Algoritmické chyby v komplexní logice hodnocení}
 
 \begin{itemize}
     \item \textbf{Popis:} Aplikace využívá data o pokusech uživatele k tomu aby poskytla analytické data uživateli.
@@ -708,7 +704,7 @@ klíčová řešení:
     \item \textbf{Opatření ke zmírnění:} Centralizovat veškerou komplexní logiku hodnocení striktně do servisních vrstev backendu Spring Boot, aby byla zajištěna konzistence a bezpečnost výpočtů. Implementovat důkladné unit testování pro modul hodnocení.
 \end{itemize}
 
-\subsubsection{3. Výkonnostní omezení databáze u hloubkové analytiky}
+\subsubsection*{3. Výkonnostní omezení databáze u hloubkové analytiky}
 
 \begin{itemize}
     \item \textbf{Popis:} Generování pokročilých dashboardů, konkrétně analýzy dlouhodobých trendů a sloupcových grafů u jednotlivých otázek, vyžaduje komplexní relační dotazy napříč více tabulkami MySQL (Pokusy, Otázky, Kvízy a propojovací tabulky kategorií M:N).
@@ -718,7 +714,7 @@ klíčová řešení:
     \item \textbf{Opatření ke zmírnění:} Optimalizovat relační schéma MySQL pomocí správného indexování propojovacích tabulek (např. \texttt{Category\_Test}). Využít strategie cachování na backendu ve Spring Boot pro historická data grafů, která nevyžadují přepočet v reálném čase.
 \end{itemize}
 
-\subsubsection{4. Latence odpovědí AI při automatickém hodnocení otázek}
+\subsubsection*{4. Latence odpovědí AI při automatickém hodnocení otázek}
 
 \begin{itemize}
     \item \textbf{Popis:} Odpověď z LLM může být pomalá (zejména u lokálních modelů), což po odeslání kvízu povede k zobrazení načítací obrazovky a uživatel bude muset čekat na výsledky.
@@ -728,7 +724,7 @@ klíčová řešení:
     \item \textbf{Opatření ke zmírnění:} Použití API třetích stran pro LLM namísto lokálního modelu, případně použití výkonného lokálního modelu.
 \end{itemize}
 
-\subsubsection{5. Zpoždění vykreslování UI u pokročilých typů obsahu}
+\subsubsection*{5. Zpoždění vykreslování UI u pokročilých typů obsahu}
 
 \begin{itemize}
     \item \textbf{Popis:} Řazení prvků pomocí drag and drop, společně s podporou pro LaTeX a vykreslování analytických grafů může být náročné.
@@ -738,9 +734,10 @@ klíčová řešení:
     \item \textbf{Opatření ke zmírnění:} Použít pokročilý state management, optimalizace react kódu, využití vhodných knihoven.
 \end{itemize}
 
-\subsection{Specifikace}
+\clearpage
+\subsection{Příloha C -- Specifikace}
 
-\subsubsection{Funkční požadavky}
+\subsubsection*{Funkční požadavky}
 
 Vytváření kvízů
 \begin{itemize}
@@ -848,7 +845,7 @@ Statistiky a analýza
     \item v případě, že není dostatek dat k tomu, aby se vykreslil graf, zobrazí se místo něj text „nedostatek dat“
 \end{itemize}
 
-\subsubsection{Nefunkční požadavky}
+\subsubsection*{Nefunkční požadavky}
 
 Klientská část (frontend)
 \begin{itemize}
@@ -872,9 +869,10 @@ Serverová část (backend)
     \item \textit{*platí pouze v případě, že uživatel nastaví časový limit pro kvíz}
 \end{itemize}
 
-\subsection{User Stories}
+\clearpage
+\subsection{Příloha D -- User Stories}
 
-\subsubsection{1. Vytváření kvízů a správa kategorií}
+\subsubsection*{1. Vytváření kvízů a správa kategorií}
 \begin{itemize}
     \item US-01: \textbf{Jako student} chci vytvořit kvíz s názvem, popisem, časovým limitem a přiřazenou kategorií, abych si mohl učivo systematicky organizovat.
     \item US-02: \textbf{Jako student} chci, aby se mi dosažené body automaticky převáděly na procenta, abych měl jednotný přehled o své úspěšnosti.
@@ -883,7 +881,7 @@ Serverová část (backend)
     \item US-05: \textbf{Jako student} chci vytvářet kategorie s vlastním názvem, popisem a barvou, abych se ve svých materiálech vizuálně lépe orientoval.
 \end{itemize}
 
-\subsubsection{2. Tvorba a hodnocení otázek}
+\subsubsection*{2. Tvorba a hodnocení otázek}
 \begin{itemize}
     \item US-06: \textbf{Jako student} chci do otázky vložit text a přidat obrázek, abych si mohl vytvářet i vizuálně zaměřené výukové kartičky či otázky.
     \item US-07: \textbf{Jako student} chci mít při tvorbě na výběr z různých typů odpovědí (jedna možnost, více možností, textová odpověď, pravda/nepravda, přiřazování dvojic, seřazení, výuková kartička), abych mohl formu testování přizpůsobit typu učiva.
@@ -893,7 +891,7 @@ Serverová část (backend)
     \item US-11: \textbf{Jako systém} chci vyhodnotit otázky s více správnými odpověďmi tak, že za každou správnou odpověď udělím zlomek bodů.
 \end{itemize}
 
-\subsubsection{3. Absolvování kvízů}
+\subsubsection*{3. Absolvování kvízů}
 \textbf{Průběh kvízu:}
 \begin{itemize}
     \item US-12: \textbf{Jako student} chci spustit kvíz.
@@ -913,7 +911,7 @@ Serverová část (backend)
     \item US-22: \textbf{Jako student} chci mít po dokončení kvízu k dispozici tlačítka pro opakování pokusu, zobrazení výsledků a návrat na přehled, abych mohl plynule pokračovat v učení.
 \end{itemize}
 
-\subsubsection{4. Statistiky a analýza}
+\subsubsection*{4. Statistiky a analýza}
 \begin{itemize}
     \item US-23: \textbf{Jako student} chci mít přístup k historii všech svých pokusů se stejnými detaily jako po dokončení kvízu, abych se k nim mohl zpětně vracet.
     \item US-24: \textbf{Jako student} chci u každého kvízu i celé kategorie vidět průměrné skóre, průměrný strávený čas a celkový počet pokusů, abych mohl zhodnotit, jak dobře dané téma ovládám.
