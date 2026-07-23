@@ -20,7 +20,7 @@
 \nazev{Tvorba aplikace pro pokročilé testování}{Thesis Title}
 \typprace{Bakalářská Práce}{Bachelor Thesis}
 
-\usepackage{url}
+\usepackage{xurl}
 \usepackage{subcaption}
 \usepackage{array}
 \usepackage{threeparttable}
@@ -61,7 +61,7 @@ Základní kapitoly:
 \begin{itemize}
     \item Úvod -- představení toho, co se bude v práci řešit. Je to info pro čtenáře, kterým ho chcete nalákat na to, co bude číst. Takže rychlé představení současného stavu a naznačeného způsobu řešení
     \item Cíle práce -- představení cílů práce (čeho se má dosáhnout) a základního způsobu, který použijete k dosažení cílů práce
-    \item Analýza současného stavu -- představení jednak metodiky, pomocí které budete hledat aktuální řešení (tj. jak jsme se bavili: jaké jsou kritéria, jakým způsobem se budou hodnotit), druhak představení současně dostupných nástrojů pro dané řešení (stručné předsdtavení + odkaz na nástroj, ohdonocení kritérií podle metodiky) + na závěr shrnutí, zda lze nějaký existující nástroj použít a není třeba tvořit nic nového, nebo zda se tedy bude dělat vlastní řešení
+    \item Analýza současného stavu -- představení jednak metodiky, pomocí které budete hledat aktuální řešení (tj. jak jsme se bavili: jaké jsou kritéria, jakým způsobem se budou hodnotit), druhak představení současně dostupných nástrojů pro dané řešení (stručné představení + odkaz na nástroj, ohdonocení kritérií podle metodiky) + na závěr shrnutí, zda lze nějaký existující nástroj použít a není třeba tvořit nic nového, nebo zda se tedy bude dělat vlastní řešení
     \item Metodika řešení práce - představení postupů, přístupů a nástrojů, které použijete při řešení práce; jakým způsobem se bude postupovat při sběru požadavků, jak se budou proritizovat, že/zda bude vize, risk-list, git, jak testování atp.
     \item Odteď dále kapitoly ohledně vlastního řešení práce. Je mi jedno, jak to rozčleníte -- nejdřív architektura a pak po kapitolách BE/FE/DB, nebo po funkcionalitách, ale nějak smysluplně to pojmout
     \item Představení vytvořeného řešení -- rychlé představení vytvořeného řešení a toho, jakt o vypadá. je to o to "prodat co vzniklo", ne o tvorbě uživatelské příručky
@@ -95,9 +95,10 @@ Aplikace, která by byla zaměřená na vytváření cvičných testů, by byla 
     \item \textbf{Závěr:} Závěr práce.
 \end{itemize}
 
-\section{Cíle práce}
+\mv{ty kapitoyl tu musí být jako text: "V první kapitole je přdstaveno... v druhé kapitole je ... další kapitola uvádí .. atd.}
+\mv{úvod se nečísluje; až kapitola za úvodem je 1. kapitola a má prefix "1."}
 
-\mv{obecně byste neměl mít kapitolu, ve které není žádný text, ale hned další podkapiotla. Takže třeba je vhodné sem alespoň napsat, že "tato kapitola představuje cíle práce, které...." nebo něco podobného. Obecně ale cíle práce berte ze zadání práce, jen to přeformulujte. Tu sekci "dosažení cílů práce" bych zrušil (myslím tím ten nadpis), protože není důvod dávat dvě věty do vlastní podkapitoly.}
+\section{Cíle práce}
 
 Záměrem tohoto projektu je vyvinout moderní full-stack webovou aplikaci pro správu kvízů. Aplikace si bere to nejlepší z platformy Moodle, ale výrazně vylepšuje uživatelské rozhraní a přidává unikátní analytické funkce. Projekt se primárně soustředí na zefektivnění studia pomocí sebetestování. Umožňuje studentům snadno transformovat vlastní učivo do interaktivních kvízů, které mohou opakovaně trénovat. Systém navíc poskytuje detailní vizualizaci dat a statistiky, díky nimž uživatel okamžitě vidí svůj pokrok a snadno identifikuje své slabé stránky.
 
@@ -105,26 +106,20 @@ Tyto cíle budou dosaženy vývojem aplikace agilním způsobem pomocí moderní
 
 \section{Analýza současného stavu}
 
-\mv{Jo, ok, trošku upřesním. Cílem není napsat "Tato kapitola...." ale uvést, proč ten obsah tady je. Takže tady něco ve stylu "Na začátku je třeba zjistit, jaká jsou současná dostupná řešení a zda by některá z nich nevyhovovala definovaným požadavkům. Nejdříve definujeme metodiku, kterou budeme používat pro hodnocení jednotlivých nástrojů a následně přestavíme nástroje, které více či méně pokrývají požadavky práce.}
-
 Úvodním krokem je analýza existujících řešení a posouzení, zda některá z nich splňují stanovené požadavky. Nejprve proto definujeme metodiku hodnocení a následně představíme vybrané nástroje, které tyto požadavky v různé míře pokrývají.
 
 \subsection{Metodika analýzy existujících řešení}
 
-\mv{Upravit viz popis v 4}
-
 Pro objektivní srovnání dostupných aplikací je nezbytné nejprve stanovit strukturovaný postup. Definování pravidel a bodových kritérií pro jednotlivé základní funkcionality vytváří základ pro následné vyhodnocení platforem. Tento přístup umožňuje přesně identifikovat případné nedostatky stávajících nástrojů a s jistotou určit, zda existuje mezera na trhu, kterou by navrhované řešení mohlo efektivně vyplnit.
 
 \subsubsection{Hodnocení}
-
-\mv{vyhodit nadpis 4.1.2 a tabulku dát k předchozímu odstavic. uvést, že se budou hodnotit následující základní funkcionailty, které pak budou představeny blíže}
 
 Aby bylo možné jednotlivé platformy spravedlivě a prokazatelně porovnat, je nutné zavést exaktní klasifikační systém. Transformace splněných kritérií na kvantifikovatelné hodnoty a jejich následné sloučení do jediné výsledné známky zaručuje, že finální hodnocení každého řešení je maximálně transparentní a co nejvíce oproštěné od subjektivních dojmů.
 
 Postup hodnocení:
 
 \begin{itemize}
-    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 + váha.
+    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 + váha.\mv{ nemá to být krát váha, ne plus?}
     \item Hodnocení se následně budou pomocí vzorce agregovat do finálního hodnocení.
     \item Každá základní funkcionalita bude mít několik definovaných konkrétních kritérií. Každé kritérium má určitý počet bodů, kterých může dosáhnout podle toho, zda je splněno, či nikoliv. Pokud je splněno, získá specifikovaný pevný počet bodů; pokud ne, žádné body se nepřičtou. Součet bodů všech definovaných kritérií v rámci jedné základní funkcionality nesmí být vyšší než pět. Některá kritéria jsou hodnocena na stupnici s rozsahem (hodnoty na stupnici lze měnit pouze v krocích po 0,5).
     \item Součet bodů poté vyjadřuje celkové hodnocení základní funkcionality.
@@ -149,6 +144,8 @@ UX/UI & 3 \\ \hline
 \subsubsection{Dostupnost (Accessibility \& Hosting)}
 
 Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce. Zde hodnocení funguje poněkud jinak, protože jednotlivá kritéria mají odlišnou relevanci a vždy platí pouze jedno z nich (platforma nemůže být zároveň self-hosted a SaaS).
+
+\mv{chybí odkaz na tabulku 2; obecně na všechny tabulky a obrázky (a ideálně i výpisy kódu) byste měl mít v textu odkazy}
 
 \begin{table}[htbp]
 \caption{Kritéria hodnocení dostupnosti}
@@ -245,6 +242,8 @@ Umožňuje volnou navigaci mezi otázkami & 0 nebo 1 bod \\ \hline
 
 \subsubsection{Analytika a statistiky}
 
+\mv{chybí popis}
+
 \begin{table}[H]
 \caption{Kritéria hodnocení analytiky a statistik}
 \label{tab:analytika}
@@ -299,8 +298,6 @@ $$
 
 \subsubsection{\textbf{Knowt}}
 
-\mv{na url odkazy používejte balíček url, viz níže. nedávejte konečné lomítko}
-
 \textbf{Knowt} (\url{https://knowt.com}) je moderní platforma pro studenty i učitele, která slouží jako bezplatná a funkcemi nabitá alternativa ke službě Quizlet. Umožňuje snadno vytvářet výukové kartičky (flashcards), poznámky a cvičné kvízy. Její největší výhodou je integrace umělé inteligence, která dokáže automaticky vygenerovat studijní materiály ze souborů nebo dokonce z videí na YouTube. Hlavním problémem platforem Knowt a Quizlet je skutečnost, že neumožňují uživateli vytvořit přímo to, co požaduje. Tyto platformy poskytují uživateli možnost vytvářet pouze sady kartiček (flashcards) s tím, že ostatní typy kvízu se podle těchto kartiček generují automaticky samy a uživatel nad nimi nemá žádnou kontrolu. To z těchto platforem nedělá nic jiného než jen „lepší“ verzi aplikací pro práci s kartičkami. Tyto automaticky vytvořené kvízy jsou pouze doplňkem, hlavní zaměření zůstává na kartičky. Druhým největším problémem jsou paywally; ačkoliv se Knowt prezentuje jako bezplatná alternativa Quizletu, i přesto jsou některé funkce uzamčeny nebo omezeny, dokud uživatel nezaplatí.
 
 \subsubsection{\textbf{Wayground (Quizizz)}}
@@ -350,26 +347,17 @@ Výsledky hodnocení všech analyzovaných platforem jsou shrnuty v Tabulce~\ref
 
 Ze širokého výběru platforem pro tvorbu kvízů je většina primárně zaměřena na učitele za účelem testování studentů, nebo se jedná o velké komplexní LMS systémy, které vyžadují složitou instalaci a provoz na vlastním serveru. Platformy, které se zaměřují přímo na studenty a sebevzdělávání, jsou pak buď zcela orientovány pouze na kartičky, nebo nedávají uživateli možnost vytvořit si kvíz přesně podle vlastních představ. Také žádná z platforem (až na pár výjimek, jako je Anki) nenabízí odpovídající formu statistik, které by uživateli ukázaly, zda se zlepšuje. V neposlední řadě jsou všechny platformy (s výjimkou těch open-source) v bezplatné verzi nějakým způsobem funkčně omezeny. Jelikož tedy žádné z dostupných řešení nesplňuje stanovené požadavky na 100\%, bylo rozhodnuto o návrhu a implementaci řešení vlastního.
 
-\mv{tady na koneci by mělo být zmíněno, že žádné řešení nesplňuje požadavky na 100 procent a proto se bude dělat řešení vlastní.}
-
 \section{Metodika řešení práce}
 
 Pro úspěšnou a efektivní realizaci výsledné aplikace je nezbytné předem stanovit jasný vývojový postup a vybudovat stabilní technické zázemí. Definování zvolené agilní metodiky a představení využitých softwarových nástrojů poskytuje transparentní vhled do způsobu, jakým byl projekt řízen, verzován a testován. Tento metodický základ je klíčový pro pochopení celého životního cyklu vývoje a prokazuje systematičnost při implementaci navrhovaného řešení.
 
 \subsection{Postup vývoje}
 
-\mv{ chybí způsob sběru požadavků a jejich forma; chybí, že se požadavky budou prioritizovat; chybí že se bude (a proč) používat git. Chybí, proč a k čemu se bude používat Jira.}
-\jp{testy jsou uvedeny v tomto bloku textu}
-
 Požadavky na aplikaci byly shromážděny na základě předchozí analýzy existujících platforem a identifikace jejich hlavních nedostatků, jako je absence zaměření na sebevzdělávání či zastaralé uživatelské prostředí. Tyto požadavky jsou formálně strukturovány primárně do podoby agilních uživatelských příběhů (User Stories), které jsou doplněny o jasný výčet funkčních a nefunkčních specifikací.
-Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly průběžně prioritizovat, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
+Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly průběžně prioritizovat\mv{nemůžete prioritizovat průběžně, protože pak zjistíte, že jste něco dpležitého z vysokou prioritou zapomněl}, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
 Na začátku se navrhne architektura aplikace a podle ní se bude následně vyvíjet. Během vývoje bude vytvořen dokument rizik (risk list) a vize projektu. Testování bude probíhat formou manuálních end-to-end testů, automatických unit a integračních testů a manuálních API testů pomocí nástroje Postman.
 
-\mv{ na konci textu by měly být zmíněné i ty testy, zatím nejsou v textu práce uvedeny vůbec}
-
 \subsection{Nástroje}
-
-\mv{"... Nyní budou přestaveny nástroje zvolené pro řešení práce..."}
 
 Pro úspěšný návrh a samotnou implementaci aplikace je klíčový výběr odpovídajícího softwarového vybavení. Představení zvolených vývojových, organizačních a testovacích nástrojů poskytuje nezbytný vhled do technického zázemí celého projektu. Objasnění role těchto prostředků pomáhá lépe pochopit, jakým způsobem bylo v praxi zajištěno efektivní psaní a bezpečné verzování zdrojového kódu, řízení agilních sprintů i spolehlivé ověřování funkčnosti vytvořeného systému.
 
@@ -380,6 +368,8 @@ Pro psaní kódu bude využit kódový editor \textbf{Visual Studio Code} (\url{
 \subsubsection{Rozšíření VS Code: \textbf{Database Client}}
 
 Pro inspekci a správu databáze během vývoje bylo využito rozšíření \textbf{Database Client} (\url{https://database-client.com}). Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření \textbf{Database Client JDBC} (\url{https://marketplace.visualstudio.com/items?itemName=cweijan.dbclient-jdbc}), jelikož aplikace používá JDBC konektor.
+
+\mv{nahradil jsem vám balíček url za xurl, aby zalamování url probíhalo lépe; po přečtení můžete tento komentář smazat}
 
 \subsubsection{Git}
 
@@ -395,21 +385,13 @@ Během vývoje byl pro testování REST API využit nástroj \textbf{Postman} (\
 
 \section{Řešení práce}
 
-\mv{to co dávám jako "link" najděte nějakou literaturu, dejte jí do literatury a tady na ní dejte odkaz}
-\mv{pozor na pojmy, např někdy píšete full-stack a někdy fullstack; mělo bý to být stejně}
-
 Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je koncipován jako moderní full-stack\cite{fullstack_dev} aplikace striktně rozdělená na nezávislou klientskou a serverovou část. Klientský frontend je implementován ve formě Single Page Application (SPA)\cite{spa_guide}, což zaručuje plynulé a dynamické uživatelské rozhraní. Tato klientská část vzdáleně volá REST API endpointy\cite{api_endpoint} backendové aplikace. Serverová (backend) část následně zpracovává hlavní byznysovou logiku, stará se o bezpečné ukládání a čtení veškerých dat z relační databáze a zároveň interně komunikuje se samostatným lokálním jazykovým modelem (LLM)\cite{local_llm}, který využívá k inteligentnímu vyhodnocování textových odpovědí.
 
 \subsection{Architektura systému}
 
-\mv{tady vám vypadal micro-services architektura; pozor, že service-based není totéž jako micro-services}
-\jp{to je tak schválně, dospěl sem k závěru že service-based je lepší alternativa k vrstvené architektuře než micro-services, změnil jsem text který explicitně říká že ta architektura je vhodnější pro tento systém než pro komplexnější systémy obecně}
-
 Celá full-stack aplikace je postavena na technologiích React, Spring Boot a MySQL. Využívá principy vrstvené (n-tier) architektury, která systém nedělí podle obchodních domén, ale striktně podle technických schopností.
 
 Ačkoliv u komplexnějších systémů může být vhodnější service-based architektura, pro rozsah tohoto projektu a práci jednoho vývojáře představuje vrstvená architektura ideální volbu. Díky své přímočarosti a všeobecné známosti je jednoduchá na pochopení, rychlá na implementaci a zcela praktická.
-
-\mv{doplnit diagram architektury a dát na něj odkaz - (viz obr ...)}
 
 \begin{figure}[htbp]
     \centering
@@ -454,13 +436,11 @@ Hlavní knihovny a nástroje, které byly použity:
     \item \textbf{Axios}: Obsluhuje veškerou HTTP komunikaci s backendem, včetně odesílání autentizačních tokenů.
     \item \textbf{React Router DOM}: Zajišťuje klientské směrování (routing) a logiku pro ochranu tras před neoprávněným přístupem.
     \item \textbf{Tailwind CSS}, \textbf{shadcn/ui} a \textbf{Radix UI}: Kombinace nástrojů pro rychlé a responzivní stylovaní vizulních komponent\cite{react_components}.
-    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{healy2019}.
+    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{healy2019}. \mv{nechat link na to co je graf + přidat linky/url na ty knihovny}
     \item \textbf{dnd-kit}: Implementuje logiku pro interakce typu Drag \& Drop\cite{html_dnd}.
 \end{itemize}
 
 \subsection{Backend}
-
-\mv{doplnit info o verzi SB}
 
 Pro backend je vynikající volbou framework \textbf{Spring Boot}\cite{spring_boot} v3.5.8, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to především díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM).
 
@@ -480,8 +460,6 @@ Hlavní knihovny a nástroje, které byly použity:
 Pro automatické vyhodnocování textových odpovědí systém využívá lokální jazykový model llama3.1:8b, běžící přes nástroj Ollama. Jeho začlenění do backendu zprostředkovává knihovna Spring AI, jež poskytuje abstrakci pro práci s modelem. Samotná komunikace s nástrojem Ollama probíhá přes její REST API prostřednictvím standardních HTTP požadavků, přičemž Spring AI na pozadí transparentně zajišťuje potřebnou serializaci a deserializaci dat do formátu JSON. Hodnotící proces je realizován odesláním promptu, který typicky obsahuje text původní otázky, referenční správnou odpověď (uloženou v konfiguraci otázky) a odevzdaný text uživatele. Na základě těchto vstupů je model následně dotázán, zda lze uživatelovu odpověď považovat za fakticky správnou.
 
 \subsection{Přehled použitých technologií}
-
-\mv{všem tabulkám doplnit label + se na ně odkazovat v textu; vyhodit [H], aby latex tu tabulku mohl dávat, kam bude chtít}
 
 Přehled všech použitých technologií a knihoven je uveden v Tabulce~\ref{tab:technologie}.
 
@@ -518,9 +496,6 @@ Vytvořené řešení představuje moderní webovou aplikaci zaměřenou na efek
 
 Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových formátů, jako jsou otázky s jedním či více výběry, přiřazování, seřazování, studijní kartičky a volné textové odpovědi. Přehled dostupných kategorií a typů otázek je znázorněn na Obrázku~\ref{img:categories} a Obrázku~\ref{img:question_types}.
 
-\mv{obrázky 2 a 3 byhc dal vedle sebe (jsou oba úzké) do dvou sloupců}
-\mv{doplnit linky na obrázky (tak jak jsem udělal u obrázku 1)}
-
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -542,8 +517,6 @@ Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových fo
 
 
 Zásadní inovací celého řešení je integrace umělé inteligence (lokálního jazykového modelu), která se stará o inteligentní a automatizované vyhodnocování právě těchto volných psaných odpovědí. Již při tvorbě kvízu si však uživatel volí, zda u dané textové otázky využije toto automatické posouzení pomocí LLM, nebo zda upřednostní vyhodnocení manuální. Pokud zvolí manuální přístup, správnost odpovědi nevyhodnocuje model, ale student si ji posoudí sám na konci kvízu, a to těsně před jeho finálním odevzdáním. Tato alternativa poskytuje uživateli větší flexibilitu a slouží jako důležité opatření pro případy, kdy by automatické vyhodnocení mohlo být nepřesné (například vlivem halucinací) nebo jinak nevyhovující. Příklad takového manuálního vyhodnocení je zobrazen na Obrázku~\ref{img:manual_review} -- student vidí svoji odpověď i referenční správnou odpověď a sám rozhodne, zda ji uzná jako správnou.
-
-\mv{odstavec výše by snesl nějaký praktický příklad, jak to vypadá v reálu - pokud to je ten obrázek 4, tak to více popsat, aby to bylo jasnější, že "toto je odpověď generovaná AI"}
 
 \begin{figure}[htbp]
     \centering
@@ -590,8 +563,6 @@ V návrhu databázového schématu bylo učiněno vědomé rozhodnutí nedodrže
 Pro automatické vyhodnocování textových odpovědí byl v aplikaci využit lokální jazykový model llama3.1:8b integrovaný prostřednictvím nástroje Ollama. I když tento model dokáže odevzdané odpovědi vyhodnocovat, má určité limitace. Model například nedokáže vždy spolehlivě rozpoznat sémantický význam a nesprávně označí odpověď za chybnou v případech, kdy student vyjádří fakticky správnou myšlenku příliš složitě nebo za použití odlišných slovních formulací. Dalším zjištěným nedostatkem je chybné vyhodnocování u otázek vyžadujících výčet několika položek; model má někdy problém s rozpoznáním správnosti a odpověď zamítne, pokud uživatel napíše požadované hodnoty v jiném pořadí, než jaké vyžaduje předložený vzor.
 
 \subsection{Nadcházející nové funkce}
-
-\mv{pokud máte pod 8.2 jen jednu podkapitolu 8.2.1, tak ji nemá smysl dělat; nechte to jako volný text v 8.2}
 
 Ačkoliv byly hlavní cíle splněny a aplikace je v plně použitelném stavu, existuje několik funkcí, na kterých se bude pracovat za účelem jejího dalšího vylepšení.
 
@@ -662,9 +633,15 @@ Zdrojový kód je dostupný na platformě Github:
 
 \url{https://github.com/jakubp03/bt-revizer-backend}
 
-\mv{nezapomeňte, že na konci musíte mít přehled tabulek, obrázků a literatury. Chybí mi tam link na GitHub, kde je aplikace nahraná a k dispozici. Nevidím tu v přílohách tu vizi ani risklist}
+\mv{pošlete mi váš github účet, udělám vám jiné repa, kam poprosím udělat klon, ať máme  zálohu na univerzitě}
+
+\mv{pokud u váš tvrdíte dostupnost 5, že je to dostupné free zdarma, tak to musíte mít někde nasazené zdarma, což zatím není; v textu práce by ta URl měla být.}
+
+\mv{nemáte anglický titulek práce}
 
 \section{Přílohy}
+
+\mv{přílohy označovat "Příloha A -- Vize", "Příloha B -- Risk-list" ... Nadpis "Přílohy" ani nic v přílohách už nečíslujte}
 
 \subsection{Vize}
 
