@@ -1,23 +1,47 @@
-\documentclass{vskpou}
+\documentclass{vskpou} % Nacteni tridy
+%% Mozne volby tridy vskpou (napr. \documentclass[draft]{vskpou}:
+%%       draft        -- zobrazi se u overfull boxu obdelnicky, ve finalni verzi vypnete
+%%       oneside      -- pouzijte v pripade, ze budete tisknout jednostranne,
+%%                       (coz doporucujeme v pripade, ze prace nepresahne 50 stran,
+%%                       nebot mene nez 25 listu Vam v kniharstvi nesvazou).
+%%       samepage     -- nova sekce nebude zacinat na nove strane
+%%       sectionright -- nova sekce bude zacinat na liche (prave) strane
+%%       old          -- pokud chceme stare poradi pocatecnich stran
 
+%% Nastaveni vstupniho kodovani; pracujete-li na pocitaci s OS Windows,
+%% pak je mozne, ze vase kodovani bude cp1250 
+%\usepackage[cp1250]{inputenc}
 \usepackage[utf8]{inputenc}
-\usepackage[IL2]{fontenc}
+
+%% Nastavení kodovani fontu
+\usepackage[IL2]{fontenc}    
 \usepackage{graphicx}
 \usepackage{tabularx}
-\usepackage{amsmath}  
+\usepackage{amsmath}    
 
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
 
+%% Nastaveni prvniho a druheho jazyka prace -- v techto jazycich budou vysazeny
+%% uvodni strany. Prvni jazyk by mel byt czech nebo slovak.
 \jazyky{czech}{english}
+%% Balicek babel se nacte automaticky s temito dvema volbami.
+%% Pokud potrebujete nacist jeste dalsi jazyky, uvedte je do volitelneho argumentu,
+%% napriklad \jazyky[slovak,magyar]{czech}{english}
+
+%% Nastaveni hlavniho jazyka prace -- timto jazykem bude vysazen obsah a hlavni text prace
 \hlavnijazyk{czech}
 
+
+%% Informace o praci
 \autor{Jakub Papánek}
 \vedouci{RNDr. Marek Vajgl, Ph.D.}
 \rok{2025}
+%% Nasledujici makra maji dva argumenty -- prvni odpovida verzi polozky v hlavnim jazyce,
+%% druhy argument odpovida druhemu jazyku
 \fakulta{Přírodovědecká Fakulta}{Faculty of Science}
 \katedra{Katedra Informatiky}{Department of Computer Science}
-\nazev{Tvorba aplikace pro pokročilé testování}{Thesis Title}
+\nazev{Tvorba aplikace pro pokročilé testování}{Creating an application for advanced testing}
 \typprace{Bakalářská Práce}{Bachelor Thesis}
 
 \usepackage{xurl}
@@ -32,19 +56,60 @@
 \newcommand{\mv}[1]{\todo[inline,color=red!50]{MV: #1}}
 \newcommand{\jp}[1]{\todo[inline,color=blue!25]{PK: #1}}
 
+%% Prace musi obsahovat autorske prohlaseni autora
+%% Text prohlaseni zavisi na pohlavi autora. M-muz, Z-zena.
 \pohlavi M
+% \pohlavi Z
+
+%% Prohlášení o použití AI - LLM
+%% zakomentovat, pokud nejsou použity
+%% definovat - 1. parametr: seznam nastroju; 2. parametr: ucel pouziti, napr.:
+%\pouzitiAI{Claude Sonnet 4.5, Geminy}{rešerše, detekce chyb a vzorů}
+\pouzitiAI{Claude Sonnet 4.6, Gemini 3.1 Pro}{assistence pro psání LaTeX, Kontrola gramatiky}
+%% Datovani prohlaseni
 \prohlaseni{V Ostravě dne 16. 12. 2025}
+%% Pokud chcete napsat jiny text prohlaseni, misto predchoziho radku napiste
+%% \prohlaseni[jiny text]{V Ostravě dne ...}
 
-\podekovani{...}
+%% Pokud chcete v praci uvest podekovani, pouzijte makro \podekovani
+\podekovani{\selectlanguage{czech} ...}
+%% Pokud nechcete uvest podekovani, makro \podekovani nepouzivejte.
 
+%% Zde zadejte abstrakt a klicova slova
 \abstrakt{
 Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s důrazem na moderní uživatelské rozhraní a specifické analytické funkce pro sebetestování.
 }{
 The goal of this thesis is to design and implement a full-stack web application for test management, inspired by the Moodle system, but with an emphasis on a modern user interface and specific analytical functions for self-testing.
 }
-
 \klicovaslova{testování, webová aplikace, React, Spring Boot, vzdělávání}{testing, web application, React, Spring Boot, education}
-\resume{Resumé v češtině...}{Summary in English...}
+
+%% Zde zadejte resume
+\resume{Resumé v~prvním jazyce}{Summary in the second language}
+
+%% Makrem \cisloprvnistrany lze nastavit cislo prvni cislovane strany, tedy strany
+%% s obsahem. Pokud se makro nepouzije, cislo teto strany se dopocita.
+%\cisloprvnistrany{8}
+
+%% Pokud praci pisete na jine univerzite, zadejte univerzitu makrem
+%% \univerzita{Cesky nazev univerzity}{English Name of University}
+
+%% Pokud Vam nevyhovuji nadpisy jednotlivych polozek, muzete je zmenit nasledujicimi makry
+% \nadpisabstraktu{nadpis abstraktu v prvnim jazyce}{nadpis abstraktu v druhem jazyce)
+% \nadpisklicovychslov{nadpis k. s. v 1. j.}{nadpis k. s. v 2. j.}
+% \nadpisresume{nadpis resume v 1. j.}{nadpis resume v 2. j.}
+% \nadpisautora{nadpis autora v 1. j.}{nadpis autora v 2. j.}
+% \nadpisvedouciho{nadpis vedouciho v 1. j.}{nadpis vedouciho v 2. j.}
+
+%% Pokud chcete vlozit soubor se zadanim prace, pouzijte makro \zadani.
+%% Makro muzete pouzit vickrat, tim vlozite vice souboru se zadanim
+%\zadani{prvnistrana.jpg}
+%\zadani{druhastrana.jpg}
+%% Mozne formaty souboru jsou jpeg,pdf,png.
+%% Muzete pouzit i rozsirenou syntaxi, napriklad
+%\zadani page 3 {naskenovane.pdf}
+%\zadani width 17cm {obrazek.jpg}
+%% Pokud potrebujete misto zadani vlozit prazdnou stranu (napriklad kvuli spravne parite stranek pri oboustrannem tisku), pouzijte
+%%\zadani{}
 
 \begin{document}
 
@@ -933,3 +998,8 @@ Serverová část (backend)
 \printbibliography[title={Literatura}]
 
 \end{document}
+
+%% Pripadne dotazy k pouziti tridy vskpou.cls smerujte na:
+%% jan tecka sustek zavinac osu tecka cz
+%% pripadne na
+%% jan tecka stepnicka zavinac osu tecka cz

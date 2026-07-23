@@ -5,9 +5,6 @@
   \catcode`\@=11
 \else
   \Plainfalse \LaTeXtrue
-  \ifx\DeclareHookRule\@undefined\else
-    \DeclareHookRule{begindocument}{.}{after}{hyperref}
-  \fi
 \fi
 \let\ea\expandafter
 \long\def\long@empty{}
@@ -105,7 +102,7 @@
 \ifLaTeX
   \NeedsTeXFormat{LaTeX2e}
 \fi
-\ProvidesClass{\JS@ClassName}[2021/05/13 v2.17^^JTrida
+\ProvidesClass{\JS@ClassName}[2015/01/23 v2.0^^JTrida
   pro sazbu kvalifikacnich praci na Ostravske univerzite.]
 \def\JS@ClassError{\ClassError{\JS@ClassName}}
 \newif\ifJS@oneside
@@ -119,7 +116,7 @@
 \DeclareOption{oneside}{\JS@onesidetrue}
 \DeclareOption{samepage}{\JS@samepagetrue}
 \DeclareOption{sectionright}
-  {\def\JS@clearpage{\JS@cleardoublepage}}
+  {\let\JS@clearpage\JS@cleardoublepage}
 \DeclareOption{old}{\JS@nastavold}
 \ifPlain
   \DeclareOption{final}{\overfullrule=0pt}
@@ -175,6 +172,11 @@
   \parindent24pt
   \iindent\parindent
   \ttindent\parindent
+  \ifJS@oneside
+    \margins/1 a4 (35,25,30,30)mm
+  \else
+    \margins/2 a4 (35,25,30,30)mm
+  \fi
 \else
   \ifJS@oneside
     \LoadClass[a4paper,12pt,oneside]{article}
@@ -226,6 +228,10 @@
 \def\klicovaslova{\catcode`\,=13 \klicovaslova@A}
 \def\klicovaslova@A#1#2{\ori@klicovaslova{#1}{#2}
   \catcode`\,=12}
+\def\pouzitiAI#1#2{\JS@pouzito{pouzitiAI}\def\pouzitiAI@nastroje{#1}%
+  \def\pouzitiAI@ucel{#2}}
+\pouzitiAI{pouzitiAI}{pouzitiAI}
+\JS@inpreamble{pouzitiAI}
 \JS@novepole{pohlavi}
 \def\JS@koncovka@M{} \def\JS@koncovka@m{}
 \def\JS@koncovka@Z{a}\def\JS@koncovka@z{a}
@@ -265,7 +271,17 @@
   literaturu a dal\v s\'\i\ zdroje, z~nich\v z jsem p\v ri
   zpracov\'an\'\i\ \v cerpal\JS@koncovka{}{a}{(a)}, v~pr\'aci
   \v r\'adn\v e cituji a jsou uvedeny v~seznamu pou\v zit\'e
-  literatury.}
+  literatury.\par
+  \def\JS@tmpAI{pouzitiAI}%
+  \ifx\pouzitiAI@nastroje\JS@tmpAI\else
+  P\v ri p\v r\'iprav\v e t\'{e}to pr\'{a}ce jsem pou\v zil\JS@koncovka{}{a}{/a}
+  n\'astroje
+  \pouzitiAI@nastroje\ za \'u\v celem: 
+  \pouzitiAI@ucel. Po pou\v zit\'i tohoto n\'{a}stroje/slu\v zby 
+  jsem obsah podle pot\v reby 
+  zkontroloval\JS@koncovka{}{a}{/a} a upravil\JS@koncovka{}{a}{/a} a p\v re\-b\'{i}r\'{a}m 
+  plnou odpov\v ednost za obsah z\'{a}v\v ere\v cn\'{e} pr\'{a}ce.\par
+  \fi}
 \def\JS@klicovaslova#1#2{\bigskip
   \begingroup
   \setbox1=\hbox{\bf#1:\quad}
@@ -466,7 +482,7 @@
   \clearpage
   {\ifPlain
     \JS@prvnijazyk
-    \nonum\notoc\JS@secc\nadpisabstraktu@CZ\par
+    \nonum\notoc\secc\nadpisabstraktu@CZ\par
   \else
     \ea\selectlanguage\ea{\JS@prvnijazyk}
     \subsection*{\nadpisabstraktu@CZ}
@@ -475,7 +491,7 @@
   \JS@klicovaslova\nadpisklicovychslov@CZ\klicovaslova@CZ
   {\ifPlain
     \JS@druhyjazyk
-    \nonum\notoc\JS@secc\nadpisabstraktu@EN\par
+    \nonum\notoc\secc\nadpisabstraktu@EN\par
   \else
     \ea\selectlanguage\ea{\JS@druhyjazyk}
     \subsection*{\nadpisabstraktu@EN}
@@ -514,30 +530,22 @@
   \fi
   \ifPlain
     \pageno\cisloprvnistrany@
-    \nonum\notoc\JS@sec\mtext{toc}\par
+    \nonum\notoc\sec\mtext{toc}\par
     \maketoc
     \clearpage
   \else
     \ea\selectlanguage\ea{\JS@hlavnijazyk}
     \setcounter{page}{\cisloprvnistrany@}
     \tableofcontents
-    \ifJS@samepage\clearpage\fi
   \fi}
 \ifPlain
-  \def\pocatecnistrany{
-    \ifJS@oneside
-      \margins/1 a4 (35,25,30,30)mm
-      \fixmnotes\right
-    \else
-      \margins/2 a4 (35,25,30,30)mm
-    \fi
-    \ABDqueue
+  \def\pocatecnistrany{\ABDqueue
     \JS@pocatecnistrany}
 \fi
 \def\stranyresume{\clearpage
   {\ifPlain
     \JS@prvnijazyk
-    \nonum\JS@sec\nadpisresume@CZ\par
+    \nonum\sec\nadpisresume@CZ\par
   \else
     \ea\selectlanguage\ea{\JS@prvnijazyk}
     \section*{\nadpisresume@CZ}%
@@ -547,7 +555,7 @@
   \clearpage
   {\ifPlain
     \JS@druhyjazyk
-    \nonum\JS@sec\nadpisresume@EN\par
+    \nonum\sec\nadpisresume@EN\par
   \else
     \ea\selectlanguage\ea{\JS@druhyjazyk}
     \section*{\nadpisresume@EN}
@@ -615,14 +623,6 @@
 \ifPlain
   \let\OP@sec\sec
   \def\sec{\ifJS@samepage\else\JS@clearpage\fi\OP@sec}
-  \ifx\eoldef\undefined
-    \let\JS@sec\sec
-    \let\JS@secc\secc
-  \else
-    {\catcode13=12
-    \gdef\JS@sec#1\par{\sec#1^^M}%
-    \gdef\JS@secc#1\par{\secc#1^^M}}
-  \fi
 \else
   \AtBeginDocument{\JS@formatsekci}
   \def\JS@formatsekci{%
@@ -703,4 +703,4 @@
 %PURPOSE. See the GNU General Public License for more details,
 %{\tt<http://www.gnu.org/licenses/>}.
 %
-%Created by Jan Šustek in 2009, 2010, 2012, 2013, 2015-2018, 2021.
+%Created by Jan Šustek in 2009, 2010, 2012, 2013, 2015.
