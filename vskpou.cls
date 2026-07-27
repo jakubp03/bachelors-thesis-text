@@ -201,7 +201,7 @@
   \def\citeborder{0 1 0}
   \def\urlborder{1 0 0}
 \else
-  \RequirePackage[unicode,pdftex,colorlinks=false,pdfview=fit,
+  \RequirePackage[unicode,pdftex,hidelinks,pdfview=fit,
     bookmarksnumbered=true,bookmarksopen=true]{hyperref}
 \fi
 \JS@noveCZENpole{univerzita}
