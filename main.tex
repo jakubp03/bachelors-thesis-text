@@ -11,7 +11,7 @@
 %% Nastaveni vstupniho kodovani; pracujete-li na pocitaci s OS Windows,
 %% pak je mozne, ze vase kodovani bude cp1250 
 %\usepackage[cp1250]{inputenc}
-\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc} 
 
 %% Nastavení kodovani fontu
 \usepackage[IL2]{fontenc}    
@@ -113,31 +113,10 @@ The goal of this thesis is to design and implement a full-stack web application 
 
 \begin{document}
 
-\tableofcontents 
-\newpage
+\mv{ve vygenerovaném pdf lokálně vidím 2x nadpis "Obsah", pozor ať to není v odevzdané verzi}
+\mv{v nadpisech obsahu 2.2.1 ... 2.2.4 jsou tučná písmena, zkuste zjistit proč a odstranit.}
 
-\section*{Osnova práce}
-\addcontentsline{toc}{section}{Osnova práce}
-
-\mv{Zdravím, do téhle sekce vám napíši, jak bych si představoval osnovu práce}
-\jp{Pomocí "\textbackslash jp\{...\}" dělejte svoje vlastní komentáře}
-
-Základní kapitoly:
-
-\begin{itemize}
-    \item Úvod -- představení toho, co se bude v práci řešit. Je to info pro čtenáře, kterým ho chcete nalákat na to, co bude číst. Takže rychlé představení současného stavu a naznačeného způsobu řešení
-    \item Cíle práce -- představení cílů práce (čeho se má dosáhnout) a základního způsobu, který použijete k dosažení cílů práce
-    \item Analýza současného stavu -- představení jednak metodiky, pomocí které budete hledat aktuální řešení (tj. jak jsme se bavili: jaké jsou kritéria, jakým způsobem se budou hodnotit), druhak představení současně dostupných nástrojů pro dané řešení (stručné představení + odkaz na nástroj, ohdonocení kritérií podle metodiky) + na závěr shrnutí, zda lze nějaký existující nástroj použít a není třeba tvořit nic nového, nebo zda se tedy bude dělat vlastní řešení
-    \item Metodika řešení práce - představení postupů, přístupů a nástrojů, které použijete při řešení práce; jakým způsobem se bude postupovat při sběru požadavků, jak se budou proritizovat, že/zda bude vize, risk-list, git, jak testování atp.
-    \item Odteď dále kapitoly ohledně vlastního řešení práce. Je mi jedno, jak to rozčleníte -- nejdřív architektura a pak po kapitolách BE/FE/DB, nebo po funkcionalitách, ale nějak smysluplně to pojmout
-    \item Představení vytvořeného řešení -- rychlé představení vytvořeného řešení a toho, jakt o vypadá. je to o to "prodat co vzniklo", ne o tvorbě uživatelské příručky
-    \item Shrnutí -- zde sepíšete, zda/jak se podařilo splnit cíle práce, co se povedlo co se nepovedlo + případně co by šlo dělat do budoucna
-    \item Závěr -- zde napište, co vlastně vzniklo a jak to dopadlo.
-\end{itemize}
-
-V průběhu textu nezapomeňte přidávat reference (pořád si je průběžně ukldádejte, ať je pak nemusíte hledat).
-
-Připravte si na tohle všechno vlastní kapitoly, případný existující text do toho přesuňte a dejte echo, že je hotovo a můžu kontrolovat, díky.
+\mv{TUTO KAPITOLU CELOU VČETNĚ KOMENTÁŘŮ NEZAPOMEŇTE SMAZAT PŘED ODEVZDÁNÍM}
 
 \section*{Úvod}
 \addcontentsline{toc}{section}{Úvod}
@@ -151,9 +130,6 @@ Aplikace, která by byla zaměřená na vytváření cvičných testů, by byla 
 Řešením je navrhnout a implementovat aplikaci, která by uživateli umožňovala vytvářet vlastní kvízy s širokou škálou typů otázek a možností organizace. Hlavní myšlenkou je vytvořit nástroj pro studenty, který není nijak omezující a který umožňuje studentovi vytvořit přesně to, co potřebuje. Když už budeme mít nástroj, který pomáhá studentovi naučit se látku tím, že opakovaně prochází cvičné testy, bylo by dobré nějakým způsobem interpretovat jeho výkon tak, aby si dokázal udělat obrázek o svých znalostech. Z toho důvodu bude aplikace vykreslovat analytické grafy, které vizualizují studentův výkon. Pro ještě efektivnější studium doplní platformu integrace velkého jazykového modelu (LLM), který se bude starat o inteligentní a automatizované vyhodnocování otázek s volnou textovou odpovědí na základě jejich významu.
 
 V první kapitole je definován hlavní záměr práce, kterým je vývoj full-stack webové aplikace zaměřené na proces učení, společně s popisem využitého agilního přístupu k vývoji. Druhá kapitola přináší detailní zhodnocení a srovnání existujících vzdělávacích platforem na základě stanovené metodiky a shrnuje jejich hlavní nedostatky. Následující část se věnuje metodice řešení a poskytuje přehled zvolených nástrojů pro vývoj a správu projektu. Další kapitola uvádí technický popis navržené vrstvené softwarové architektury a obsahuje výčet použitých technologií na frontendu i backendu. Pátá kapitola následně vizuálně a funkčně představuje hotovou aplikaci, demonstruje tvorbu kvízů, využití umělé inteligence k automatickému hodnocení odpovědí a analytické statistiky pro sledování pokroku. Předposlední kapitola shrnuje stav implementace a upozorňuje na limity řešení, jako je nenormalizovaná databáze či nedokonalosti umělé inteligence. Celý text je formálně zakončen závěrem práce.
-
-\mv{ty kapitoyl tu musí být jako text: "V první kapitole je přdstaveno... v druhé kapitole je ... další kapitola uvádí .. atd.}
-\mv{úvod se nečísluje; až kapitola za úvodem je 1. kapitola a má prefix "1."}
 
 \section{Cíle práce}
 
@@ -176,7 +152,7 @@ Aby bylo možné jednotlivé platformy spravedlivě a prokazatelně porovnat, je
 Postup hodnocení:
 
 \begin{itemize}
-    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 * váha.\mv{ nemá to být krát váha, ne plus?}
+    \item Jednotlivé základní funkcionality (viz Tabulka~\ref{tab:funkcionality}) jsou hodnoceny stupni 0 až 5 * váha.
     \item Hodnocení se následně budou pomocí vzorce agregovat do finálního hodnocení.
     \item Každá základní funkcionalita bude mít několik definovaných konkrétních kritérií. Každé kritérium má určitý počet bodů, kterých může dosáhnout podle toho, zda je splněno, či nikoliv. Pokud je splněno, získá specifikovaný pevný počet bodů; pokud ne, žádné body se nepřičtou. Součet bodů všech definovaných kritérií v rámci jedné základní funkcionality nesmí být vyšší než pět. Některá kritéria jsou hodnocena na stupnici s rozsahem (hodnoty na stupnici lze měnit pouze v krocích po 0,5).
     \item Součet bodů poté vyjadřuje celkové hodnocení základní funkcionality.
@@ -201,8 +177,6 @@ UX/UI & 3 \\ \hline
 \subsubsection{Dostupnost (Accessibility \& Hosting)}
 
 Hodnotíme, jak snadno se k nástroji dostane koncový uživatel (student) bez pomoci instituce (viz Tabulka~\ref{tab:dostupnost}). Zde hodnocení funguje poněkud jinak, protože jednotlivá kritéria mají odlišnou relevanci a vždy platí pouze jedno z nich (platforma nemůže být zároveň self-hosted a SaaS).
-
-\mv{chybí odkaz na tabulku 2; obecně na všechny tabulky a obrázky (a ideálně i výpisy kódu) byste měl mít v textu odkazy}
 
 \begin{table}[htbp]
 \caption{Kritéria hodnocení dostupnosti}
@@ -301,8 +275,6 @@ Umožňuje volnou navigaci mezi otázkami & 0 nebo 1 bod \\ \hline
 
 Analytický a statistický modul představuje klíčovou součást platformy, jelikož studentům umožňuje exaktně sledovat efektivitu učení metodou aktivního vybavování a identifikovat konkrétní mezery ve znalostech.
 
-\mv{chybí popis}
-
 \begin{table}[H]
 \caption{Kritéria hodnocení analytiky a statistik}
 \label{tab:analytika}
@@ -346,7 +318,7 @@ Celkové UX & 0 až 2,5 bodu \\ \hline
 
 \begin{enumerate}
     \item Každé základní funkcionalitě (\textit{Hi}) přiřadíme váhu \textit{Wi} (viz tabulka výše).
-    \item Finální známka pro danou platformu se vypočítá pomocí tohoto vzorce:
+    \item Finální známka pro danou platformu se vypočítá pomocí vzorce:
 \end{enumerate}
 
 $$
@@ -355,19 +327,19 @@ $$
 
 \subsection{Představení a analýza existujících řešení}
 
-\subsubsection{\textbf{Knowt}}
+\subsubsection{Knowt}
 
 \textbf{Knowt} (\url{https://knowt.com}) je moderní platforma pro studenty i učitele, která slouží jako bezplatná a funkcemi nabitá alternativa ke službě Quizlet. Umožňuje snadno vytvářet výukové kartičky (flashcards), poznámky a cvičné kvízy. Její největší výhodou je integrace umělé inteligence, která dokáže automaticky vygenerovat studijní materiály ze souborů nebo dokonce z videí na YouTube. Hlavním problémem platforem Knowt a Quizlet je skutečnost, že neumožňují uživateli vytvořit přímo to, co požaduje. Tyto platformy poskytují uživateli možnost vytvářet pouze sady kartiček (flashcards) s tím, že ostatní typy kvízu se podle těchto kartiček generují automaticky samy a uživatel nad nimi nemá žádnou kontrolu. To z těchto platforem nedělá nic jiného než jen „lepší“ verzi aplikací pro práci s kartičkami. Tyto automaticky vytvořené kvízy jsou pouze doplňkem, hlavní zaměření zůstává na kartičky. Druhým největším problémem jsou paywally; ačkoliv se Knowt prezentuje jako bezplatná alternativa Quizletu, i přesto jsou některé funkce uzamčeny nebo omezeny, dokud uživatel nezaplatí.
 
-\subsubsection{\textbf{Wayground (Quizizz)}}
+\subsubsection{Wayground (Quizizz)}
 
 \textbf{Wayground} (\url{https://wayground.com}), mnohem známější pod svým původním a běžněji užívaným názvem Quizizz, je gamifikovaná vzdělávací platforma navržená pro maximální zapojení studentů a oživení výuky. Učitelům umožňuje vytvářet interaktivní kvízy, ankety a lekce, které mohou studenti plnit buď naživo v reálném čase formou soutěže, nebo asynchronně vlastním tempem jako domácí úkol. Wayground a podobně i ostatní platformy jako např. OnlineExamMaker jsou zaměřeny spíše na učitele a jsou uzpůsobeny k tomu, aby učitel otestoval žáky. Jejich hlavní problém spočívá v tom, že když si student chce spustit kvíz pro sebe, musí jej nejprve inicializovat a následně se do něj připojit přes druhé okno v prohlížeči. Spouštění kvízů navíc není plynulé; většinou se uživatel musí proklikat přes několik oken s nastavením předtím, než může kvíz reálně zahájit. Tyto platformy jednoduše nejsou uzpůsobeny k opakovanému spouštění téhož kvízu několikrát za sebou.
 
-\subsubsection{\textbf{Moodle}}
+\subsubsection{Moodle}
 
 \textbf{Moodle} (\url{https://moodle.org}) (včetně jeho nástroje Moodle Quiz) je komplexní open-source systém pro správu výuky (LMS), který si vzdělávací instituce obvykle samy hostují na vlastních serverech. Jedná se o extrémně robustní a modulární platformu budovanou pro dlouhodobé akademické vzdělávání. Systém exceluje ve správě rozsáhlých databází otázek, podpoře složitých typů úloh a poskytuje učitelům hluboké analýzy výsledků zkoušek. Je určen primárně pro formální výuku na univerzitách a středních školách, kde je kladen důraz na strukturované učení, bezpečnost a detailní dlouhodobé sledování studentů. Samostatné hostování a konfigurace tohoto systému představuje velkou technickou bariéru, což platí i pro ostatní open-source LMS systémy. Moodle specificky trpí zastaralým uživatelským rozhraním (UI) a uživatelskou přívětivostí (UX), zejména co se týče modulu Moodle Quiz.
 
-\subsubsection{\textbf{Anki}}
+\subsubsection{Anki}
 
 \textbf{Anki} (\url{https://apps.ankiweb.net}) je výkonná aplikace (dostupná pro desktop i mobilní zařízení) zaměřená primárně na dlouhodobé a efektivní zapamatování velkého množství informací pomocí studijních kartiček (flashcards). Její hlavní devízou je vědecky podložený algoritmus rozloženého opakování (Spaced Repetition), který uživateli ukazuje kartičky přesně ve chvíli, kdy by je pravděpodobně zapomněl. Nabízí obrovskou míru přizpůsobení, podporuje doplňky, obrázky, zvuk i matematický zápis. Anki je aplikace zaměřená čistě jen na kartičky. Mimo to je její UI/UX velice matoucí.
 
@@ -413,7 +385,7 @@ Pro úspěšnou a efektivní realizaci výsledné aplikace je nezbytné předem 
 \subsection{Postup vývoje}
 
 Požadavky na aplikaci byly shromážděny na základě předchozí analýzy existujících platforem a identifikace jejich hlavních nedostatků, jako je absence zaměření na sebevzdělávání či zastaralé uživatelské prostředí. Tyto požadavky jsou formálně strukturovány primárně do podoby agilních uživatelských příběhů (User Stories), které jsou doplněny o jasný výčet funkčních a nefunkčních specifikací.
-Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly prioritizovat\mv{nemůžete prioritizovat průběžně, protože pak zjistíte, že jste něco dpležitého z vysokou prioritou zapomněl}, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
+Vývoj bude probíhat agilním způsobem ve formě sprintů o délce jednoho týdne. Všechny požadavky budou shromažďovány v backlogu, odkud se budou jednotlivé úkoly prioritizovat, aby se v každém sprintu pracovalo na těch nejdůležitějších částech systému. Pro efektivní řízení vývoje, organizaci práce, plánování sprintů a detailní evidenci vývojových úloh (tasků) bude využíván nástroj Jira. Z důvodu bezpečné správy verzí zdrojového kódu a jeho zálohování do repozitáře na cloudové platformě GitHub bude využit systém Git, který pro tyto účely představuje osvědčený oborový standard. Vzájemná integrace těchto dvou nástrojů navíc umožní, aby jednotlivé commity v Gitu přímo odpovídaly konkrétním úkolům v systému Jira.
 Na začátku se navrhne architektura aplikace a podle ní se bude následně vyvíjet. Během vývoje bude vytvořen dokument rizik (risk list) a vize projektu. Testování bude probíhat formou manuálních end-to-end testů, automatických unit a integračních testů a manuálních API testů pomocí nástroje Postman.
 
 \subsection{Nástroje}
@@ -424,7 +396,7 @@ Pro úspěšný návrh a samotnou implementaci aplikace je klíčový výběr od
 
 Pro psaní kódu bude využit kódový editor \textbf{Visual Studio Code} (\url{https://code.visualstudio.com}), který díky možnosti přidání rozšíření dosahuje úrovně plnohodnotného vývojového prostředí (IDE). Obsahuje mnoho funkcionalit, které jsou nezbytné pro softwarový vývoj, mezi něž patří například integrovaný terminál, grafické uživatelské rozhraní pro Git, kompilátor a další.
 
-\subsubsection{Rozšíření VS Code: \textbf{Database Client}}
+\subsubsection{Rozšíření VS Code: Database Client}
 
 Pro inspekci a správu databáze během vývoje bylo využito rozšíření \textbf{Database Client} (\url{https://database-client.com}). Tento nástroj poskytuje přehledné GUI, které umožňuje přímé zobrazení dat a provádění široké škály databázových operací bez nutnosti manuálního psaní SQL příkazů v konzoli. Pro navázání spojení s databází je nezbytné nainstalovat také druhé, samostatné rozšíření \textbf{Database Client JDBC} (\url{https://marketplace.visualstudio.com/items?itemName=cweijan.dbclient-jdbc}), jelikož aplikace používá JDBC konektor.
 
@@ -493,7 +465,7 @@ Hlavní knihovny a nástroje, které byly použity:
     \item \textbf{Axios}: Obsluhuje veškerou HTTP komunikaci s backendem, včetně odesílání autentizačních tokenů\cite{axios}.
     \item \textbf{React Router DOM}: Zajišťuje klientské směrování (routing) a logiku pro ochranu tras před neoprávněným přístupem\cite{react_router}.
     \item \textbf{Tailwind CSS}, \textbf{shadcn/ui} a \textbf{Radix UI}: Kombinace nástrojů pro rychlé a responzivní stylovaní vizulních komponent\cite{shadcn_ui,radix_ui}.
-    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{echarts,recharts,healy2019}. \mv{nechat link na to co je graf + přidat linky/url na ty knihovny}
+    \item \textbf{ECharts} a \textbf{Recharts}: Slouží k vizualizaci dat a tvorbě pokročilých statistických grafů\cite{echarts,recharts,healy2019}.
     \item \textbf{dnd-kit}: Implementuje logiku pro interakce typu Drag \& Drop\cite{dnd_kit,html_dnd}.
 \end{itemize}
 
@@ -684,17 +656,26 @@ Klíčovým dosaženým milníkem aplikace Revizer je detailní analytický pane
 \end{table}
 
 
-Zdrojový kód je dostupný na platformě Github:
+Zdrojový kód je dostupný na platformě GitHub:
 
 \url{https://github.com/jakubp03/bt-revizer-frontend}
 
 \url{https://github.com/jakubp03/bt-revizer-backend}
 
-\mv{pošlete mi váš github účet, udělám vám jiné repa, kam poprosím udělat klon, ať máme  zálohu na univerzitě}
-
 \mv{pokud u váš tvrdíte dostupnost 5, že je to dostupné free zdarma, tak to musíte mít někde nasazené zdarma, což zatím není; v textu práce by ta URl měla být.}
 
-\mv{nemáte anglický titulek práce}
+\mv{Nemáte seznam literatury. A nevím, pls zjistěte od toho, kdo vedl seminář závěrečných prací, jestli seznam literatury/tabulek/obrázků je před nebo za přílohami (já myslím že před)}
+
+\newpage
+\renewcommand{\listfigurename}{Seznam obrázků}
+\listoffigures
+
+\newpage
+\renewcommand{\listtablename}{Seznam tabulek}
+\listoftables
+
+\newpage
+\printbibliography[title={Literatura}]
 
 \setcounter{secnumdepth}{-1}
 \section*{Přílohy}
@@ -985,17 +966,6 @@ Serverová část (backend)
     \item US-27: \textbf{Jako student} chci u konkrétního kvízu vidět graf chybovosti jednotlivých otázek, abych věděl, na které konkrétní oblasti se musím při dalším učení zaměřit.
     \item US-28: \textbf{Jako student} chci u kvízu vidět graf času stráveného u každé otázky, abych mohl identifikovat pasáže, nad kterými přemýšlím příliš dlouho.
 \end{itemize}
-
-\newpage
-\renewcommand{\listfigurename}{Seznam obrázků}
-\listoffigures
-
-\newpage
-\renewcommand{\listtablename}{Seznam tabulek}
-\listoftables
-
-\newpage
-\printbibliography[title={Literatura}]
 
 \end{document}
 
