@@ -72,7 +72,6 @@
 %% \prohlaseni[jiny text]{V Ostravě dne ...}
 
 %% Pokud chcete v praci uvest podekovani, pouzijte makro \podekovani
-% TODO
 \podekovani{\selectlanguage{czech} ...}
 %% Pokud nechcete uvest podekovani, makro \podekovani nepouzivejte.
 
@@ -85,7 +84,6 @@ The goal of this thesis is to design and implement a full-stack web application 
 \klicovaslova{testování, webová aplikace, React, Spring Boot, vzdělávání}{testing, web application, React, Spring Boot, education}
 
 %% Zde zadejte resume
-% TODO
 \resume{Resumé v~prvním jazyce}{Summary in the second language}
 
 %% Makrem \cisloprvnistrany lze nastavit cislo prvni cislovane strany, tedy strany
@@ -114,11 +112,6 @@ The goal of this thesis is to design and implement a full-stack web application 
 %%\zadani{}
 
 \begin{document}
-
-\mv{ve vygenerovaném pdf lokálně vidím 2x nadpis "Obsah", pozor ať to není v odevzdané verzi}
-\mv{v nadpisech obsahu 2.2.1 ... 2.2.4 jsou tučná písmena, zkuste zjistit proč a odstranit.}
-
-\mv{TUTO KAPITOLU CELOU VČETNĚ KOMENTÁŘŮ NEZAPOMEŇTE SMAZAT PŘED ODEVZDÁNÍM}
 
 \section*{Úvod}
 \addcontentsline{toc}{section}{Úvod}
@@ -424,6 +417,7 @@ Celá full-stack aplikace je postavena na technologiích React, Spring Boot a My
 
 Ačkoliv u komplexnějších systémů může být vhodnější service-based architektura, pro rozsah tohoto projektu a práci jednoho vývojáře představuje vrstvená architektura ideální volbu. Díky své přímočarosti a všeobecné známosti je jednoduchá na pochopení, rychlá na implementaci a zcela praktická.
 
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{architecture diagram.png}
@@ -475,6 +469,8 @@ Hlavní knihovny a nástroje, které byly použity:
 
 Pro backend je vynikající volbou framework \textbf{Spring Boot}\cite{spring_boot} v3.5.8, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to především díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM).
 
+\mv{tady u je třeba ještě rozvést ten popis té architektury, protože i s tím, co píšete, tu architekturu můžete pojmout jako monolit; takže bych ještě někde napsal, jak to teda je ten vztah mezi enpdointy a nějakými službami a nějakými utilites + přidal odkazy na GIT, kde se ty jednotlivé věci najdou.}
+
 Hlavní knihovny a nástroje, které byly použity:
 
 \begin{itemize}
@@ -488,7 +484,8 @@ Hlavní knihovny a nástroje, které byly použity:
 
 \subsection{Integrace LLM}
 
-Pro automatické vyhodnocování textových odpovědí systém využívá lokální jazykový model llama3.1:8b, běžící přes nástroj Ollama. Jeho začlenění do backendu zprostředkovává knihovna Spring AI, jež poskytuje abstrakci pro práci s modelem. Samotná komunikace s nástrojem Ollama probíhá přes její REST API prostřednictvím standardních HTTP požadavků, přičemž Spring AI na pozadí transparentně zajišťuje potřebnou serializaci a deserializaci dat do formátu JSON. Hodnotící proces je realizován odesláním promptu, který typicky obsahuje text původní otázky, referenční správnou odpověď (uloženou v konfiguraci otázky) a odevzdaný text uživatele. Na základě těchto vstupů je model následně dotázán, zda lze uživatelovu odpověď považovat za fakticky správnou.
+Pro automatické vyhodnocování textových odpovědí systém využívá lokální jazykový model llama3.1:8b běžící přes nástroj Ollama. Tento konkrétní model byl vybrán, protože nabízí optimální poměr mezi nízkými hardwarovými nároky a vysokou schopností porozumění psanému textu. Umožňuje tak spolehlivě realizovat sémantické posuzování volných odpovědí i na běžném spotřebitelském hardwaru bez nutnosti platit za externí cloudová API.
+Začlenění modelu do backendu zprostředkovává knihovna Spring AI, jež poskytuje abstrakci pro práci s ním. Samotná komunikace s nástrojem Ollama probíhá přes její REST API prostřednictvím standardních HTTP požadavků, přičemž Spring AI na pozadí transparentně zajišťuje potřebnou serializaci a deserializaci dat do formátu JSON. Hodnotící proces je realizován odesláním promptu, který typicky obsahuje text původní otázky, referenční správnou odpověď (uloženou v konfiguraci otázky) a odevzdaný text uživatele. Na základě těchto vstupů je model následně dotázán, zda lze uživatelovu odpověď považovat za fakticky správnou.
 
 \subsection{Přehled použitých technologií}
 
@@ -515,9 +512,11 @@ Přehled všech použitých technologií a knihoven je uveden v Tabulce~\ref{tab
 
 \section{Představení řešení}
 
+\mv{tady to ještě rozšřite. Tím, že ten popis architektury je celkem stručný a nemáte tam žádné "finty" k popisování v programování, tak bych se víc zaměřil na tohle a trošku to ještě víc prodejte - zmiňte, jaké všechny typy otázek tam být mohou (není vidět, jen z obrázku, normálně vysvětlete v odrážkách), jaké všechny statistiky tam být mohou (zmíněno jen obecně). Co ještě nevidím je způsob, jak se vytvořený kvíz dostane mezi ostatní uživatele, jak to funguje -- je to někde popsáno?}
+
 Vytvořené řešení představuje moderní webovou aplikaci zaměřenou na efektivní sebevzdělávání (self-testing) a metodu aktivního vybavování znalostí. Jádrem systému je tvorba personalizovaných kvízů z vlastních studijních materiálů (viz Obrázek~\ref{img:quiz_creation}), které lze logicky uspořádat do strukturovaných kategorií.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{quiz creation.png}
     \caption{Rozhraní pro tvorbu kvízu}
@@ -527,7 +526,7 @@ Vytvořené řešení představuje moderní webovou aplikaci zaměřenou na efek
 
 Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových formátů, jako jsou otázky s jedním či více výběry, přiřazování, seřazování, studijní kartičky a volné textové odpovědi. Přehled dostupných kategorií a typů otázek je znázorněn na Obrázku~\ref{img:categories} a Obrázku~\ref{img:question_types}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
@@ -549,7 +548,7 @@ Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových fo
 
 Zásadní inovací celého řešení je integrace umělé inteligence (lokálního jazykového modelu), která se stará o inteligentní a automatizované vyhodnocování právě těchto volných psaných odpovědí. Již při tvorbě kvízu si však uživatel volí, zda u dané textové otázky využije toto automatické posouzení pomocí LLM, nebo zda upřednostní vyhodnocení manuální. Pokud zvolí manuální přístup, správnost odpovědi nevyhodnocuje model, ale student si ji posoudí sám na konci kvízu, a to těsně před jeho finálním odevzdáním. Tato alternativa poskytuje uživateli větší flexibilitu a slouží jako důležité opatření pro případy, kdy by automatické vyhodnocení mohlo být nepřesné (například vlivem halucinací) nebo jinak nevyhovující. Příklad takového manuálního vyhodnocení je zobrazen na Obrázku~\ref{img:manual_review} -- student vidí svoji odpověď i referenční správnou odpověď a sám rozhodne, zda ji uzná jako správnou.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{manual review modal.jpg}
     \caption{Manuální vyhodnocení otázky s volnou odpovědí}
@@ -559,7 +558,7 @@ Zásadní inovací celého řešení je integrace umělé inteligence (lokální
 
 Veškeré studijní úsilí a opakované pokusy uživatele jsou následně vizualizovány v pokročilém analytickém panelu (viz Obrázek~\ref{img:quiz_stats}), kde systém pomocí podrobných grafů a statistik ukazuje vývoj procentuální úspěšnosti, strávený čas i detailní chybovost a časovou náročnost u jednotlivých otázek.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{quiz stats.png}
     \caption{Analytický panel s grafy výsledků kvízu}
@@ -571,7 +570,7 @@ Systém nezobrazuje tyto statistiky pouze u jednotlivých kvízů, ale i v rámc
 
 Systém dále umožňuje detailní revizi uživatelových pokusů (viz Obrázek~\ref{img:quiz_review}), kde uživatel přesně vidí, jak odpověděl na všechny otázky, zda je jeho odpověď správná, a případně zkontroluje, které možnosti měly být označeny jako správné a které jako chybné.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{quiz review.png}
     \caption{Revize odpovědí po dokončení pokusu}
@@ -623,7 +622,7 @@ Přehled funkcí
 
 \section{Závěr}
 
-Výsledkem této práce je úspěšný návrh a vytvoření plně funkční full-stack webové aplikace pojmenované \textbf{Revizer}, která splňuje všechny definované požadavky a dosahuje stanovených hlavních cílů. Podařilo se implementovat moderní a intuitivní nástroj navržený primárně pro sebevzdělávání metodou aktivního vybavování znalostí, čímž řešení efektivně vyplňuje mezeru mezi existujícími platformami. Systém postavený na technologiích React, Spring Boot a MySQL dává uživatelům naprostou volnost v tvorbě vlastních cvičných testů s využitím široké škály formátů otázek.
+Výsledkem této práce je úspěšný návrh a vytvoření plně funkční full-stack webové aplikace pojmenované \textbf{Revizer} (\url{https://revizer.site}), která splňuje všechny definované požadavky a dosahuje stanovených hlavních cílů. Podařilo se implementovat moderní a intuitivní nástroj navržený primárně pro sebevzdělávání metodou aktivního vybavování znalostí, čímž řešení efektivně vyplňuje mezeru mezi existujícími platformami. Systém postavený na technologiích React, Spring Boot a MySQL dává uživatelům naprostou volnost v tvorbě vlastních cvičných testů s využitím široké škály formátů otázek.
 
 Klíčovým dosaženým milníkem aplikace Revizer je detailní analytický panel poskytující pokročilé statistiky a vizualizace pro exaktní sledování dlouhodobého studijního pokroku a identifikaci mezer ve znalostech. Rovněž se podařilo úspěšně integrovat lokální jazykový model, který automatizuje a zefektivňuje vyhodnocování volných textových odpovědí. I přes nezbytné architektonické kompromisy v podobě částečné denormalizace databázového schématu a přirozené limity využitého jazykového modelu představuje nově vzniklá aplikace ucelené, stabilní a v praxi plně využitelné řešení pro zefektivnění samostatného studia. Srovnání aplikace Revizer s ostatními analyzovanými platformami je uvedeno v Tabulce~\ref{tab:hodnoceni_final}.
 
@@ -664,9 +663,6 @@ Zdrojový kód je dostupný na platformě GitHub:
 
 \url{https://github.com/jakubp03/bt-revizer-backend}
 
-\mv{pokud u váš tvrdíte dostupnost 5, že je to dostupné free zdarma, tak to musíte mít někde nasazené zdarma, což zatím není; v textu práce by ta URl měla být.}
-
-\mv{Nemáte seznam literatury. A nevím, pls zjistěte od toho, kdo vedl seminář závěrečných prací, jestli seznam literatury/tabulek/obrázků je před nebo za přílohami (já myslím že před)}
 
 \newpage
 \renewcommand{\listfigurename}{Seznam obrázků}
@@ -682,8 +678,6 @@ Zdrojový kód je dostupný na platformě GitHub:
 \setcounter{secnumdepth}{-1}
 \section*{Přílohy}
 \addcontentsline{toc}{section}{Přílohy}
-
-\mv{přílohy označovat "Příloha A -- Vize", "Příloha B -- Risk-list" ... Nadpis "Přílohy" ani nic v přílohách už nečíslujte}
 
 \clearpage
 \subsection{Příloha A -- Vize}
