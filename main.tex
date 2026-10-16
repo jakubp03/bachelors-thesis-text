@@ -77,9 +77,9 @@
 
 %% Zde zadejte abstrakt a klicova slova
 \abstrakt{
-Cílem této práce je navrhnout a implementovat full-stack webovou aplikaci pro správu testů, inspirovanou systémem Moodle, avšak s důrazem na moderní uživatelské rozhraní a specifické analytické funkce pro sebetestování.
+Cílem této bakalářské práce je návrh a implementace plně funkční full-stack webové aplikace Revizer pro správu a procvičování testů, která je inspirována robustními systémy jako Moodle, ale zaměřuje se primárně na potřeby samostatného studenta, moderní uživatelské rozhraní a pokročilou behaviorální analytiku. Současné vzdělávací platformy jsou často orientovány na formální zkoušení ze strany pedagogů, což studentům ztěžuje jejich využití k efektivnímu sebevzdělávání metodou aktivního vybavování znalostí (active recall). Praktickým výstupem práce je responzivní Single Page Application postavená na technologiích React, Spring Boot a relační databázi MySQL. Aplikace umožňuje uživatelům vytvářet personalizované kvízy organizované do strukturovaných kategorií. Podporuje širokou škálu sedmi interaktivních formátů otázek, včetně výběru jedné či více možností, pravdivostních tvrzení, přiřazování dvojic, řazení prvků pomocí rozhraní Drag and Drop, studijních kartiček a volných textových odpovědí.
 }{
-The goal of this thesis is to design and implement a full-stack web application for test management, inspired by the Moodle system, but with an emphasis on a modern user interface and specific analytical functions for self-testing.
+The goal of this bachelor thesis is the design and implementation of a fully functional full-stack web application, Revizer, for managing and practicing tests. While inspired by robust systems such as Moodle, it focuses primarily on the needs of self-directed learners, featuring a modern user interface and advanced behavioral analytics. Current educational platforms are often oriented toward formal assessment by educators, making it difficult for students to use them for effective self-study via active recall methods. The practical output of the thesis is a responsive Single Page Application built on React, Spring Boot, and a MySQL relational database. The application enables users to create personalized quizzes organized into structured categories. It supports a wide range of seven interactive question formats, including single- and multiple-choice questions, true/false statements, matching pairs, Drag and Drop element ordering, flashcards, and open-ended text responses.
 }
 \klicovaslova{testování, webová aplikace, React, Spring Boot, vzdělávání}{testing, web application, React, Spring Boot, education}
 
@@ -403,10 +403,6 @@ Během vývoje aplikace bude pro správu verzí zdrojového kódu využit systé
 
 Pro efektivní řízení vývoje a organizaci práce bude využit nástroj \textbf{Jira} (\url{https://www.atlassian.com/software/jira}). Systém Jira poslouží k plánování a sledování jednotlivých sprintů, správě backlogu a detailní evidenci vývojových úloh (tasků).
 
-\subsubsection{Postman}
-
-Během vývoje byl pro testování REST API využit nástroj \textbf{Postman} (\url{https://www.postman.com}). Jedná se o platformu, která umožňuje jednoduše sestavovat a odesílat HTTP požadavky na backendové endpointy a následně analyzovat odpovědi serveru. Nástroj slouží k ověřování správnosti vracených dat a funkčnosti aplikační logiky nezávisle na uživatelském rozhraní frontendu.
-
 \section{Řešení práce}
 
 Vývoj celé aplikace byl realizován s využitím pestré palety moderních softwarových nástrojů a knihoven, které zajišťují plynulý chod, bezpečnost a snadnou udržovatelnost. Projekt je koncipován jako moderní full-stack\cite{fullstack_dev} aplikace striktně rozdělená na nezávislou klientskou a serverovou část. Klientský frontend je implementován ve formě Single Page Application (SPA)\cite{spa_guide}, což zaručuje plynulé a dynamické uživatelské rozhraní. Tato klientská část vzdáleně volá REST API endpointy\cite{api_endpoint} backendové aplikace. Serverová (backend) část následně zpracovává hlavní byznysovou logiku, stará se o bezpečné ukládání a čtení veškerých dat z relační databáze a zároveň interně komunikuje se samostatným lokálním jazykovým modelem (LLM)\cite{local_llm}, který využívá k inteligentnímu vyhodnocování textových odpovědí.
@@ -467,7 +463,7 @@ Hlavní knihovny a nástroje, které byly použity:
 
 \subsection{Backend}
 
-Pro backendovou část je zvolen framework \textbf{Spring Boot}\cite{spring_boot}, který poskytuje základ pro tvorbu RESTful API, správu byznysové logiky a bezpečně řízenou bezstavovou autentizaci. Z hlediska nasazení je backend koncipován jako monolitická aplikace, jejíž vnitřní struktura je organizována do Java balíčků (packages) v rámci adresáře \texttt{src/main/java/com/opr3/opr3/}.
+Pro backendovou část je zvolen framework \textbf{Spring Boot}\cite{spring_boot}, který poskytuje základ pro tvorbu RESTful API, správu byznysové logiky a bezpečně řízenou bezstavovou autentizaci. Z hlediska nasazení je backend koncipován jako monolitická aplikace, jejíž vnitřní struktura je organizována do Java balíčků (packages).
 
 Vztahy, interakce a toky dat mezi jednotlivými komponentami jsou v kódu vymezeny následovně:
 \begin{itemize}
@@ -517,69 +513,87 @@ Přehled všech použitých technologií a knihoven je uveden v Tabulce~\ref{tab
 
 \section{Představení řešení}
 
-\mv{tady to ještě rozšřite. Tím, že ten popis architektury je celkem stručný a nemáte tam žádné "finty" k popisování v programování, tak bych se víc zaměřil na tohle a trošku to ještě víc prodejte - zmiňte, jaké všechny typy otázek tam být mohou (není vidět, jen z obrázku, normálně vysvětlete v odrážkách), jaké všechny statistiky tam být mohou (zmíněno jen obecně). Co ještě nevidím je způsob, jak se vytvořený kvíz dostane mezi ostatní uživatele, jak to funguje -- je to někde popsáno?}
-
 Vytvořené řešení představuje moderní webovou aplikaci zaměřenou na efektivní sebevzdělávání (self-testing) a metodu aktivního vybavování znalostí. Jádrem systému je tvorba personalizovaných kvízů z vlastních studijních materiálů (viz Obrázek~\ref{img:quiz_creation}), které lze logicky uspořádat do strukturovaných kategorií.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{quiz creation.png}
-    \caption{Rozhraní pro tvorbu kvízu}
-    \label{img:quiz_creation}
+\centering
+\includegraphics[width=0.85\textwidth]{quiz creation.png}
+\caption{Rozhraní pro tvorbu kvízu}
+\label{img:quiz_creation}
 \end{figure}
 
-
-Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových formátů, jako jsou otázky s jedním či více výběry, přiřazování, seřazování, studijní kartičky a volné textové odpovědi. Přehled dostupných kategorií a typů otázek je znázorněn na Obrázku~\ref{img:categories} a Obrázku~\ref{img:question_types}.
+Platforma nabízí vysokou flexibilitu díky podpoře mnoha typů kvízových formátů. Přehled dostupných kategorií a typů otázek je znázorněn na Obrázku~\ref{img:categories} a Obrázku~\ref{img:question_types}. Mezi podporované formáty otázek patří:
+\begin{itemize}
+    \item \textbf{Jedna možnost (Single Choice)}: klasická volba právě jedné správné odpovědi ze seznamu,
+    \item \textbf{Více možností (Multiple Choice)}: výběr libovolného počtu správných odpovědí, kde výsledné hodnocení zohledňuje míru částečné úspěšnosti,
+    \item \textbf{Pravda/Nepravda (True/False)}: rychlé binární posouzení platnosti tvrzení,
+    \item \textbf{Přiřazování dvojic (Matching)}: spojování logicky souvisejících prvků z levého a pravého sloupce,
+    \item \textbf{Seřazování (Ordering)}: interaktivní řazení prvků do správného chronologického či logického pořadí pomocí rozhraní Drag \& Drop,
+    \item \textbf{Studijní kartička (Flashcard)}: oboustranná kartička určená k rychlému sebehodnocení, kdy uživatel po zobrazení rubové strany sám označí, zda si pojem úspěšně vybavil,
+    \item \textbf{Volná textová odpověď (Text Input)}: otevřená otázka, u níž uživatel volí buď automatické vyhodnocení sémantického významu pomocí lokálního LLM, nebo manuální sebehodnocení.
+\end{itemize}
 
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{categories.jpg}
-        \caption{Přehled kategorií v postranním panelu}
-        \label{img:categories}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{question types.jpg}
-        \caption{Dostupné typy otázek při tvorbě kvízu}
-        \label{img:question_types}
-    \end{subfigure}
-    \caption{Prvky uživatelského rozhraní aplikace Revizer}
-    \label{img:ui_elements}
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{categories.jpg}
+\caption{Přehled kategorií v postranním panelu}
+\label{img:categories}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{question types.jpg}
+\caption{Dostupné typy otázek při tvorbě kvízu}
+\label{img:question_types}
+\end{subfigure}
+\caption{Prvky uživatelského rozhraní aplikace Revizer}
+\label{img:ui_elements}
 \end{figure}
-
 
 Zásadní inovací celého řešení je integrace umělé inteligence (lokálního jazykového modelu), která se stará o inteligentní a automatizované vyhodnocování právě těchto volných psaných odpovědí. Již při tvorbě kvízu si však uživatel volí, zda u dané textové otázky využije toto automatické posouzení pomocí LLM, nebo zda upřednostní vyhodnocení manuální. Pokud zvolí manuální přístup, správnost odpovědi nevyhodnocuje model, ale student si ji posoudí sám na konci kvízu, a to těsně před jeho finálním odevzdáním. Tato alternativa poskytuje uživateli větší flexibilitu a slouží jako důležité opatření pro případy, kdy by automatické vyhodnocení mohlo být nepřesné (například vlivem halucinací) nebo jinak nevyhovující. Příklad takového manuálního vyhodnocení je zobrazen na Obrázku~\ref{img:manual_review} -- student vidí svoji odpověď i referenční správnou odpověď a sám rozhodne, zda ji uzná jako správnou.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{manual review modal.jpg}
-    \caption{Manuální vyhodnocení otázky s volnou odpovědí}
-    \label{img:manual_review}
+\centering
+\includegraphics[width=0.75\textwidth]{manual review modal.jpg}
+\caption{Manuální vyhodnocení otázky s volnou odpovědí}
+\label{img:manual_review}
 \end{figure}
 
-
-Veškeré studijní úsilí a opakované pokusy uživatele jsou následně vizualizovány v pokročilém analytickém panelu (viz Obrázek~\ref{img:quiz_stats}), kde systém pomocí podrobných grafů a statistik ukazuje vývoj procentuální úspěšnosti, strávený čas i detailní chybovost a časovou náročnost u jednotlivých otázek.
+Veškeré studijní úsilí a opakované pokusy uživatele jsou následně vizualizovány v pokročilém analytickém panelu (viz Obrázek~\ref{img:quiz_stats}).
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{quiz stats.png}
-    \caption{Analytický panel s grafy výsledků kvízu}
-    \label{img:quiz_stats}
+\centering
+\includegraphics[width=0.85\textwidth]{quiz stats.png}
+\caption{Analytický panel s grafy výsledků kvízu}
+\label{img:quiz_stats}
 \end{figure}
 
+Uživatel má k dispozici podrobné statistické vyhodnocení. Zobrazené metriky a vizualizace se dělí podle toho, zda se vztahují k celé kategorii kvízů, nebo pouze k jednomu konkrétnímu testu.
 
-Systém nezobrazuje tyto statistiky pouze u jednotlivých kvízů, ale i v rámci celé kategorie napříč všemi kvízy, které jsou v ní zařazeny.
+Statistiky dostupné jak pro každý jednotlivý test, tak i pro celou kategorii testů zahrnují:
+\begin{itemize}
+    \item \textbf{Sloupcový graf procentuálních výsledků (skóre)}: zobrazuje vývoj procentuálního skóre (osa Y) v závislosti na počtu pokusů (osa X),
+    \item \textbf{Sloupcový graf času stráveného u pokusů}: vizualizuje čas strávený na pokusech (osa Y) v závislosti na počtu pokusů (osa X),
+    \item \textbf{Počet pokusů}: celkový počet odeslaných pokusů.
+\end{itemize}
 
-Systém dále umožňuje detailní revizi uživatelových pokusů (viz Obrázek~\ref{img:quiz_review}), kde uživatel přesně vidí, jak odpověděl na všechny otázky, zda je jeho odpověď správná, a případně zkontroluje, které možnosti měly být označeny jako správné a které jako chybné.
+Statistiky dostupné výhradně pro jednotlivé testy navíc obsahují:
+\begin{itemize}
+    \item \textbf{Sloupcový graf průměrné chybovosti v procentech u jednotlivých otázek}: zobrazuje chybovost (osa Y) u jednotlivých otázek (osa X).
+    \item \textbf{Box plot graf času stráveného u každé otázky}: vizualizuje rozptyl času (osa Y) stráveného nad každou jednotlivou otázkou (osa X).
+\end{itemize}
+
+Pokud v systému není dostatek dat pro vykreslení konkrétního grafu (např. před prvním spuštěním testu), zobrazí se namísto něj upozornění „nedostatek dat“.
+
+Aplikace dále umožňuje detailní revizi uživatelových pokusů (viz Obrázek~\ref{img:quiz_review}), kde student vidí své odeslané odpovědi, jejich správnost a kompletní přehled správných řešení.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{quiz review.png}
-    \caption{Revize odpovědí po dokončení pokusu}
-    \label{img:quiz_review}
+\centering
+\includegraphics[width=0.85\textwidth]{quiz review.png}
+\caption{Revize odpovědí po dokončení pokusu}
+\label{img:quiz_review}
 \end{figure}
 
 
@@ -616,13 +630,17 @@ Přehled funkcí
     \end{itemize}
     \item Import a export kvízů a jednotlivých otázek:
     \begin{itemize}
-        \item Možnost importovat a exportovat kvízy i jednotlivé otázky pomocí formátu JSON. Dostupná by byla i JSON šablona (template) pro importování kvízu, kterou by uživatel mohl využít k tomu, aby mu kvíz vygeneroval libovolný jazykový model (LLM).
+        \item Možnost importovat a exportovat kvízy i jednotlivé otázky pomocí formátu JSON. Dostupná by byla i JSON šablona (template) pro importování kvízu, kterou by uživatel mohl využít k tomu, aby mu kvíz vygeneroval libovolný jazykový model (LLM). Nebo pro sdílení s jinými uživateli.
     \end{itemize}
     \item Export výsledků do formátu CSV:
     \begin{itemize}
         \item Možnost exportovat výsledky kvízů do souboru CSV, aby uživatel získal volný přístup ke svým datům a mohl s nimi libovolně nakládat, např. pro vlastní statistickou analýzu.
     \end{itemize}
     \item Podpora matematického formátování v otázkách (LaTeX).
+    \item Sdílení kvízů pomocí UUID.
+        \begin{itemize}
+        \item Tato funkce umožní přímou peer-to-peer výměnu studijních materiálů mezi studenty. Autor kvízu bude moci jednoduše zkopírovat unikátní UUID identifikátor svého kvízu a poskytnout jej jinému uživateli. Ten tento kód vloží ve svém rozhraní, což spustí proces kompletního překopírování celé struktury kvízu (včetně otázek a konfigurace) přímo do jeho vlastní knihovny, kde s ním může dále nezávisle pracovat.
+    \end{itemize}
 \end{itemize}
 
 \section{Závěr}
