@@ -467,12 +467,17 @@ Hlavní knihovny a nástroje, které byly použity:
 
 \subsection{Backend}
 
-Pro backend je vynikající volbou framework \textbf{Spring Boot}\cite{spring_boot} v3.5.8, jenž poskytuje základ pro tvorbu RESTful API, správu komplexní business logiky pro hodnocení pokusů a bezpečně řízenou bezstavovou autentizaci. Architektura aplikace z tohoto frameworku výrazně těží, a to především díky modulu Spring AI, který umožňuje přímou a efektivní integraci s velkými jazykovými modely (LLM).
+Pro backendovou část je zvolen framework \textbf{Spring Boot}\cite{spring_boot}, který poskytuje základ pro tvorbu RESTful API, správu byznysové logiky a bezpečně řízenou bezstavovou autentizaci. Z hlediska nasazení je backend koncipován jako monolitická aplikace, jejíž vnitřní struktura je organizována do Java balíčků (packages) v rámci adresáře \texttt{src/main/java/com/opr3/opr3/}.
 
-\mv{tady u je třeba ještě rozvést ten popis té architektury, protože i s tím, co píšete, tu architekturu můžete pojmout jako monolit; takže bych ještě někde napsal, jak to teda je ten vztah mezi enpdointy a nějakými službami a nějakými utilites + přidal odkazy na GIT, kde se ty jednotlivé věci najdou.}
+Vztahy, interakce a toky dat mezi jednotlivými komponentami jsou v kódu vymezeny následovně:
+\begin{itemize}
+    \item \textbf{Kontrolery} (v adresáři \texttt{controller/}): Definují koncové REST endpointy a přijímají příchozí HTTP požadavky z klientské části. Po základní validaci předávají data v podobě DTO (Data Transfer Object) do servisní vrstvy.
+    \item \textbf{Doménové služby} (v adresáři \texttt{service/}): Obsahují hlavní doménovou logiku aplikace (např. \textit{QuizService} pro správu kvízů nebo \textit{AttemptService} pro zpracování pokusů). Jsou přímo volány kontrolery a koordinují databázové transakce.
+    \item \textbf{Pomocné služby a utility} (umístěné v \texttt{service/} nebo v bezpečnostních filtrech): Jedná se o specializované interní komponenty, které nejsou přímo přístupné přes endpointy kontrolerů, ale doménové služby je využívají pro specifické systémové úkoly. Patří sem \textit{JwtService} (správa tokenů), \textit{QuizGradingService} (vyhodnocovací algoritmy pro různé typy otázek) nebo \textit{OllamaService} (komunikace s lokálním LLM).
+    \item \textbf{Repozitáře} (v adresáři \texttt{repository/}): Zprostředkovávají přímý zápis a čtení z databáze pomocí JPA rozhraní.
+\end{itemize}
 
-Hlavní knihovny a nástroje, které byly použity:
-
+Hlavní knihovny a nástroje použité na backendu:
 \begin{itemize}
     \item \textbf{Spring Security} (s využitím \textbf{JWT}): Stará se o bezstavovou autentizaci, autorizaci uživatelů a zabezpečení jednotlivých endpointů.
     \item \textbf{Spring Data JPA} a \textbf{Hibernate}: Zajišťují mapování objektů do relační databáze (ORM) a zjednodušují práci s datovými entitami.
